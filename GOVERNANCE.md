@@ -6,12 +6,12 @@ This document describes how the MARS standard is maintained, how contributions a
 
 ## 1. Overview
 
-MARS uses a **BDFL-style governance model** during the v0.x pre-release phase, transitioning to a **community governance model** from v1.0 onwards.
+MARS uses a **BDFL-style governance model** during its incubation and initial release phases, transitioning to a **community governance model** once critical adoption milestones are met.
 
 | Phase | Decision Authority | Contribution Channel |
 |---|---|---|
-| `v0.x` (pre-release) | Aikya (BDFL-style) | GitHub Issues — reviewed by Aikya maintainers |
-| `v1.0+` (stable) | Elected steering committee + Aikya seat | GitHub Issues → 30-day community comment period |
+| `Incubation` (v0.x - v1.x) | Aikya (BDFL-style) | GitHub Issues — reviewed by Aikya maintainers |
+| `Community` (Post-trigger) | Elected steering committee + Aikya seat | GitHub Issues → 30-day community comment period |
 
 ---
 
@@ -40,20 +40,25 @@ All changes to the MARS standard — whether schema modifications, new vocabular
 
 ## 3. Decision Authority
 
-### v0.x (Current)
+### Incubation Phase (Current)
 
 **BDFL:** Aikya / microdao.bio  
-All final decisions on acceptance or rejection of proposed changes rest with Aikya maintainers.  
+To ensure rapid iteration and agility during early adoption, all final decisions on acceptance or rejection of proposed changes rest with Aikya maintainers.  
 Rationale is always provided in writing on the relevant GitHub Issue.
 
-### v1.0+ (Planned)
+### Community Phase (Planned Transition)
 
-A **MARS Steering Committee** will be formed, comprising:
+To guarantee that MARS remains an open, community-owned standard, Aikya will cede BDFL control and form a formal **MARS Steering Committee**. 
+
+**The Transition Trigger:**
+This governance transition will occur automatically when MARS reaches **10 independent institutional adopters**, or upon the release of `v2.0` (whichever comes first).
+
+The committee will comprise:
 - 2 seats: Aikya (permanent, as founding organisation)
 - 3 seats: Elected community representatives (researchers, implementers, public health institutions)
 - Quorum: 4 of 5 members required for MAJOR version decisions
 
-Details of the v1.0 governance transition will be published as a separate RFC before the v1.0 release.
+Details of the governance transition and election mechanics will be published as a separate RFC when the adoption trigger is reached.
 
 ---
 

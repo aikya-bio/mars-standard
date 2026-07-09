@@ -51,7 +51,7 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 | 2 | **Built on community identifiers** | Uses NCBI Taxonomy, ARO, ChEMBL, and ISO 3166 - invents nothing new. |
 | 3 | **PHA4GE-compatible** | A PHA4GE-aligned dataset can be made MARS-compliant with minimal additional work. |
 | 4 | **Mandatory minimum, optional enrichment** | Small mandatory core; optional fields unlock additional use cases. |
-| 5 | **Agentic access as first-class citizen** | Every MARS dataset includes a standard MCP manifest for AI agent query. |
+| 5 | **Designed for Agentic Access** | Schemas and identifiers are explicitly optimized for LLM Text-to-SQL and tool use. |
 | 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts. Apache 2.0 for reference code. DOI from v1.0. |
 
 ---
@@ -87,7 +87,7 @@ mars/
 │   └── crosswalk_log.md
 ├── vocabularies/                      # Controlled vocabulary CSVs
 ├── crosswalk_tables/                  # Mapping templates (unpopulated)
-├── mcp/                               # (Planned for v0.2) Standard MCP agent manifest
+
 ├── compatibility/
 │   ├── pha4ge_crosswalk.md
 │   ├── hamronization_crosswalk.md
@@ -109,8 +109,17 @@ The core standard artefacts:
 - ✅ Reference Python scripts (`reference_implementation/`)
 - ✅ Governance, contribution, and versioning policy
 
-### v0.2 — Agentic Layer *(planned - requires demo data + live MCP endpoint)*
-- 🔜 `mcp/mars_mcp_manifest.yaml` — standard MCP manifest for AI agent access
+---
+
+## Ecosystem & AI Readiness
+
+MARS is explicitly designed to be **AI-ready** out of the box:
+- **LLM-Friendly Schemas:** Denormalized table structures allow LLMs to easily generate accurate Text-to-SQL queries without complex JOIN hallucinations.
+- **Canonical IDs over Strings:** Agents use precise NCBI Taxonomy and ChEMBL IDs, avoiding fuzzy string matching errors.
+- **Strict Vocabularies:** Extensive controlled vocabularies give LLMs perfect context on allowed values when reasoning about the data.
+
+**The Model Context Protocol (MCP) Server**
+To cleanly separate the data standard from the access protocol, the official MCP manifest and reference server for querying a MARS database are maintained in a separate repository (coming soon to `aikya-bio/mars-mcp`).
 
 ---
 
@@ -118,7 +127,7 @@ The core standard artefacts:
 
 | Artefact | Licence |
 |---|---|
-| Schema SQL, data dictionary, vocabularies, crosswalk templates, MCP manifest, compatibility docs | [CC-BY 4.0](LICENSE) |
+| Schema SQL, data dictionary, vocabularies, crosswalk templates, compatibility docs | [CC-BY 4.0](LICENSE) |
 | Reference Python scripts (`reference_implementation/`) | [Apache 2.0](LICENSE_CODE) |
 
 **Attribution required:** Any implementation of MARS must credit:  

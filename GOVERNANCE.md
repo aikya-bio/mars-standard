@@ -81,13 +81,13 @@ All contributors and community members are expected to adhere to the [MARS Code 
 
 ## 6. How to Report Issues with Governance
 
-If you believe a governance process has not been followed correctly, email **governance@aikya.bio** with the subject line `MARS Governance Concern — [Issue #]`.
+If you believe a governance process has not been followed correctly, email **mars@aikya.bio** with the subject line `MARS Governance Concern — [Issue #]`.
 
 ---
 
 ## 7. Reporting Security Vulnerabilities
 
-If you discover a security issue in any MARS reference implementation code, **do not open a public issue**. Email **security@aikya.bio** instead.
+If you discover a security issue in any MARS reference implementation code, **do not open a public issue**. Email **mars@aikya.bio** instead.
 
 ---
 

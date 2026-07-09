@@ -9,7 +9,7 @@ import os
 from Bio import Entrez
 
 # ALWAYS set your email before using Entrez!
-Entrez.email = "mars@aikya.bio"
+Entrez.email = "Youremail@email.com"
 
 CACHE_FILE = 'organism_taxonomy_cache.json'
 

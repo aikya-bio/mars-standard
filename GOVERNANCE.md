@@ -51,7 +51,7 @@ Rationale is always provided in writing on the relevant GitHub Issue.
 To guarantee that MARS remains an open, community-owned standard, Aikya will cede BDFL control and form a formal **MARS Steering Committee**. 
 
 **The Transition Trigger:**
-This governance transition will occur automatically when MARS reaches **10 independent institutional adopters**, or upon the release of `v2.0` (whichever comes first).
+This governance transition will occur automatically when MARS reaches **10 independent institutional adopters**.
 
 The committee will comprise:
 - 2 seats: Aikya (permanent, as founding organisation)

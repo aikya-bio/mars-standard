@@ -1,0 +1,32 @@
+name: Bug Report
+description: Report a spec bug or inconsistency
+type: bug
+labels: ["bugs"]
+body:
+  - type: markdown
+    attributes:
+      value: "Please provide the details of the bug below."
+  - type: textarea
+    id: spec_section
+    attributes:
+      label: Section of the spec where the error appears
+    validations:
+      required: true
+  - type: textarea
+    id: fields
+    attributes:
+      label: Field name(s) involved
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the inconsistency or error
+    validations:
+      required: true
+  - type: textarea
+    id: suggested_fix
+    attributes:
+      label: Suggested fix if you have one
+    validations:
+      required: false

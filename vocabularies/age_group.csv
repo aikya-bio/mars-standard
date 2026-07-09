@@ -1,0 +1,6 @@
+value,description,mars_version_added,deprecated
+0–2,Infants and toddlers,v0.1,FALSE
+3–17,Children and adolescents,v0.1,FALSE
+18–64,Adults,v0.1,FALSE
+65+,Older adults,v0.1,FALSE
+Unknown,Age unknown,v0.1,FALSE

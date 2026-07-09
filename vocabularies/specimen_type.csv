@@ -1,0 +1,12 @@
+value,description,mars_version_added,deprecated
+Blood,Blood culture,v0.1,FALSE
+Urine,Urine culture,v0.1,FALSE
+Respiratory,Sputum / BAL / ETA,v0.1,FALSE
+Wound,Wound swab or tissue,v0.1,FALSE
+CSF,Cerebrospinal fluid,v0.1,FALSE
+Skin/Soft Tissue,Skin or soft tissue,v0.1,FALSE
+Intra-abdominal,Peritoneal or intra-abdominal fluid,v0.1,FALSE
+Bone/Joint,Bone or synovial fluid,v0.1,FALSE
+Eye,Ocular specimen,v0.1,FALSE
+Other,Other specified specimen type,v0.1,FALSE
+Unknown,Specimen type unknown,v0.1,FALSE

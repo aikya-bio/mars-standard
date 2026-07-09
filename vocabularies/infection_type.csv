@@ -1,0 +1,10 @@
+value,description,mars_version_added,deprecated
+BSI,Bloodstream Infection,v0.1,FALSE
+UTI,Urinary Tract Infection,v0.1,FALSE
+Pneumonia,Pneumonia (general),v0.1,FALSE
+Wound,Wound Infection,v0.1,FALSE
+IAI,Intra-abdominal Infection,v0.1,FALSE
+HAP,Hospital-acquired Pneumonia,v0.1,FALSE
+SSTI,Skin and Soft Tissue Infection,v0.1,FALSE
+Other,Other infection type,v0.1,FALSE
+Unknown,Infection type unknown,v0.1,FALSE

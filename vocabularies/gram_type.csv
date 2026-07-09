@@ -1,0 +1,6 @@
+value,description,mars_version_added,deprecated
+Gram-negative,Organism does not retain crystal violet stain,v0.1,FALSE
+Gram-positive,Organism retains crystal violet stain,v0.1,FALSE
+Fungal,Fungal organism,v0.1,FALSE
+Mycobacteria,Acid-fast bacilli / mycobacteria,v0.1,FALSE
+Unknown,Gram type is unknown or not applicable,v0.1,FALSE

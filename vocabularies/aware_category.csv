@@ -1,0 +1,5 @@
+value,description,mars_version_added,deprecated
+Access,WHO AWaRe Access group,v0.1,FALSE
+Watch,WHO AWaRe Watch group,v0.1,FALSE
+Reserve,WHO AWaRe Reserve group,v0.1,FALSE
+Unknown,AWaRe category is unknown or unassigned,v0.1,FALSE

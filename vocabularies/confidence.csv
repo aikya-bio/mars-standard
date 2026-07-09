@@ -1,0 +1,5 @@
+value,description,mars_version_added,deprecated
+exact,Exact automatic match,v0.1,FALSE
+fuzzy,Fuzzy automatic match needing review,v0.1,FALSE
+manual,Manually curated match,v0.1,FALSE
+unknown,Match logic unknown or unrecorded,v0.1,FALSE

@@ -1,0 +1,4 @@
+value,description,mars_version_added,deprecated
+CLSI,Clinical and Laboratory Standards Institute,v0.1,FALSE
+EUCAST,European Committee on Antimicrobial Susceptibility Testing,v0.1,FALSE
+Unknown,Breakpoint system is unknown or missing,v0.1,FALSE

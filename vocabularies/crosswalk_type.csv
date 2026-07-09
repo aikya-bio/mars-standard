@@ -1,0 +1,5 @@
+value,description,mars_version_added,deprecated
+organism,Organism identifier mapping,v0.1,FALSE
+drug,Drug identifier mapping,v0.1,FALSE
+gene,Gene identifier mapping,v0.1,FALSE
+country,Country identifier mapping,v0.1,FALSE

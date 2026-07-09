@@ -1,0 +1,56 @@
+# OS & editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Python (reference_implementation/ — Apache 2.0, added in v0.2)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Environment & secrets
+.env
+.env.*
+*.key
+*.pem
+secrets/
+
+# Temporary / scratch files
+*.tmp
+*.bak
+*.orig
+scratch/
+
+# Spec working documents — source of truth is the markdown files in this repo
+*.docx
+*.xlsx
+*.pdf
+
+# Large data files — do not commit real isolate data
+*.csv.gz
+*.parquet
+*.db
+*.sqlite
+
+# Node (if any tooling is added later)
+node_modules/

@@ -1,0 +1,5 @@
+value,description,mars_version_added,deprecated
+S,Susceptible,v0.1,FALSE
+I,Intermediate or Susceptible Increased Exposure,v0.1,FALSE
+R,Resistant,v0.1,FALSE
+Unknown,Interpretation is unknown or missing,v0.1,FALSE

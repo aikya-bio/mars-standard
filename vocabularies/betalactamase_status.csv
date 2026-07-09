@@ -1,0 +1,4 @@
+value,description,mars_version_added,deprecated
+POS,Positive / detected,v0.1,FALSE
+NEG,Negative / not detected,v0.1,FALSE
+Unknown,Status is unknown or untested,v0.1,FALSE

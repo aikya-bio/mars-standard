@@ -1,0 +1,6 @@
+value,description,mars_version_added,deprecated
+=,MIC is exactly this value,v0.1,FALSE
+>,MIC is greater than this value,v0.1,FALSE
+<,MIC is less than this value,v0.1,FALSE
+>=,MIC is greater than or equal to this value,v0.1,FALSE
+<=,MIC is less than or equal to this value,v0.1,FALSE

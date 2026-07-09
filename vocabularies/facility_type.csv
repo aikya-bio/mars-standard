@@ -1,0 +1,7 @@
+value,description,mars_version_added,deprecated
+ICU,Intensive Care Unit,v0.1,FALSE
+General Ward,Inpatient general ward,v0.1,FALSE
+Community,Community setting,v0.1,FALSE
+Outpatient,Outpatient clinic,v0.1,FALSE
+Long-term Care,Nursing home or long-term care facility,v0.1,FALSE
+Unknown,Facility type unknown,v0.1,FALSE

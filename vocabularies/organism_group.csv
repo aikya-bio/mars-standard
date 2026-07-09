@@ -1,0 +1,9 @@
+value,description,mars_version_added,deprecated
+Enterobacterales,Enterobacterales order,v0.1,FALSE
+Non-fermenters,Non-fermenting Gram-negative bacilli,v0.1,FALSE
+Streptococci,Streptococcus species,v0.1,FALSE
+Staphylococci,Staphylococcus species,v0.1,FALSE
+Enterococci,Enterococcus species,v0.1,FALSE
+Candida,Candida species,v0.1,FALSE
+Other,Other organism group,v0.1,FALSE
+Unknown,Organism group unknown,v0.1,FALSE

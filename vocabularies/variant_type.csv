@@ -1,0 +1,4 @@
+value,description,mars_version_added,deprecated
+nucleotide,Nucleotide mutation/variant,v0.1,FALSE
+amino_acid,Amino acid mutation/variant,v0.1,FALSE
+Unknown,Variant type unknown,v0.1,FALSE

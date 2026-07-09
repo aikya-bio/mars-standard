@@ -1,0 +1,45 @@
+name: Feature Request
+description: Request a new term or vocabulary addition
+type: feature request
+labels: ["term-request"]
+body:
+  - type: input
+    id: table
+    attributes:
+      label: Which table does the field belong in?
+    validations:
+      required: true
+  - type: input
+    id: field_name
+    attributes:
+      label: Proposed field name
+    validations:
+      required: true
+  - type: input
+    id: data_type
+    attributes:
+      label: Data type
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status you are proposing
+      options:
+        - Mandatory
+        - Recommended
+        - Optional
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of what the field captures
+    validations:
+      required: true
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+    validations:
+      required: true

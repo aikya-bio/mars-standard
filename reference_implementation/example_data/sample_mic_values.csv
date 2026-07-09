@@ -1,0 +1,8 @@
+raw_mic,notes
+>64,String inequality overflow
+<=0.015,String inequality underflow
+64.0001,Float overflow artifact
+0.0599,Float underflow artifact
+2.0,Plain decimal
+16,Plain integer
+< 0.5,Spaced inequality

@@ -1,0 +1,3 @@
+isolate_id,source_dataset,loaded_at,ncbi_taxonomy_id,organism_name_standard,gram_type,organism_group,country_iso,region_un_m49,year_collected,specimen_type,facility_type,age_group,gender,nosocomial,infection_type,subtype,has_genotype_data,metadata
+ISOL-001,Demo-Dataset-2026,2026-07-19T00:00:00Z,573,Klebsiella pneumoniae,Gram-negative,Enterobacterales,GB,Northern Europe,2023,Blood,ICU,65+,M,true,BSI,,true,{}
+ISOL-002,Demo-Dataset-2026,2026-07-19T00:00:00Z,562,Escherichia coli,Gram-negative,Enterobacterales,IN,Southern Asia,2023,Urine,Community,18-64,F,false,UTI,,false,{}

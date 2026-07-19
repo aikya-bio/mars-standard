@@ -1,0 +1,52 @@
+# demo_harmonised/mars_manifest.yaml
+server:
+  name: MARS Synthetic Demo Dataset 2026
+  mars_standard_version: '0.1'
+  mars_certification_tier: Uncertified
+
+domain:
+  type: antimicrobial_resistance_surveillance
+  description: 'A minimal, synthetic gold-standard dataset demonstrating the MARS structure. Contains two isolates (K. pneumoniae and E. coli) to show how data is represented across the four tables. Does not contain real surveillance data.'
+
+dataset:
+  source_datasets: ['Demo-Dataset-2026']
+  provider: 'Aikya / MARS Reference'
+  isolate_count: 2
+  year_from: 2023
+  year_to: 2023
+  country_count: 2
+  pathogen_count: 2
+  top_pathogens: [573, 562]
+  top_drugs: ['CHEMBL154', 'CHEMBL1086', 'CHEMBL182']
+
+coverage:
+  gram_types: ['Gram-negative']
+  has_genotype_data: true
+  has_breakpoint_system: true
+  has_specimen_type: true
+  regions: ['Northern Europe', 'Southern Asia']
+
+supported_use_cases: 
+  - PV-01
+  - PV-02
+  - PV-03
+  - PV-04
+  - PV-05
+  - PR-01
+  - PR-02
+  - PR-03
+  - PR-04
+  - CU-01
+  - CU-02
+  - CU-03
+  - CU-04
+  - CU-05
+  - GEN-01
+  - GEN-02
+
+not_suitable_for:
+  - 'Drug pharmacokinetics or PK/PD modelling'
+  - 'Patient-level clinical outcomes or treatment records'
+  - 'Genomic sequences or FASTA data'
+  - 'Novel compound design or drug discovery synthesis'
+  - 'Real-world surveillance analysis (this is a synthetic demo)'

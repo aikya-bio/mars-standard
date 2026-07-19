@@ -1,0 +1,2 @@
+isolate_id,source_dataset,gene_aro_id,gene_name_standard,phenotypic_class,betalactamase_status,hgvs_notation,variant_type,raw_notation
+ISOL-001,Demo-Dataset-2026,ARO:3003001,NDM-1,Carbapenemase,POS,,,blaNDM-1

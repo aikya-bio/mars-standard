@@ -1,0 +1,368 @@
+# mars-standard/mcp/tool_annotation_spec.yaml
+# MARS MCP Tool Annotation Standard v0.1
+#
+# Every tool registered in a MARS MCP server must declare these annotations.
+# Tool annotations serve two purposes:
+#   1. Agent routing — signals which tool to call for a given investigation query
+#   2. Enterprise middleware — validates that the requested use case permits this tool call
+#
+# WHERE THIS LIVES
+#   Specification (authoritative):  mars-standard/mcp/tool_annotation_spec.yaml  ← this file
+#   Implementation (dict):          mars/server_annotations.py (TOOL_ANNOTATIONS)
+#   Applied in:                     mars/server.py (@server.tool(annotations=...))
+#
+# Created by Aikya / microdao.bio
+# Licence: CC-BY 4.0
+
+# ── ANNOTATION TEMPLATE ───────────────────────────────────────────────────────
+# Apply this template to every tool in a MARS MCP server.
+# tool_name must match the MCP tool registration name exactly.
+
+tool_name: string               # Matches MCP tool registration name exactly.
+
+annotations:
+
+  # ── FIXED VALUES ─────────────────────────────────────────────────────────────
+  # These are the same for every tool in every MARS MCP server.
+  # Do not override them. They apply to the entire MARS domain.
+  readOnlyHint: true            # FIXED. All MARS tools are read-only. No data is written.
+  idempotentHint: true          # FIXED. Same params always produce the same result.
+  openWorldHint: false          # FIXED. Results are bounded to the connected dataset.
+                                # An agent cannot infer global AMR patterns from one server.
+
+  # ── PILLAR ───────────────────────────────────────────────────────────────────
+  pillar: string                # REQUIRED. One of:
+                                #   Predict & Validate | Prevent | Cure | General | All
+                                # Use 'All' only if the tool genuinely spans all three pillars
+                                # (e.g. query_isolates, which is used in all investigation types).
+
+  # ── USE CASE MAPPING ─────────────────────────────────────────────────────────
+  use_case_ids: list[string]    # REQUIRED. MUL IDs this tool can serve.
+                                # e.g. ['PV-01', 'PV-05']
+                                # Must match IDs defined in use_case_library/mars_ucl_v0.1.yaml.
+                                # Enterprise middleware uses this list to validate that the
+                                # requested use case permits this specific tool call.
+
+  # ── AGENT ROUTING SIGNALS ────────────────────────────────────────────────────
+  intent_signals:
+    keywords: list[string]      # REQUIRED. Single words that suggest this tool should be called.
+                                # e.g. ['trend', 'resistance', 'rate', 'over time']
+                                # Copied from MUL intent_signals for the listed use_case_ids.
+                                # Add tool-specific terms beyond the MUL entries.
+
+    phrases: list[string]       # REQUIRED. 2-4 word natural language phrases.
+                                # e.g. ['year on year', 'how has changed']
+                                # Used by agent routing layers for intent classification.
+
+    pathogen_context: boolean   # REQUIRED.
+                                # True if results are only meaningful for a specific pathogen.
+                                # False if tool provides pathogen-agnostic results.
+
+    drug_context: boolean       # REQUIRED.
+                                # True if results are only meaningful for a specific drug/class.
+                                # False if tool provides cross-drug results.
+
+    geography_context: boolean  # REQUIRED.
+                                # True if geography meaningfully filters or segments results.
+                                # False if tool provides geography-agnostic results.
+
+  # ── DATA REQUIREMENTS ────────────────────────────────────────────────────────
+  data_requirements:
+    genotype_data: boolean      # REQUIRED.
+                                # True if tool is only useful when genotype_observations
+                                # are populated (has_genotype_data = true in server metadata).
+                                # If true and has_genotype_data is false, tool should
+                                # return a clear "data not available" response.
+
+    breakpoint_system: boolean  # REQUIRED.
+                                # True if S/I/R interpretation is needed for meaningful results.
+                                # If true and has_breakpoint_system is false, results
+                                # are MIC values only without susceptibility categorisation.
+
+    minimum_isolates: integer   # REQUIRED.
+                                # Below this count, results are not statistically meaningful.
+                                # Tool should warn if query returns fewer than this threshold.
+                                # Set to 0 if tool is meaningful for any dataset size
+                                # (e.g. provenance, gap analysis).
+
+  # ── RETURN VALUE ─────────────────────────────────────────────────────────────
+  returns:
+    summary: string             # REQUIRED. 1-sentence description of what the tool returns.
+                                # Used by agents for prompt construction and by Arena for
+                                # human-facing dataset documentation.
+                                # e.g. 'Non-susceptibility rates aggregated by year,
+                                #       country, or facility type'
+
+    count_field: string|null    # REQUIRED. Name of the primary count field in the response.
+                                # Typically 'isolate_count'.
+                                # Set to null if tool does not return a count
+                                # (e.g. get_provenance, query_surveillance_gaps).
+
+    max_return_percentage: integer # REQUIRED. Hard limit on rows returned per call,
+                                   # expressed as a percentage of total dataset isolate_count.
+                                   # e.g., 5 means a max of 5% of total records.
+                                   # Prevents complete exfiltration on small datasets.
+
+  # ── EXAMPLE QUERIES ──────────────────────────────────────────────────────────
+  example_queries: list[string] # RECOMMENDED. 2-3 natural language examples.
+                                # Should match examples in the corresponding MUL entries.
+                                # Used by Arena for human-facing dataset cards and
+                                # by agent frameworks for few-shot routing.
+
+
+# ── THE SIX TOOLS — COMPLETE ANNOTATION REFERENCE ────────────────────────────
+# The following entries are the authoritative annotations for all six standard
+# MARS MCP tools. These are implemented in mars/server_annotations.py as the
+# TOOL_ANNOTATIONS dict and applied in mars/server.py.
+
+tools:
+
+  - tool_name: query_resistance_trends
+    annotations:
+      readOnlyHint: true
+      idempotentHint: true
+      openWorldHint: false
+      pillar: Predict & Validate
+      use_case_ids:
+        - PV-01
+        - PV-05
+      intent_signals:
+        keywords:
+          - trend
+          - resistance
+          - rate
+          - increasing
+          - decreasing
+          - temporal
+          - longitudinal
+          - evolution
+          - surveillance
+        phrases:
+          - over time
+          - year on year
+          - how has changed
+          - getting worse
+          - non-susceptibility rate
+          - resistance trend
+        pathogen_context: true
+        drug_context: false
+        geography_context: true
+      data_requirements:
+        genotype_data: false
+        breakpoint_system: false
+        minimum_isolates: 30
+      returns:
+        summary: 'Non-susceptibility rates aggregated by year, country, or facility type'
+        count_field: isolate_count
+        max_return_percentage: 5
+      example_queries:
+        - How has carbapenem resistance in K. pneumoniae changed across Europe since 2015?
+        - Is meropenem resistance increasing in A. baumannii in South Asia?
+
+  - tool_name: query_isolates
+    annotations:
+      readOnlyHint: true
+      idempotentHint: true
+      openWorldHint: false
+      pillar: All
+      use_case_ids:
+        - PV-01
+        - PV-02
+        - PV-03
+        - PR-01
+        - PR-02
+        - CU-01
+        - CU-02
+        - CU-03
+      intent_signals:
+        keywords:
+          - isolates
+          - MIC
+          - susceptibility
+          - raw
+          - data
+          - records
+          - filter
+        phrases:
+          - MIC value
+          - susceptibility data
+          - isolate records
+          - filter by
+        pathogen_context: true
+        drug_context: true
+        geography_context: true
+      data_requirements:
+        genotype_data: false
+        breakpoint_system: false
+        minimum_isolates: 1
+      returns:
+        summary: 'Isolate records with MIC observations matching query filters'
+        count_field: isolate_count
+        max_return_percentage: 5
+      example_queries:
+        - Show me MIC values for colistin against A. baumannii isolates from ICUs in Greece
+        - Give me all carbapenem-resistant K. pneumoniae isolates from India in 2022
+
+  - tool_name: query_genotypes
+    annotations:
+      readOnlyHint: true
+      idempotentHint: true
+      openWorldHint: false
+      pillar: Predict & Validate
+      use_case_ids:
+        - PV-02
+        - PV-03
+        - CU-01
+      intent_signals:
+        keywords:
+          - gene
+          - mechanism
+          - genotype
+          - carbapenemase
+          - ESBL
+          - NDM
+          - KPC
+          - OXA
+          - CTX-M
+          - VIM
+          - IMP
+          - mcr
+          - vanA
+        phrases:
+          - resistance gene
+          - resistance mechanism
+          - gene prevalence
+          - what genes
+          - which mechanism
+          - genotypic
+        pathogen_context: true
+        drug_context: false
+        geography_context: true
+      data_requirements:
+        genotype_data: true
+        breakpoint_system: false
+        minimum_isolates: 10
+      returns:
+        summary: 'Resistance gene prevalence with ARO identifiers and phenotypic class'
+        count_field: isolate_count
+        max_return_percentage: 5
+      example_queries:
+        - What carbapenemase genes are present in K. pneumoniae isolates from this dataset?
+        - How prevalent is NDM-1 in Gram-negative isolates from South Asia?
+
+  - tool_name: query_stewardship_profile
+    annotations:
+      readOnlyHint: true
+      idempotentHint: true
+      openWorldHint: false
+      pillar: Prevent
+      use_case_ids:
+        - PR-02
+        - PR-01
+      intent_signals:
+        keywords:
+          - stewardship
+          - AWaRe
+          - Access
+          - Watch
+          - Reserve
+          - empiric
+          - therapy
+          - guideline
+          - treatment
+          - policy
+        phrases:
+          - empiric treatment
+          - stewardship programme
+          - AWaRe category
+          - first-line therapy
+          - antibiotic policy
+          - treatment guideline
+        pathogen_context: true
+        drug_context: false
+        geography_context: true
+      data_requirements:
+        genotype_data: false
+        breakpoint_system: false
+        minimum_isolates: 30
+      returns:
+        summary: 'Resistance rates by AWaRe drug category (Access/Watch/Reserve)'
+        count_field: isolate_count
+        max_return_percentage: 5
+      example_queries:
+        - What is the stewardship profile for E. coli UTIs in community settings in India?
+        - Which Access-category antibiotics still have activity against K. pneumoniae in Africa?
+
+  - tool_name: query_surveillance_gaps
+    annotations:
+      readOnlyHint: true
+      idempotentHint: true
+      openWorldHint: false
+      pillar: Predict & Validate
+      use_case_ids:
+        - PV-05
+      intent_signals:
+        keywords:
+          - gap
+          - missing
+          - coverage
+          - surveillance
+          - absent
+          - insufficient
+        phrases:
+          - surveillance gap
+          - missing data
+          - data coverage
+          - where is data missing
+          - underrepresented
+        pathogen_context: false
+        drug_context: false
+        geography_context: true
+      data_requirements:
+        genotype_data: false
+        breakpoint_system: false
+        minimum_isolates: 0
+      returns:
+        summary: 'Ranked list of pathogen-drug-country combinations with insufficient isolate counts'
+        count_field: null
+        max_return_percentage: 5
+      example_queries:
+        - Where are the surveillance gaps for Gram-negative pathogens in Sub-Saharan Africa?
+        - Which drug-pathogen combinations have fewer than 30 isolates in this dataset?
+
+  - tool_name: get_provenance
+    annotations:
+      readOnlyHint: true
+      idempotentHint: true
+      openWorldHint: false
+      pillar: General
+      use_case_ids:
+        - GEN-02
+      intent_signals:
+        keywords:
+          - provenance
+          - source
+          - citation
+          - origin
+          - crosswalk
+          - audit
+        phrases:
+          - where does this come from
+          - data source
+          - how was this harmonised
+          - cite this data
+          - data provenance
+        pathogen_context: false
+        drug_context: false
+        geography_context: false
+      data_requirements:
+        genotype_data: false
+        breakpoint_system: false
+        minimum_isolates: 1
+      returns:
+        summary: 'Crosswalk log entries and source citations for specified isolate IDs'
+        count_field: null
+        max_return_percentage: 5
+      example_queries:
+        - What is the data source for these isolate records?
+        - How was the organism name harmonised to the NCBI Taxonomy ID?

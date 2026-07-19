@@ -58,6 +58,29 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 
 ## How to Implement MARS
 
+The easiest way to adopt the standard is using the official `mars` CLI tool. It automates harmonisation, mapping, and MCP serving.
+
+1. **Install the CLI:**
+   ```bash
+   pip install mars-standard
+   ```
+2. **Initialise and map your data:**
+   ```bash
+   mars init
+   mars map --source data.csv
+   ```
+3. **Run the harmonisation pipeline:**
+   ```bash
+   mars harmonise
+   ```
+4. **Serve via MCP:**
+   ```bash
+   mars serve
+   ```
+
+### Manual Implementation (Advanced / Custom Pipelines)
+
+If you are building custom ETL pipelines, you can implement the standard manually:
 1. **Download schema SQL** from [`schema/`](schema/) and create the four core tables in your database
 2. **Download crosswalk templates** from [`crosswalk_tables/`](crosswalk_tables/) and populate using the [reference lookup scripts](reference_implementation/)
 3. **Normalise MIC values** using [`reference_implementation/mic_normaliser.py`](reference_implementation/mic_normaliser.py) before loading
@@ -68,7 +91,7 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 ## Repository Structure
 
 ```
-mars/
+mars-standard/
 ├── LICENSE                            # CC-BY 4.0 (standard artefacts)
 ├── LICENSE_CODE                       # Apache 2.0 (reference_implementation/)
 ├── README.md
@@ -87,27 +110,44 @@ mars/
 │   └── crosswalk_log.md
 ├── vocabularies/                      # Controlled vocabulary CSVs
 ├── crosswalk_tables/                  # Mapping templates (unpopulated)
-
 ├── compatibility/
 │   ├── pha4ge_crosswalk.md
 │   ├── hamronization_crosswalk.md
 │   └── glass_crosswalk.md
-└── reference_implementation/          # Apache 2.0 — Python normalisation scripts
+├── reference_implementation/          # Apache 2.0 — Python normalisation scripts
+│   └── example_data/harmonised/       # Gold-standard demo dataset & manifest
+├── use_case_library/                  # MARS Use Case Library (MUL)
+│   └── mars_ucl_v0.1.yaml             # 16 seed AMR investigation use cases
+└── mcp/                               # MCP discovery infrastructure specs
+    ├── server_metadata_spec.yaml      # Server metadata minimum standard template
+    └── tool_annotation_spec.yaml      # Tool annotation standard template
 ```
 
 
 
 ## Roadmap
 
-### v0.1 — Founding Specification (current)
+### v0.1 — Founding Specification ✅
 The core standard artefacts:
 - ✅ Four-table data model (schema SQL + JSON Schema)
-- ✅ Data dictionary -field-by-field definitions for all four tables
-- ✅ Controlled vocabularies (13 CSV files)
-- ✅ Crosswalk templates - drug, organism, gene
-- ✅ Compatibility crosswalks - PHA4GE, hAMRonization, WHO GLASS
+- ✅ Data dictionary — field-by-field definitions for all four tables
+- ✅ Controlled vocabularies (15 CSV files)
+- ✅ Crosswalk templates — drug, organism, gene
+- ✅ Compatibility crosswalks — PHA4GE, hAMRonization, WHO GLASS
 - ✅ Reference Python scripts (`reference_implementation/`)
 - ✅ Governance, contribution, and versioning policy
+
+### v0.2 — Discovery Infrastructure (current)
+MCP agent-routing and use case vocabulary:
+- ✅ MARS Use Case Library (MUL) — 16 seed AMR investigation types (`use_case_library/mars_ucl_v0.1.yaml`)
+- ✅ Server Metadata Standard — minimum declaration template for every MARS MCP server (`mcp/server_metadata_spec.yaml`)
+- ✅ Tool Annotation Standard — per-tool routing signals for agent use case matching (`mcp/tool_annotation_spec.yaml`)
+
+### v1.0 — First Stable Public Release (planned)
+- Community governance model replaces BDFL-style
+- Zenodo DOI registration
+- Public release of certified dataset registry
+- Full MCP manifest with live endpoint validation
 
 ---
 
@@ -117,9 +157,11 @@ MARS is explicitly designed to be **AI-ready** out of the box:
 - **LLM-Friendly Schemas:** Denormalized table structures allow LLMs to easily generate accurate Text-to-SQL queries without complex JOIN hallucinations.
 - **Canonical IDs over Strings:** Agents use precise NCBI Taxonomy and ChEMBL IDs, avoiding fuzzy string matching errors.
 - **Strict Vocabularies:** Extensive controlled vocabularies give LLMs perfect context on allowed values when reasoning about the data.
+- **Use Case Library:** The [MARS Use Case Library](use_case_library/mars_ucl_v0.1.yaml) defines 16 structured AMR investigation types with intent signals, so agents can route queries to the right tool without guessing.
+- **Discovery Manifest:** Every MARS MCP server declares structured metadata at startup — what data it holds, what use cases it supports, and what it cannot do — so agents choose the right server before calling any tool.
 
-**The Model Context Protocol (MCP) Server**
-To cleanly separate the data standard from the access protocol, the official MCP manifest and reference server for querying a MARS database are maintained in a separate repository (coming soon to `aikya-bio/mars-mcp`).
+**MCP Discovery Infrastructure**
+The MCP specifications (server metadata standard and tool annotation standard) live in this repo as the authoritative artefacts. The reference implementation that generates discovery manifests from harmonised data lives in the [`mars` CLI repository](https://github.com/aikya-bio/mars) (`mars/manifest.py`, `mars/server_annotations.py`).
 
 ---
 

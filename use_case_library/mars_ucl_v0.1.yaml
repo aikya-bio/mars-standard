@@ -1,0 +1,1008 @@
+# mars-standard/use_case_library/mars_ucl_v0.1.yaml
+# MARS Use Case Library (MUL) v0.1
+# The controlled vocabulary of AMR investigation types for MARS MCP servers.
+# Agents use this to route investigation queries to the correct tool.
+# Enterprise middleware uses use_case_ids in tool annotations to validate access.
+#
+# Created by Aikya / microdao.bio
+# Licence: CC-BY 4.0
+# Changelog: github.com/aikya-bio/mars-standard/CHANGELOG.md
+#
+# VERSIONING (per §2.4 of the MARS Standard Specification)
+#   Add a new use case         → MINOR bump
+#   Add intent_signals keywords → PATCH bump
+#   Add a permitted_tool       → MINOR bump
+#   Remove a use case          → MAJOR bump (breaking — enterprise grants reference IDs)
+#   Change a use case ID       → MAJOR bump (breaking)
+#
+# IDs are STABLE and NEVER change after publication.
+
+version: '0.1'
+created_by: 'Aikya / microdao.bio'
+licence: 'CC-BY 4.0'
+changelog_url: 'github.com/aikya-bio/mars-standard/CHANGELOG.md'
+
+use_cases:
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PILLAR: PREDICT & VALIDATE
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: PV-01
+    name: Resistance Trend Forecasting
+    pillar: Predict & Validate
+    description: >
+      Temporal analysis of non-susceptibility rates for a pathogen-drug
+      combination across geography and time. Answers: is resistance
+      increasing, where, and how fast?
+
+    intent_signals:
+      keywords:
+        - trend
+        - resistance
+        - increasing
+        - decreasing
+        - rate
+        - temporal
+        - longitudinal
+        - evolution
+        - surveillance
+      phrases:
+        - over time
+        - year on year
+        - how has changed
+        - getting worse
+        - non-susceptibility rate
+        - resistance trend
+
+    ontology_references:
+      - system: ARO
+        note: Resistance mechanisms relevant to the queried drug class
+      - system: ChEMBL
+        note: Drug and drug class identifiers
+
+    permitted_tools:
+      - query_resistance_trends
+      - query_isolates
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Drug pharmacokinetics or mechanism of action
+      - Patient-level treatment outcomes
+      - Novel compound activity identification
+
+    example_queries:
+      - How has carbapenem resistance in K. pneumoniae changed across Europe since 2015?
+      - Is meropenem resistance increasing in A. baumannii in South Asia?
+      - What is the year-on-year trend in MRSA rates in ICU settings?
+
+
+  - id: PV-02
+    name: Resistance Mechanism Mapping
+    pillar: Predict & Validate
+    description: >
+      Maps genotypic resistance determinants — genes, mutations, and
+      acquired mechanisms — to observed phenotypic resistance profiles.
+      Requires datasets with genotype_observations populated. Identifies
+      which mechanisms drive resistance to specific drug classes.
+
+    intent_signals:
+      keywords:
+        - gene
+        - mechanism
+        - genotype
+        - carbapenemase
+        - ESBL
+        - NDM
+        - KPC
+        - OXA
+        - CTX-M
+        - VIM
+        - IMP
+        - mcr
+        - vanA
+        - mecA
+        - determinant
+      phrases:
+        - resistance gene
+        - resistance mechanism
+        - gene prevalence
+        - what genes
+        - which mechanism
+        - genotypic basis
+        - molecular epidemiology
+        - what drives resistance
+
+    ontology_references:
+      - system: ARO
+        note: Resistance gene and mechanism identifiers (primary)
+      - system: NCBI Taxonomy
+        note: Organism context for gene-phenotype associations
+
+    permitted_tools:
+      - query_genotypes
+      - query_resistance_trends
+      - query_isolates
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 10
+      requires_genotype_data: true
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Datasets without genotype_observations data
+      - Drug pharmacokinetics or mechanism of action
+      - Novel compound synthesis or design
+
+    example_queries:
+      - What carbapenemase genes are present in K. pneumoniae in this dataset?
+      - How prevalent is NDM-1 in Gram-negative isolates from South Asia?
+      - Which ESBL types are driving cephalosporin resistance in E. coli?
+
+
+  - id: PV-03
+    name: Genotype-to-Phenotype Prediction
+    pillar: Predict & Validate
+    description: >
+      Predicts expected MIC range or susceptibility category (S/I/R)
+      from genotypic data. Requires both genotype_observations and
+      mic_observations in the dataset. Answers whether observed
+      genotypes are consistent with phenotypic resistance and identifies
+      discordant isolates for further investigation.
+
+    intent_signals:
+      keywords:
+        - predict
+        - prediction
+        - expected
+        - genotype
+        - phenotype
+        - concordance
+        - discordance
+        - G2P
+      phrases:
+        - genotype to phenotype
+        - expected resistance
+        - predicted susceptibility
+        - consistent with genotype
+        - discordant isolate
+        - phenotypic prediction
+
+    ontology_references:
+      - system: ARO
+        note: Resistance gene identifiers
+      - system: ChEMBL
+        note: Drug identifiers for phenotypic predictions
+
+    permitted_tools:
+      - query_genotypes
+      - query_isolates
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 10
+      requires_genotype_data: true
+      requires_breakpoint_system: true
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Datasets without genotype_observations data
+      - Datasets without breakpoint_system declared
+      - Real-time or clinical decision support
+
+    example_queries:
+      - Are the observed MIC values consistent with the detected resistance genes?
+      - Which isolates have NDM-1 but unexpectedly remain susceptible to carbapenems?
+      - What MIC range is expected for KPC-2 positive K. pneumoniae against meropenem?
+
+
+  - id: PV-04
+    name: Diagnostic Tool Selection
+    pillar: Predict & Validate
+    description: >
+      Evaluates which diagnostic approaches — phenotypic testing,
+      genotypic screening, MALDI-TOF — are most appropriate for
+      detecting resistance in a given pathogen-setting combination.
+      Uses MIC distribution and breakpoint data to assess where
+      phenotypic screening alone may miss resistance.
+
+    intent_signals:
+      keywords:
+        - diagnostic
+        - detection
+        - screening
+        - breakpoint
+        - MALDI
+        - sensitivity
+        - specificity
+        - testing
+        - identification
+      phrases:
+        - diagnostic approach
+        - resistance detection
+        - phenotypic testing
+        - which test
+        - missed resistance
+        - diagnostic accuracy
+        - testing strategy
+
+    ontology_references:
+      - system: ChEMBL
+        note: Drug identifiers for breakpoint assessment
+      - system: NCBI Taxonomy
+        note: Organism identifiers for diagnostic context
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: true
+      requires_specimen_type: true
+
+    not_suitable_for:
+      - Datasets without breakpoint_system declared
+      - Real-time diagnostic decisions or clinical support
+      - Novel diagnostic tool development
+
+    example_queries:
+      - Where might phenotypic carbapenem testing miss resistance in A. baumannii?
+      - What proportion of isolates fall in the intermediate MIC range for meropenem?
+      - Is phenotypic testing sufficient to detect colistin resistance in K. pneumoniae?
+
+
+  - id: PV-05
+    name: Surveillance Gap Analysis
+    pillar: Predict & Validate
+    description: >
+      Identifies pathogen-drug-geography combinations where surveillance
+      data is absent or below the minimum threshold for meaningful trend
+      analysis. Produces a ranked gap report showing where additional
+      data collection is most needed to support global AMR monitoring.
+
+    intent_signals:
+      keywords:
+        - gap
+        - missing
+        - coverage
+        - surveillance
+        - absent
+        - insufficient
+        - underrepresented
+        - blind spot
+        - threshold
+      phrases:
+        - surveillance gap
+        - missing data
+        - data coverage
+        - where is data missing
+        - insufficient coverage
+        - monitoring gap
+        - surveillance blind spot
+
+    ontology_references:
+      - system: ISO 3166
+        note: Country and region identifiers for geographic gap mapping
+      - system: ChEMBL
+        note: Drug identifiers for drug-specific gap analysis
+
+    permitted_tools:
+      - query_surveillance_gaps
+      - query_isolates
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 0
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Identifying gaps outside the geographic scope of this dataset
+      - Real-time surveillance monitoring
+
+    example_queries:
+      - Where are the surveillance gaps for Gram-negative pathogens in Sub-Saharan Africa?
+      - Which drug-pathogen combinations have fewer than 30 isolates in this dataset?
+      - What geographic regions are underrepresented in this surveillance programme?
+
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PILLAR: PREVENT
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: PR-01
+    name: Intervention Evidence Browser
+    pillar: Prevent
+    description: >
+      Retrieves and synthesises evidence on the effectiveness of
+      interventions — stewardship programmes, infection control
+      measures, decolonisation strategies — across comparable
+      settings. Uses resistance rate data before and after documented
+      interventions where available to assess impact.
+
+    intent_signals:
+      keywords:
+        - intervention
+        - stewardship
+        - infection
+        - control
+        - prevention
+        - decolonisation
+        - impact
+        - effectiveness
+        - evidence
+        - bundle
+      phrases:
+        - infection control
+        - stewardship intervention
+        - what works
+        - intervention evidence
+        - reduce resistance
+        - prevention strategy
+        - control measure effectiveness
+
+    ontology_references:
+      - system: WHO AWaRe
+        note: Drug classification for stewardship intervention context
+      - system: ISO 3166
+        note: Country context for comparable settings
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - query_stewardship_profile
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: true
+
+    not_suitable_for:
+      - Clinical trial outcomes or randomised controlled trial data
+      - Patient-level treatment decisions
+      - Novel compound screening
+
+    example_queries:
+      - What is the resistance profile in LMIC hospital settings for empiric UTI treatment?
+      - How does ICU resistance differ from community settings for E. coli in India?
+      - What evidence exists for resistance rates in settings with high antibiotic consumption?
+
+
+  - id: PR-02
+    name: Stewardship Programme Design
+    pillar: Prevent
+    description: >
+      Generates resistance profiles stratified by WHO AWaRe drug
+      category to inform empiric therapy guidelines and antimicrobial
+      stewardship programmes. Identifies which Access-category drugs
+      retain activity and where Watch or Reserve category drugs are
+      being used against susceptible organisms.
+
+    intent_signals:
+      keywords:
+        - stewardship
+        - AWaRe
+        - Access
+        - Watch
+        - Reserve
+        - empiric
+        - therapy
+        - guideline
+        - treatment
+        - policy
+        - formulary
+      phrases:
+        - empiric treatment
+        - stewardship programme
+        - AWaRe category
+        - first-line therapy
+        - antibiotic policy
+        - treatment guideline
+        - formulary design
+        - prescribing guidance
+
+    ontology_references:
+      - system: WHO AWaRe 2023
+        note: Drug classification (primary reference for this use case)
+      - system: ChEMBL
+        note: Drug identifiers mapped to AWaRe categories
+
+    permitted_tools:
+      - query_stewardship_profile
+      - query_resistance_trends
+      - query_isolates
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: true
+
+    not_suitable_for:
+      - Individual patient prescribing decisions
+      - Drug pharmacokinetics or dosing optimisation
+      - Novel compound development
+
+    example_queries:
+      - What is the stewardship profile for E. coli UTIs in community settings in India?
+      - Which Access-category antibiotics retain activity against K. pneumoniae in Africa?
+      - What proportion of Watch-category drugs are being prescribed against susceptible E. coli?
+
+
+  - id: PR-03
+    name: Vaccine Candidate Explorer
+    pillar: Prevent
+    description: >
+      Analyses distribution of pathogen surface antigen variants,
+      serotype diversity, and resistance co-occurrence patterns
+      relevant to vaccine design and evaluation. Identifies which
+      pathogen variants and clones are most prevalent in target
+      populations and geographies.
+
+    intent_signals:
+      keywords:
+        - vaccine
+        - serotype
+        - antigen
+        - clone
+        - variant
+        - capsule
+        - surface
+        - immunogenic
+        - serogroup
+      phrases:
+        - vaccine target
+        - serotype distribution
+        - antigen diversity
+        - vaccine candidate
+        - clonal distribution
+        - population coverage
+        - vaccine-preventable
+
+    ontology_references:
+      - system: NCBI Taxonomy
+        note: Strain and serotype classification
+      - system: ARO
+        note: Resistance co-occurrence with vaccine-relevant strains
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 50
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: true
+
+    not_suitable_for:
+      - Immunogenicity or efficacy data — not available in surveillance datasets
+      - Clinical trial or vaccine trial outcomes
+      - Drug therapy recommendations
+
+    example_queries:
+      - What S. pneumoniae serotypes are most prevalent in paediatric bacteraemia in Africa?
+      - How has the serotype distribution of K. pneumoniae changed since 2018?
+      - What proportion of invasive S. aureus isolates are MRSA in this dataset?
+
+
+  - id: PR-04
+    name: One Health Landscape
+    pillar: Prevent
+    description: >
+      Integrates or contextualises human AMR surveillance data
+      alongside animal and environmental resistance signals where
+      available. Identifies cross-sector transmission patterns and
+      resistance genes shared across human, animal, and environmental
+      reservoirs within the dataset's scope.
+
+    intent_signals:
+      keywords:
+        - One Health
+        - zoonotic
+        - animal
+        - environmental
+        - food
+        - agriculture
+        - veterinary
+        - reservoir
+        - transmission
+        - spillover
+      phrases:
+        - One Health
+        - animal-human transmission
+        - environmental reservoir
+        - cross-sector resistance
+        - zoonotic AMR
+        - food chain resistance
+        - agricultural antibiotic use
+
+    ontology_references:
+      - system: NCBI Taxonomy
+        note: Cross-species pathogen identification
+      - system: ARO
+        note: Shared resistance genes across sectors
+      - system: ISO 3166
+        note: Geographic transmission context
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - query_genotypes
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: true
+
+    not_suitable_for:
+      - Datasets limited to human clinical isolates only (can identify human side only)
+      - Direct animal or environmental exposure data — not available in clinical datasets
+      - Causal attribution of cross-sector transmission
+
+    example_queries:
+      - What mcr-mediated colistin resistance is present in human isolates in this dataset?
+      - How prevalent are resistance genes known to originate in agricultural settings?
+      - Which resistance mechanisms are shared between human and food-chain pathogens?
+
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PILLAR: CURE
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: CU-01
+    name: Novel Target Hypothesis
+    pillar: Cure
+    description: >
+      Identifies pathogen-drug combinations where newer or reserve
+      compounds retain meaningful activity against isolates that
+      are resistant to standard-of-care agents. Generates hypotheses
+      about unexplored drug-target combinations based on retained
+      susceptibility patterns in the dataset.
+
+    intent_signals:
+      keywords:
+        - novel
+        - target
+        - activity
+        - retained
+        - unexplored
+        - discovery
+        - hypothesis
+        - cefiderocol
+        - aztreonam
+        - phage
+        - AMP
+        - combination
+      phrases:
+        - retained activity
+        - novel target
+        - where does it work
+        - unexplored activity
+        - drug discovery hypothesis
+        - active against resistant
+        - new drug opportunity
+
+    ontology_references:
+      - system: ARO
+        note: Resistance mechanisms against which novel activity is assessed
+      - system: ChEMBL
+        note: Novel compound identifiers including reserve antibiotics
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - query_genotypes
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Drug synthesis or compound design — this is a data analysis use case only
+      - Clinical trial design
+      - Prescribing or treatment recommendations
+
+    example_queries:
+      - Where does cefiderocol retain activity against carbapenem-resistant A. baumannii?
+      - Which reserve antibiotics remain active against XDR K. pneumoniae in this dataset?
+      - What drug class combinations show activity against NDM-positive isolates?
+
+
+  - id: CU-02
+    name: Drug Class Coverage Mapping
+    pillar: Cure
+    description: >
+      Maps the coverage of existing antimicrobial drug classes against
+      a target pathogen's resistance profile. Identifies which drug
+      classes retain meaningful activity, which are comprehensively
+      compromised, and where coverage gaps exist across the isolate
+      population.
+
+    intent_signals:
+      keywords:
+        - coverage
+        - drug class
+        - carbapenem
+        - fluoroquinolone
+        - aminoglycoside
+        - cephalosporin
+        - polymyxin
+        - pan-resistant
+        - susceptible
+      phrases:
+        - drug class coverage
+        - which drugs work
+        - coverage map
+        - drug class activity
+        - resistance landscape
+        - treatment options
+        - class coverage
+
+    ontology_references:
+      - system: ChEMBL
+        note: Drug and drug class identifiers
+      - system: WHO AWaRe 2023
+        note: Drug class categorisation by stewardship tier
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - query_stewardship_profile
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Individual treatment decisions
+      - Drug pharmacokinetics or PK/PD modelling
+      - Compound design or synthesis
+
+    example_queries:
+      - Which drug classes retain more than 80% susceptibility in A. baumannii?
+      - What is the full resistance landscape for XDR P. aeruginosa in this dataset?
+      - How does cephalosporin coverage compare to carbapenem coverage for K. pneumoniae?
+
+
+  - id: CU-03
+    name: Discovery Briefing
+    pillar: Cure
+    description: >
+      Produces a comprehensive multi-source synthesis of the resistance
+      landscape, mechanism distribution, novel compound activity, and
+      key knowledge gaps for a target pathogen. The flagship drug
+      discovery use case — integrates PV-01, PV-02, CU-01, and CU-02
+      outputs into a single structured evidence package for a drug
+      discovery team or programme.
+
+    intent_signals:
+      keywords:
+        - briefing
+        - synthesis
+        - landscape
+        - overview
+        - summary
+        - comprehensive
+        - discovery
+        - programme
+        - dossier
+        - intelligence
+      phrases:
+        - discovery briefing
+        - full picture
+        - resistance landscape
+        - comprehensive overview
+        - drug discovery summary
+        - what do we know about
+        - programme intelligence
+
+    ontology_references:
+      - system: ARO
+        note: Full resistance mechanism landscape
+      - system: ChEMBL
+        note: Full drug class coverage across all available compounds
+      - system: NCBI Taxonomy
+        note: Pathogen strain and subtype context
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - query_genotypes
+      - query_stewardship_profile
+      - query_surveillance_gaps
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Individual patient treatment decisions
+      - Regulatory submission data packages
+      - Real-time or outbreak intelligence
+
+    example_queries:
+      - Give me a complete resistance intelligence briefing on A. baumannii
+      - What is the full drug discovery landscape for carbapenem-resistant Enterobacterales?
+      - Synthesise everything known from this dataset about XDR K. pneumoniae
+
+
+  - id: CU-04
+    name: Validated Asset Dossier
+    pillar: Cure
+    description: >
+      Assembles a structured, citable evidence package for a specific
+      compound-pathogen combination from surveillance data. Designed
+      to support asset advancement decisions — providing MIC
+      distribution, susceptibility rates, geographic coverage of
+      activity, and mechanism context with full provenance for
+      every data point.
+
+    intent_signals:
+      keywords:
+        - dossier
+        - asset
+        - evidence
+        - citable
+        - validated
+        - compound
+        - advancement
+        - package
+        - portfolio
+        - submission
+      phrases:
+        - evidence dossier
+        - asset dossier
+        - citable evidence
+        - data package
+        - compound evidence
+        - advancement decision
+        - evidence package
+
+    ontology_references:
+      - system: ChEMBL
+        note: Compound identifier for the asset under evaluation
+      - system: ARO
+        note: Resistance mechanisms relevant to compound activity
+      - system: NCBI Taxonomy
+        note: Target pathogen identifiers
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - query_genotypes
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 30
+      requires_genotype_data: false
+      requires_breakpoint_system: true
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Regulatory submission evidence packages — this is surveillance data only
+      - Clinical efficacy or safety data
+      - PK/PD or dose-finding data
+
+    example_queries:
+      - Build an evidence dossier for cefiderocol activity against A. baumannii
+      - What is the MIC distribution for sulbactam-durlobactam against XDR A. baumannii?
+      - Assemble citable susceptibility data for omadacycline against MRSA
+
+
+  - id: CU-05
+    name: Fungal AMR Intelligence
+    pillar: Cure
+    description: >
+      Surveillance and mechanism analysis specific to fungal pathogens —
+      Candida, Aspergillus, and emerging fungal species. Covers
+      antifungal resistance landscape, echinocandin and azole
+      susceptibility profiles, and emerging resistance signals in
+      Candida auris and related species.
+
+    intent_signals:
+      keywords:
+        - fungal
+        - Candida
+        - Aspergillus
+        - echinocandin
+        - azole
+        - antifungal
+        - auris
+        - albicans
+        - fumigatus
+        - fluconazole
+        - caspofungin
+      phrases:
+        - fungal resistance
+        - antifungal surveillance
+        - Candida auris
+        - azole resistance
+        - echinocandin resistance
+        - fungal AMR
+        - antifungal landscape
+
+    ontology_references:
+      - system: NCBI Taxonomy
+        note: Fungal species identifiers (Candida, Aspergillus genera)
+      - system: ChEMBL
+        note: Antifungal drug identifiers
+
+    permitted_tools:
+      - query_isolates
+      - query_resistance_trends
+      - query_genotypes
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 10
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Bacterial resistance analysis (use PV-01 to PV-05 instead)
+      - Clinical antifungal prescribing decisions
+      - Antifungal drug development synthesis
+
+    example_queries:
+      - What is the azole resistance prevalence in Candida auris in this dataset?
+      - How does echinocandin susceptibility vary across Candida species?
+      - What antifungal resistance patterns are emerging in Aspergillus fumigatus?
+
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PILLAR: GENERAL
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: GEN-01
+    name: Schema and Coverage Discovery
+    pillar: General
+    description: >
+      Returns the MARS data model schema, field definitions, controlled
+      vocabularies, and a summary of what data is available in this
+      server. Available to all authenticated sessions regardless of
+      use case grants. The entry point for any agent connecting to
+      a MARS MCP server for the first time.
+
+    intent_signals:
+      keywords:
+        - schema
+        - coverage
+        - available
+        - fields
+        - what
+        - discover
+        - explore
+        - overview
+        - structure
+      phrases:
+        - what data is available
+        - what is in this dataset
+        - what can I query
+        - data schema
+        - field definitions
+        - what pathogens
+        - what drugs
+        - coverage summary
+
+    ontology_references:
+      - system: MARS Standard
+        note: Field definitions and controlled vocabularies
+
+    # NOTE: GEN-01 is served by MCP resources rather than callable tools.
+    # amr://schema/mars returns the data model and field definitions.
+    # amr://coverage returns the dataset coverage summary.
+    # amr://discovery returns the full manifest (combines both).
+    # The permitted_tools list below covers tool-level access where applicable.
+    permitted_tools:
+      - query_surveillance_gaps  # closest tool equivalent for coverage overview
+      - get_provenance
+
+    mcp_resources:
+      - amr://discovery    # Full discovery manifest (schema + coverage + use cases)
+      - amr://schema/mars  # MARS data model — tables, fields, types, vocabularies
+      - amr://coverage     # Dataset coverage summary (isolate counts, pathogens, years)
+
+    data_requirements:
+      minimum_isolates: 0
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Resistance trend analysis — use PV-01 to PV-05
+      - Stewardship analysis — use PR-02
+      - Drug discovery — use CU-01 to CU-05
+
+    example_queries:
+      - What pathogens are covered in this dataset?
+      - What drugs are included in the MIC observations?
+      - What countries and years does this server cover?
+
+
+  - id: GEN-02
+    name: Provenance and Citation Retrieval
+    pillar: General
+    description: >
+      Returns crosswalk log entries, source citations, and harmonisation
+      audit trail for a set of isolate records. Enables researchers and
+      agents to verify where data came from, how organism names were
+      mapped to NCBI Taxonomy, and how drug names were mapped to ChEMBL
+      identifiers. Required for Evidence Outcome Stub (EOS) generation
+      in Aikya's agent framework.
+
+    intent_signals:
+      keywords:
+        - provenance
+        - source
+        - citation
+        - origin
+        - crosswalk
+        - audit
+        - trace
+        - verify
+        - attribution
+        - reference
+      phrases:
+        - where does this come from
+        - data source
+        - how was this harmonised
+        - cite this data
+        - data provenance
+        - audit trail
+        - source attribution
+        - verify the data
+
+    ontology_references:
+      - system: MARS Standard
+        note: crosswalk_log schema and confidence scoring
+      - system: NCBI Taxonomy
+        note: Organism name mapping audit
+      - system: ChEMBL
+        note: Drug name mapping audit
+
+    permitted_tools:
+      - get_provenance
+
+    data_requirements:
+      minimum_isolates: 1
+      requires_genotype_data: false
+      requires_breakpoint_system: false
+      requires_specimen_type: false
+
+    not_suitable_for:
+      - Resistance trend analysis
+      - Patient identification — provenance data contains no patient identifiers
+
+    example_queries:
+      - What is the source of these isolate records?
+      - How was the organism name harmonised to the NCBI Taxonomy ID for these records?
+      - What was the crosswalk confidence for the drug name mapping in this result?

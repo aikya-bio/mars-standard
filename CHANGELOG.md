@@ -6,6 +6,21 @@ Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [M
 
 ---
 
+## [v0.2] — 2026-07-19
+
+**Status:** Pre-release · Aikya internal development
+**Change type:** MINOR — additive discovery infrastructure artefacts
+
+### Added
+- `use_case_library/mars_ucl_v0.1.yaml` — MARS Use Case Library (MUL): 16 seed AMR investigation use cases with full schema (`id`, `name`, `pillar`, `description`, `intent_signals`, `ontology_references`, `permitted_tools`, `data_requirements`, `not_suitable_for`, `example_queries`). Pillars: Predict & Validate (5), Prevent (4), Cure (5), General (2).
+- `mcp/server_metadata_spec.yaml` — MARS MCP Server Metadata Minimum Standard v0.1. Authoritative template defining all REQUIRED and RECOMMENDED fields every MARS MCP server must declare at initialisation. Includes auto-generation logic and custodian review guidance.
+- `mcp/tool_annotation_spec.yaml` — MARS MCP Tool Annotation Standard v0.1. Authoritative template for per-tool routing annotations. Includes complete reference annotations for all six standard MARS tools.
+
+### Migration Notes
+_Additive only. No changes to existing schema, vocabularies, or crosswalk tables._
+
+---
+
 ## [v0.1] — 2026-07-08
 
 **Status:** Pre-release · Aikya internal development  

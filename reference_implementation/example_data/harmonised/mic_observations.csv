@@ -1,0 +1,4 @@
+isolate_id,source_dataset,chembl_id,drug_name_standard,drug_class,aware_category,mic_numeric,mic_qualifier,interpretation_raw,interpretation_standard,breakpoint_system,breakpoint_version
+ISOL-001,Demo-Dataset-2026,CHEMBL154,Meropenem,Carbapenems,Watch,16.0,>,R,R,EUCAST,v14.0
+ISOL-001,Demo-Dataset-2026,CHEMBL1086,Colistin,Polymyxins,Reserve,2.0,=,S,S,EUCAST,v14.0
+ISOL-002,Demo-Dataset-2026,CHEMBL182,Ciprofloxacin,Fluoroquinolones,Watch,0.06,<=,S,S,EUCAST,v14.0

@@ -1,0 +1,158 @@
+# mars-standard/mcp/server_metadata_spec.yaml
+# MARS MCP Server Metadata Minimum Standard v0.1
+#
+# Every MARS MCP server must declare all REQUIRED fields.
+# Agents use this to route investigation queries to the correct server.
+# The implementation that generates a draft from the harmonisation report
+# lives in mars/manifest.py (the CLI repo). The custodian reviews and
+# edits before deployment.
+#
+# WHERE THIS LIVES
+#   Specification (authoritative):  mars-standard/mcp/server_metadata_spec.yaml  ← this file
+#   Implementation (generator):     mars/manifest.py
+#   Generated output (editable):    harmonised/mars_manifest.yaml
+#
+# Created by Aikya / microdao.bio
+# Licence: CC-BY 4.0
+
+# ── SERVER BLOCK ──────────────────────────────────────────────────────────────
+server:
+  name: string                      # REQUIRED.
+                                    # Human-readable. Descriptive. Unique within your deployment.
+                                    # Good: 'Oxford AMR Surveillance — Gram-negatives 2015-2024'
+                                    # Bad:  'mars-server-1' or 'my_data'
+                                    # CUSTODIAN: EDIT THIS — make it descriptive and specific.
+
+  mars_standard_version: string     # REQUIRED. e.g. '0.1'
+                                    # Must match pinned_mars_version in mars.yaml.
+                                    # AUTO-GENERATED from mars.yaml.
+
+  mars_certification_tier: string   # REQUIRED.
+                                    # One of: Compliant | Recommended | Agent-Ready | Uncertified
+                                    # Set to Uncertified until mars arena submit is run.
+                                    # AUTO-GENERATED as 'Uncertified'; updated by mars arena submit.
+
+# ── DOMAIN BLOCK ─────────────────────────────────────────────────────────────
+domain:
+  type: antimicrobial_resistance_surveillance
+  # FIXED. Must be this exact string for all MARS servers.
+  # Agent routing layers use this for initial server filtering.
+
+  description: string               # REQUIRED. 2-4 sentences.
+                                    # Must answer three questions:
+                                    #   1. What data is in this server?
+                                    #   2. What investigation types can it support?
+                                    #   3. What can it NOT do?
+                                    # Example:
+                                    # 'Gram-negative bacterial resistance data from the
+                                    #  Pfizer ATLAS programme (2004-2024, 83 countries,
+                                    #  917,000 isolates). Supports resistance trend analysis,
+                                    #  stewardship profiling, and surveillance gap identification.
+                                    #  Does not include genotype data or clinical outcomes.'
+                                    # CUSTODIAN: EDIT THIS — make it specific to your dataset.
+
+# ── DATASET BLOCK ─────────────────────────────────────────────────────────────
+dataset:
+  source_datasets: list[string]     # REQUIRED. Names of original data sources.
+                                    # e.g. ['Pfizer ATLAS Antibiotics 2024']
+                                    # CUSTODIAN: Verify and update.
+
+  provider: string                  # REQUIRED. Organisation owning the underlying data.
+                                    # e.g. 'University of Oxford Clinical Microbiology'
+                                    # CUSTODIAN: EDIT THIS.
+
+  isolate_count: integer            # REQUIRED. Total isolates in harmonised output.
+                                    # AUTO-GENERATED: len(harmonised/isolates.csv)
+                                    # CUSTODIAN: Verify.
+
+  year_from: integer                # REQUIRED. Earliest year_collected value.
+                                    # AUTO-GENERATED: min(year_collected)
+                                    # CUSTODIAN: Verify.
+
+  year_to: integer                  # REQUIRED. Latest year_collected value.
+                                    # AUTO-GENERATED: max(year_collected)
+                                    # CUSTODIAN: Verify.
+
+  country_count: integer            # REQUIRED. Distinct country_iso values.
+                                    # AUTO-GENERATED: nunique(country_iso)
+                                    # CUSTODIAN: Verify.
+
+  pathogen_count: integer           # REQUIRED. Distinct ncbi_taxonomy_id values.
+                                    # AUTO-GENERATED: nunique(ncbi_taxonomy_id)
+                                    # CUSTODIAN: Verify.
+
+  top_pathogens: list[integer]      # RECOMMENDED. Top 10 NCBI Taxonomy IDs by isolate count.
+                                    # Allows agents to quickly assess whether their target
+                                    # pathogen is well-represented in this server.
+                                    # AUTO-GENERATED: value_counts(ncbi_taxonomy_id).head(10)
+                                    # CUSTODIAN: Verify.
+
+  top_drugs: list[string]           # RECOMMENDED. Top 10 ChEMBL IDs by MIC observation count.
+                                    # AUTO-GENERATED: value_counts(chembl_id).head(10)
+                                    # CUSTODIAN: Verify.
+
+# ── COVERAGE BLOCK ────────────────────────────────────────────────────────────
+coverage:
+  gram_types: list[string]          # REQUIRED. Which gram types are present.
+                                    # e.g. ['Gram-negative', 'Gram-positive', 'Fungal']
+                                    # AUTO-GENERATED: unique(gram_type)
+                                    # CUSTODIAN: Verify.
+
+  has_genotype_data: boolean        # REQUIRED.
+                                    # True if genotype_observations table is populated.
+                                    # Determines whether PV-02, PV-03, CU-01 appear
+                                    # in supported_use_cases.
+                                    # AUTO-GENERATED: len(genotype_observations.csv) > 0
+                                    # CUSTODIAN: Verify.
+
+  has_breakpoint_system: boolean    # REQUIRED.
+                                    # True if >50% of mic_observations have breakpoint_system
+                                    # declared (not Unknown/null).
+                                    # False means S/I/R interpretation is not reliable.
+                                    # Determines whether PV-03, PV-04, CU-04 are supported.
+                                    # AUTO-GENERATED from mic_observations.
+                                    # CUSTODIAN: Verify.
+
+  has_specimen_type: boolean        # REQUIRED.
+                                    # True if >50% of isolates have specimen_type populated.
+                                    # False means infection-type stratification unavailable.
+                                    # Determines whether PR-01, PR-02, PR-03, PR-04 are
+                                    # fully supported.
+                                    # AUTO-GENERATED from isolates.
+                                    # CUSTODIAN: Verify.
+
+  regions: list[string]             # RECOMMENDED. UN M49 region names present in dataset.
+                                    # e.g. ['Southern Asia', 'Sub-Saharan Africa', 'Europe']
+                                    # AUTO-GENERATED from country_iso → UN M49 mapping.
+                                    # CUSTODIAN: Verify.
+
+# ── USE CASE BLOCK ────────────────────────────────────────────────────────────
+supported_use_cases: list[string]   # REQUIRED. MUL IDs this server can meaningfully support.
+                                    # AUTO-GENERATED from coverage flags per MUL data_requirements.
+                                    # e.g. ['PV-01', 'PV-05', 'PR-02', 'GEN-01', 'GEN-02']
+                                    # Logic:
+                                    #   PV-02 only if has_genotype_data = true
+                                    #   PV-03 only if has_genotype_data = true AND
+                                    #                has_breakpoint_system = true
+                                    #   PV-04 only if has_breakpoint_system = true AND
+                                    #                has_specimen_type = true
+                                    #   PR-01, PR-02, PR-03, PR-04 require has_specimen_type
+                                    #   CU-01 only if has_genotype_data = true
+                                    #   CU-04 only if has_breakpoint_system = true
+                                    #   GEN-01, GEN-02 always included
+                                    # CUSTODIAN: REVIEW — remove any the data cannot
+                                    # genuinely support.
+
+not_suitable_for: list[string]      # REQUIRED. Minimum 3 entries.
+                                    # Be specific to this dataset, not generic disclaimers.
+                                    # AUTO-GENERATED with standard list:
+                                    #   - 'Drug pharmacokinetics or PK/PD modelling'
+                                    #   - 'Patient-level clinical outcomes or treatment records'
+                                    #   - 'Genomic sequences or FASTA data'
+                                    #   - 'Novel compound design or drug discovery synthesis'
+                                    #   - 'Real-time or outbreak surveillance'
+                                    # CUSTODIAN: EDIT THIS — add dataset-specific exclusions.
+                                    # Examples of dataset-specific entries:
+                                    #   - 'Fungal pathogens — dataset contains bacteria only'
+                                    #   - 'Community-acquired infections — ICU isolates only'
+                                    #   - 'Pre-2010 resistance trends — data starts 2015'

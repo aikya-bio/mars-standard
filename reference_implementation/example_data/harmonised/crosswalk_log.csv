@@ -1,0 +1,3 @@
+source_dataset,crosswalk_type,raw_value,mapped_identifier,mapped_name,confidence,mapped_at,mapped_by
+Demo-Dataset-2026,organism,K. pneumo,573,Klebsiella pneumoniae,exact,2026-07-19T00:00:00Z,mars-cli
+Demo-Dataset-2026,drug,Mero,CHEMBL154,Meropenem,exact,2026-07-19T00:00:00Z,mars-cli

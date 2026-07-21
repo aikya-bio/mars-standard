@@ -155,6 +155,25 @@ tools:
         summary: 'Non-susceptibility rates aggregated by year, country, or facility type'
         count_field: isolate_count
         max_return_percentage: 5
+      inputSchema:
+        type: object
+        description: "Queries resistance trends over time. You MUST provide at least one filter parameter."
+        properties:
+          ncbi_taxonomy_id:
+            type: integer
+            description: "NCBI Taxonomy ID for the organism. You MUST resolve names (e.g. 'E. coli') to IDs before querying."
+          chembl_id:
+            type: string
+            description: "ChEMBL ID for the drug or drug class. You MUST resolve names to IDs before querying."
+          country_iso:
+            type: string
+            description: "2-letter ISO 3166 country code (e.g., 'GB', 'IN')."
+          start_year:
+            type: integer
+            description: "Start year for the trend analysis (e.g., 2018)."
+          end_year:
+            type: integer
+            description: "End year for the trend analysis (e.g., 2022)."
       example_queries:
         - How has carbapenem resistance in K. pneumoniae changed across Europe since 2015?
         - Is meropenem resistance increasing in A. baumannii in South Asia?
@@ -199,6 +218,59 @@ tools:
         summary: 'Isolate records with MIC observations matching query filters'
         count_field: isolate_count
         max_return_percentage: 5
+      inputSchema:
+        type: object
+        description: "Retrieves isolate records with MIC observations matching filters. You MUST provide at least one filter parameter."
+        properties:
+          ncbi_taxonomy_id:
+            type: integer
+            description: "NCBI Taxonomy ID for the organism. You MUST resolve names (e.g. 'E. coli') to IDs before querying."
+          chembl_id:
+            type: string
+            description: "ChEMBL ID for the drug or drug class. You MUST resolve names to IDs before querying."
+          country_iso:
+            type: string
+            description: "2-letter ISO 3166 country code."
+          start_year:
+            type: integer
+            description: "Start year of collection."
+          end_year:
+            type: integer
+            description: "End year of collection."
+          specimen_type:
+            type: string
+            description: "Specimen source (e.g., 'Blood', 'Urine', 'Respiratory')."
+          facility_type:
+            type: string
+            description: "Healthcare facility type (e.g., 'ICU', 'Community', 'General Ward')."
+          infection_type:
+            type: string
+            description: "Type of infection (e.g., 'BSI', 'UTI', 'Pneumonia')."
+          age_group:
+            type: string
+            description: "Age group (e.g., '0–2', '3–17', '18–64', '65+')."
+          gender:
+            type: string
+            description: "Gender ('M', 'F', 'Unknown')."
+          nosocomial:
+            type: boolean
+            description: "True if the infection was hospital-acquired."
+          gram_type:
+            type: string
+            description: "Gram stain type ('Gram-negative', 'Gram-positive')."
+          organism_group:
+            type: string
+            description: "Group (e.g., 'Enterobacterales', 'Non-fermenters', 'Staphylococci')."
+          subtype:
+            type: string
+            description: "Specific clone, serotype, or lineage (e.g., 'ST131')."
+          drug_class:
+            type: string
+            description: "Broad drug class (e.g., 'Carbapenems', 'Aminoglycosides')."
+          interpretation_standard:
+            type: string
+            enum: [S, I, R]
+            description: "Susceptibility interpretation (S = Susceptible, I = Intermediate, R = Resistant)."
       example_queries:
         - Show me MIC values for colistin against A. baumannii isolates from ICUs in Greece
         - Give me all carbapenem-resistant K. pneumoniae isolates from India in 2022
@@ -246,6 +318,19 @@ tools:
         summary: 'Resistance gene prevalence with ARO identifiers and phenotypic class'
         count_field: isolate_count
         max_return_percentage: 5
+      inputSchema:
+        type: object
+        description: "Queries resistance gene prevalence. You MUST provide at least one filter parameter."
+        properties:
+          ncbi_taxonomy_id:
+            type: integer
+            description: "NCBI Taxonomy ID for the organism. You MUST resolve names to IDs before querying."
+          country_iso:
+            type: string
+            description: "2-letter ISO 3166 country code."
+          gene_aro_id:
+            type: string
+            description: "CARD ARO identifier for the resistance gene or mechanism. You MUST resolve names to ARO IDs."
       example_queries:
         - What carbapenemase genes are present in K. pneumoniae isolates from this dataset?
         - How prevalent is NDM-1 in Gram-negative isolates from South Asia?
@@ -289,6 +374,23 @@ tools:
         summary: 'Resistance rates by AWaRe drug category (Access/Watch/Reserve)'
         count_field: isolate_count
         max_return_percentage: 5
+      inputSchema:
+        type: object
+        description: "Queries resistance rates by WHO AWaRe drug category. You MUST provide at least one filter parameter."
+        properties:
+          ncbi_taxonomy_id:
+            type: integer
+            description: "NCBI Taxonomy ID for the organism. You MUST resolve names to IDs before querying."
+          country_iso:
+            type: string
+            description: "2-letter ISO 3166 country code."
+          year_collected:
+            type: integer
+            description: "Specific year of collection."
+          aware_category:
+            type: string
+            enum: [Access, Watch, Reserve]
+            description: "WHO AWaRe category to filter by."
       example_queries:
         - What is the stewardship profile for E. coli UTIs in community settings in India?
         - Which Access-category antibiotics still have activity against K. pneumoniae in Africa?
@@ -326,6 +428,22 @@ tools:
         summary: 'Ranked list of pathogen-drug-country combinations with insufficient isolate counts'
         count_field: null
         max_return_percentage: 5
+      inputSchema:
+        type: object
+        description: "Identifies surveillance gaps based on insufficient isolate counts."
+        properties:
+          ncbi_taxonomy_id:
+            type: integer
+            description: "NCBI Taxonomy ID for the organism. You MUST resolve names to IDs before querying."
+          chembl_id:
+            type: string
+            description: "ChEMBL ID for the drug or drug class."
+          country_iso:
+            type: string
+            description: "2-letter ISO 3166 country code."
+          region_un_m49:
+            type: string
+            description: "UN M49 region code (e.g., '001' for World, '002' for Africa)."
       example_queries:
         - Where are the surveillance gaps for Gram-negative pathogens in Sub-Saharan Africa?
         - Which drug-pathogen combinations have fewer than 30 isolates in this dataset?
@@ -363,6 +481,17 @@ tools:
         summary: 'Crosswalk log entries and source citations for specified isolate IDs'
         count_field: null
         max_return_percentage: 5
+      inputSchema:
+        type: object
+        description: "Retrieves crosswalk log entries and source citations for specific isolates."
+        properties:
+          isolate_ids:
+            type: array
+            items:
+              type: string
+            description: "Array of specific isolate IDs to audit."
+        required:
+          - isolate_ids
       example_queries:
         - What is the data source for these isolate records?
         - How was the organism name harmonised to the NCBI Taxonomy ID?

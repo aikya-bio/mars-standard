@@ -58,29 +58,9 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 
 ## How to Implement MARS
 
-The easiest way to adopt the standard is using the official `mars` CLI tool. It automates harmonisation, mapping, and MCP serving.
+*Note: There is an upcoming MARS CLI tool to be released soon that will empower users to automate harmonisation, map their data to MARS, and serve it via MCP.*
 
-1. **Install the CLI:**
-   ```bash
-   pip install mars-standard
-   ```
-2. **Initialise and map your data:**
-   ```bash
-   mars init
-   mars map --source data.csv
-   ```
-3. **Run the harmonisation pipeline:**
-   ```bash
-   mars harmonise
-   ```
-4. **Serve via MCP:**
-   ```bash
-   mars serve
-   ```
-
-### Manual Implementation (Advanced / Custom Pipelines)
-
-If you are building custom ETL pipelines, you can implement the standard manually:
+Until the CLI is released, you can implement the standard manually. If you are building custom ETL pipelines, follow these steps:
 1. **Download schema SQL** from [`schema/`](schema/) and create the four core tables in your database
 2. **Download crosswalk templates** from [`crosswalk_tables/`](crosswalk_tables/) and populate using the [reference lookup scripts](reference_implementation/)
 3. **Normalise MIC values** using [`reference_implementation/mic_normaliser.py`](reference_implementation/mic_normaliser.py) before loading
@@ -161,7 +141,11 @@ MARS is explicitly designed to be **AI-ready** out of the box:
 - **Discovery Manifest:** Every MARS MCP server declares structured metadata at startup — what data it holds, what use cases it supports, and what it cannot do — so agents choose the right server before calling any tool.
 
 **MCP Discovery Infrastructure**
-The MCP specifications (server metadata standard and tool annotation standard) live in this repo as the authoritative artefacts. The reference implementation that generates discovery manifests from harmonised data lives in the [`mars` CLI repository](https://github.com/aikya-bio/mars) (`mars/manifest.py`, `mars/server_annotations.py`).
+The MCP specifications (server metadata standard and tool annotation standard) live in this repo as the authoritative artefacts. 
+
+*Note: An upcoming MARS CLI will be released soon that automatically generates discovery manifests from your harmonised data.*
+
+Until the CLI is released, implementers must construct their own `manifest.yaml` manually by adhering to the template provided in `mcp/server_metadata_spec.yaml`, populating it with their data scope and supported use cases from the Use Case Library (MUL).
 
 ---
 
@@ -174,15 +158,15 @@ The MCP specifications (server metadata standard and tool annotation standard) l
 
 **Attribution required:** Any implementation of MARS must credit:  
 `MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`  
-with a link to `https://github.com/aikya-bio/mars`
+with a link to `https://github.com/aikya-bio/mars-standard`
 
 ---
 
 ## Community & Contributing
 
-- 💬 **Questions & Discussion** → [GitHub Discussions](https://github.com/aikya-bio/mars/discussions)
-- 🐛 **Spec bug or inconsistency** → [Open an Issue](https://github.com/aikya-bio/mars/issues/new?template=bug_report.yml)
-- ➕ **New term or vocabulary addition** → [New Term Request](https://github.com/aikya-bio/mars/issues/new?template=feature_request.yml)
+- 💬 **Questions & Discussion** → [GitHub Discussions](https://github.com/aikya-bio/mars-standard/discussions)
+- 🐛 **Spec bug or inconsistency** → [Open an Issue](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml)
+- ➕ **New term or vocabulary addition** → [New Term Request](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml)
 - 📖 **How to contribute** → [CONTRIBUTING.md](CONTRIBUTING.md)
 - ⚖️ **How decisions are made** → [GOVERNANCE.md](GOVERNANCE.md)
 

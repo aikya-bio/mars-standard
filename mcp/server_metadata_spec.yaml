@@ -3,13 +3,14 @@
 #
 # Every MARS MCP server must declare all REQUIRED fields.
 # Agents use this to route investigation queries to the correct server.
-# The implementation that generates a draft from the harmonisation report
-# lives in mars/manifest.py (the CLI repo). The custodian reviews and
-# edits before deployment.
+# Note: An upcoming MARS CLI will provide a generator to create a draft 
+# from the harmonisation report. Until then, implementers must construct 
+# this metadata manually to describe their server's capabilities and data.
+# The custodian reviews and edits before deployment.
 #
 # WHERE THIS LIVES
 #   Specification (authoritative):  mars-standard/mcp/server_metadata_spec.yaml  ← this file
-#   Implementation (generator):     mars/manifest.py
+#   Implementation (generator):     upcoming MARS CLI release
 #   Generated output (editable):    harmonised/mars_manifest.yaml
 #
 # Created by Aikya / microdao.bio

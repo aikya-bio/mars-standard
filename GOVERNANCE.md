@@ -95,7 +95,7 @@ If you discover a security issue in any MARS reference implementation code, **do
 
 Any implementation of MARS must credit:  
 `MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`  
-with a link to `https://github.com/aikya-bio/mars`
+with a link to `https://github.com/aikya-bio/mars-standard`
 
 ---
 

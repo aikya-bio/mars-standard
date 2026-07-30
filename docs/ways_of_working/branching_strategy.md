@@ -1,6 +1,6 @@
 # Development Branching Strategy
 
-This document outlines the standard workflow for feature development, testing, and deployment using GitHub branches. It is the canonical version shared across all AIKYA repositories — `aikya-agent-factory`, `aikya-platform`, `mars`, `mars-standard`, and `AIKYA-KG`.
+This document outlines the standard workflow for feature development, testing, and deployment using GitHub branches. It is the canonical version shared across all AIKYA repositories — `aikya-agent-factory`, `aikya-platform`, `mars`, `mars-standard`, `AIKYA-KG`, and `aikya.bio-website`.
 
 ## Visual Workflow
 

@@ -1,0 +1,37 @@
+name: Branch Naming Audit
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+      - 'staging'
+      - 'demo'
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-branch-name:
+    name: Validate Branch Name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Branch Name
+        run: |
+          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          echo "Auditing branch name: $BRANCH_NAME"
+
+          # Regex for AIKYA naming convention
+          REGEX="^(feature|hotfix|bugfix|chore|docs|refactor|infra)/.+"
+
+          if [[ ! "$BRANCH_NAME" =~ $REGEX ]]; then
+            echo " [ERROR] Invalid branch name: '$BRANCH_NAME'"
+            echo "         AIKYA 'Ways of Working' requires localized features to use prefixes:"
+            echo "         - feature/*"
+            echo "         - hotfix/*"
+            echo "         - bugfix/*"
+            echo "         - chore/*"
+            echo "         - docs/*"
+            echo "         - refactor/*"
+            echo "         - infra/*"
+            exit 1
+          fi
+          echo "Branch name is valid."

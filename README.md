@@ -58,8 +58,6 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 
 ## How to Implement MARS
 
-*Note: There is an upcoming MARS CLI tool to be released soon that will empower users to automate harmonisation, map their data to MARS, and serve it via MCP.*
-
 Until the CLI is released, you can implement the standard manually. If you are building custom ETL pipelines, follow these steps:
 1. **Download schema SQL** from [`schema/`](schema/) and create the four core tables in your database
 2. **Download crosswalk templates** from [`crosswalk_tables/`](crosswalk_tables/) and populate using the [reference lookup scripts](reference_implementation/)

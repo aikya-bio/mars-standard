@@ -5,6 +5,7 @@
 [![License: Apache 2.0](https://img.shields.io/badge/Code%20License-Apache%202.0-green.svg)](LICENSE_CODE)
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](CHANGELOG.md)
 [![DOI](https://img.shields.io/badge/DOI-pending%20v1.0-lightgrey)](#)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21880278.svg)](https://doi.org/10.5281/zenodo.21880278)
 
 > **MARS is an open community standard for isolate-level antimicrobial resistance surveillance data.**  
 > It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and a machine-readable agent access interface - all in one versioned, citable artefact.

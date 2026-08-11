@@ -49,7 +49,7 @@ By participating in this project, you agree to abide by the [MARS Code of Conduc
 
 ## Requesting a New Term or Field
 
-Use the [New Term Request issue template](../../issues/new?template=new_term_request.yml). Please provide:
+Use the [New Term Request issue template](../../issues/new?template=feature_request.yml). Please provide:
 
 - **Which table** the field belongs in (`isolates`, `mic_observations`, `genotype_observations`, `crosswalk_log`)
 - **Proposed field name** (snake_case, consistent with existing fields)
@@ -66,7 +66,7 @@ New mandatory fields require a MAJOR version bump and 60-day comment period. New
 
 ## Proposing a Vocabulary Change
 
-Use the [Vocabulary Change issue template](../../issues/new?template=vocabulary_change.yml). Specify:
+Use the [Vocabulary Change issue template](../../issues/new?template=feature_request.yml). Specify:
 
 - **Which vocabulary** (e.g., `specimen_type`, `aware_category`)
 - **Change type:** Add / Modify / Deprecate
@@ -80,7 +80,7 @@ All vocabulary CSVs live in [`vocabularies/`](vocabularies/).
 
 ## Reporting a Spec Bug
 
-Use the [Spec Bug Report issue template](../../issues/new?template=spec_bug_report.yml). Include:
+Use the [Spec Bug Report issue template](../../issues/new?template=bug_report.yml). Include:
 
 - **Section** of the spec where the error appears
 - **Field name(s)** involved
@@ -96,7 +96,7 @@ Use the [Spec Bug Report issue template](../../issues/new?template=spec_bug_repo
 1. **Fork** the repository and create a branch: `git checkout -b fix/issue-123-specimen-type`
 2. Make your changes. Follow the [style guide](#style-guide) below.
 3. **Update CHANGELOG.md** — add an entry under `[Unreleased]`
-4. **Open the PR** against `main`, fill out the [PR template](.github/pull_request_template.md), and link the related issue
+4. **Open the PR** against `main`, describe your changes clearly in the PR description, and link the related issue
 5. A maintainer will review within the SLA defined in [GOVERNANCE.md](GOVERNANCE.md)
 
 **Branch naming:**

@@ -1,0 +1,41 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: MARS - Minimum AMR Surveillance Standard
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Varun Bhaskar
+    family-names: Kothamachu
+    email: varunkothamachu@gmail.com
+    affiliation: aikya.bio
+    orcid: 'https://orcid.org/0000-0002-2888-4317'
+repository-code: 'https://github.com/aikya-bio/mars-standard'
+url: 'https://aikya.bio'
+abstract: >-
+  MARS is an open community standard for isolate-level
+  antimicrobial resistance surveillance data.
+
+  It defines a minimal mandatory data model, canonical
+  identifier mappings, controlled vocabularies, and a
+  machine-readable agent access interface - all in one
+  versioned, citable artefact.
+keywords:
+  - '  antimicrobial resistance'
+  - AMR
+  - data standard
+  - data harmonisation
+  - isolate-level data
+  - metadata schema
+  - interoperability
+  - FAIR data
+  - open specification
+  - global health
+  - genomic surveillance
+  - antibiotic susceptibility testing
+commit: 2ae74c079a22b586e4626ba3dde1b9eba2e3abe1
+version: v0.2.0
+date-released: '2026-08-11'

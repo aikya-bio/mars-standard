@@ -59,7 +59,7 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 
 ## How to Implement MARS
 
-Until the CLI is released, you can implement the standard manually. If you are building custom ETL pipelines, follow these steps:
+To implement MARS in a custom ETL pipeline, follow these steps:
 1. **Download schema SQL** from [`schema/`](schema/) and create the four core tables in your database
 2. **Download crosswalk templates** from [`crosswalk_tables/`](crosswalk_tables/) and populate using the [reference lookup scripts](reference_implementation/)
 3. **Normalise MIC values** using [`reference_implementation/mic_normaliser.py`](reference_implementation/mic_normaliser.py) before loading
@@ -123,9 +123,7 @@ MCP agent-routing and use case vocabulary:
 - ✅ Tool Annotation Standard — per-tool routing signals for agent use case matching (`mcp/tool_annotation_spec.yaml`)
 
 ### v1.0 — First Stable Public Release (planned)
-- Community governance model replaces BDFL-style
 - Zenodo DOI registration
-- Public release of certified dataset registry
 - Full MCP manifest with live endpoint validation
 
 ---
@@ -142,9 +140,7 @@ MARS is explicitly designed to be **AI-ready** out of the box:
 **MCP Discovery Infrastructure**
 The MCP specifications (server metadata standard and tool annotation standard) live in this repo as the authoritative artefacts. 
 
-*Note: An upcoming MARS CLI will be released soon that automatically generates discovery manifests from your harmonised data.*
-
-Until the CLI is released, implementers must construct their own `manifest.yaml` manually by adhering to the template provided in `mcp/server_metadata_spec.yaml`, populating it with their data scope and supported use cases from the Use Case Library (MUL).
+Implementers must construct their own `manifest.yaml` manually by adhering to the template provided in `mcp/server_metadata_spec.yaml`, populating it with their data scope and supported use cases from the Use Case Library (MUL).
 
 ---
 

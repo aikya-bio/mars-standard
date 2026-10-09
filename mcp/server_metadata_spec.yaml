@@ -25,6 +25,11 @@ server:
                                     # Must match pinned_mars_version in mars.yaml.
                                     # AUTO-GENERATED from mars.yaml.
 
+  agentic_readiness_score: number   # REQUIRED. 0-100, or null if not assessed.
+                                    # Self-assessed by the custodian against the MARS agentic
+                                    # readiness scoring guide. Informational; not a certification.
+                                    # Set to null until assessed.
+
 # ── DOMAIN BLOCK ─────────────────────────────────────────────────────────────
 domain:
   type: antimicrobial_resistance_surveillance

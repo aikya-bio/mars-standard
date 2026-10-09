@@ -2,6 +2,7 @@
 server:
   name: MARS Synthetic Demo Dataset 2026
   mars_standard_version: '0.1'
+  agentic_readiness_score: null
 
 domain:
   type: antimicrobial_resistance_surveillance

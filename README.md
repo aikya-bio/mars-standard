@@ -112,7 +112,7 @@ The core standard artefacts:
 - ✅ Data dictionary — field-by-field definitions for all four tables
 - ✅ Controlled vocabularies (15 CSV files)
 - ✅ Crosswalk templates — drug, organism, gene
-- ✅ Compatibility crosswalks — PHA4GE, hAMRonization, WHO GLASS
+- ✅ Compatibility notes — PHA4GE, hAMRonization, WHO GLASS (indicative)
 - ✅ Reference Python scripts (`reference_implementation/`)
 - ✅ Governance, contribution, and versioning policy
 
@@ -123,6 +123,7 @@ MCP agent-routing and use case vocabulary:
 - ✅ Tool Annotation Standard — per-tool routing signals for agent use case matching (`mcp/tool_annotation_spec.yaml`)
 
 ### v1.0 — First Stable Public Release (planned)
+- WHONET / BacLink crosswalk (organism, antibiotic and test codes; to be developed with input from the WHONET team)
 - Zenodo DOI registration
 - Full MCP manifest with live endpoint validation
 

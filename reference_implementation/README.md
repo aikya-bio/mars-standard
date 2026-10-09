@@ -8,7 +8,7 @@ This directory contains standalone Python reference scripts demonstrating how to
 ## Scripts Included
 
 1. `mic_normaliser.py`: Parses raw MIC strings (e.g. `>64`, `<=0.015`, `64.0001`) into the MARS `{numeric, qualifier}` format.
-2. `chembl_lookup.py`: Maps drug names and a small illustrative set of abbreviations to ChEMBL IDs. AWaRe category is a placeholder (`Unknown`) pending a lookup against the WHO AWaRe list.
+2. `chembl_lookup.py`: Maps drug names and a small illustrative set of abbreviations to ChEMBL IDs, and assigns the WHO AWaRe 2023 category by name match against `third_party/who_aware_2023.csv` (WHO data, see `third_party/NOTICE.md`).
 3. `ncbi_taxonomy_lookup.py`: Maps organism names (including abbreviations and misspellings) to NCBI Taxonomy IDs.
 4. `aro_lookup.py`: Maps resistance gene names to the Comprehensive Antibiotic Resistance Database (CARD) ARO ontology.
 

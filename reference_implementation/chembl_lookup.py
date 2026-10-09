@@ -1,19 +1,21 @@
 """
 MARS Reference Implementation: ChEMBL Lookup
 
-Maps raw drug names to ChEMBL IDs. Demonstrates caching to avoid redundant API calls.
+Maps raw drug names to ChEMBL IDs and WHO AWaRe 2023 categories (by drug-name match
+against third_party/who_aware_2023.csv). Demonstrates caching to avoid redundant API calls.
 
-Illustrative only: the abbreviation map covers a handful of common drugs, and the
-`aware_category` value is a placeholder, NOT a lookup against the WHO AWaRe
-classification. A production crosswalk should use a versioned copy of the WHO AWaRe
-list and the full WHONET antibiotic dictionary.
+Illustrative only: the abbreviation map covers a handful of common drugs. A production
+crosswalk should use the full WHONET antibiotic dictionary. AWaRe matching is on the
+drug name only; names not in the WHO list (including some combinations) return 'Unknown'.
 """
+import csv
 import json
 import os
 import re
 import requests
 
 CACHE_FILE = 'chembl_cache.json'
+AWARE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'third_party', 'who_aware_2023.csv')
 CHEMBL_API = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json'
 
 # Example three-letter abbreviation map (illustrative subset, not the WHONET code list)
@@ -25,6 +27,23 @@ ABBREVIATION_MAP = {
     'CIP': 'Ciprofloxacin',
     'AMK': 'Amikacin'
 }
+
+def load_aware():
+    """Load WHO AWaRe 2023 as {lowercase antibiotic name: category}."""
+    table = {}
+    if os.path.exists(AWARE_FILE):
+        with open(AWARE_FILE, newline='') as f:
+            for row in csv.DictReader(f):
+                table[row['antibiotic'].strip().lower()] = row['aware_category']
+    return table
+
+AWARE = load_aware()
+
+def aware_category(*names) -> str:
+    for n in names:
+        if n and n.strip().lower() in AWARE:
+            return AWARE[n.strip().lower()]
+    return 'Unknown'
 
 def load_cache():
     if os.path.exists(CACHE_FILE):
@@ -64,9 +83,7 @@ def lookup_drug(raw_name: str, cache: dict = None) -> dict:
             best_match = molecules[0]
             chembl_id = best_match.get('molecule_chembl_id')
             standard_name = best_match.get('pref_name') or cleaned_name
-            # PLACEHOLDER: AWaRe is not resolved here. A full implementation would
-            # cross-reference the ChEMBL ID or name against a versioned copy of the WHO AWaRe list.
-            aware = "Unknown"
+            aware = aware_category(standard_name, cleaned_name)
             
             result = {
                 'chembl_id': chembl_id,
@@ -81,7 +98,7 @@ def lookup_drug(raw_name: str, cache: dict = None) -> dict:
     except requests.RequestException as e:
         print(f"API Error for {cleaned_name}: {e}")
         
-    result = {'chembl_id': None, 'standard_name': None, 'aware_category': 'Unknown', 'confidence': 'unknown'}
+    result = {'chembl_id': None, 'standard_name': None, 'aware_category': aware_category(cleaned_name), 'confidence': 'unknown'}
     cache[cleaned_name.lower()] = result
     save_cache(cache)
     return result

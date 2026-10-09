@@ -51,12 +51,12 @@ _N/A — founding version._
 
 ### Changed
 - README: neutral description of WHONET and OMOP; narrowed the "why MARS exists" statement
-- `chembl_lookup.py`: abbreviation map relabelled as an illustrative subset; AWaRe is now an explicit placeholder rather than a heuristic
+- `chembl_lookup.py`: abbreviation map relabelled as an illustrative subset; AWaRe now resolved by name against the WHO AWaRe 2023 list (`reference_implementation/third_party/`), replacing a name-pattern heuristic
 - GLASS compatibility note reworded as indicative
 - GOVERNANCE.md simplified to maintainer-led with open contribution
 
 ### Removed
-- `server.mars_certification_tier` from `mcp/server_metadata_spec.yaml` and the example manifest · Affected field(s): `mars_certification_tier`
+- `server.mars_certification_tier` from `mcp/server_metadata_spec.yaml` and the example manifest, replaced by `server.agentic_readiness_score` (self-assessed, nullable) · Affected field(s): `mars_certification_tier`, `agentic_readiness_score`
 - References to unreleased tooling in `mcp/server_metadata_spec.yaml`
 
 ---
@@ -65,6 +65,7 @@ _N/A — founding version._
 
 **Planned:** First stable public release  
 **Planned changes:**
+- WHONET / BacLink crosswalk
 - Zenodo DOI registration
 - Full MCP manifest with live endpoint validation
 

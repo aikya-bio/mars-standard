@@ -31,14 +31,14 @@ Every MARS-compliant dataset exposes four normalised tables:
 
 ## Why MARS Exists
 
-No open, versioned, isolate-level data standard designed for agentic AI access currently exists.
+No open, versioned, isolate-level specification that any data holder can adopt, and that is designed for agentic AI access, currently exists for routine and industry surveillance data.
 
 | Standard | What It Does | Relationship to MARS |
 |---|---|---|
 | WHO GLASS | Aggregate surveillance (countries submit resistance *rates*) | Downstream consumer of MARS-level analysis |
 | PHA4GE | Minimal pathogen-agnostic contextual metadata for genomics | Compatible - MARS is explicitly PHA4GE-aligned |
-| WHONET | Data capture tool for clinical labs | Source of heterogeneous naming MARS resolves |
-| OMOP CDM | Common data model for EHR observational data | Wrong fit - designed for clinical records, not surveillance isolates |
+| WHONET | Free laboratory software and BacLink conversion tool, with widely used organism, antibiotic and test code dictionaries | Upstream source for routine laboratory data; WHONET and BacLink files can be mapped into MARS |
+| OMOP CDM | Common data model for EHR observational data | Designed for clinical records; a different unit of analysis from surveillance isolates |
 
 MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access**.
 

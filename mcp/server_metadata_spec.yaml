@@ -3,14 +3,11 @@
 #
 # Every MARS MCP server must declare all REQUIRED fields.
 # Agents use this to route investigation queries to the correct server.
-# Note: An upcoming MARS CLI will provide a generator to create a draft 
-# from the harmonisation report. Until then, implementers must construct 
-# this metadata manually to describe their server's capabilities and data.
-# The custodian reviews and edits before deployment.
+# Implementers construct this metadata to describe their server's capabilities
+# and data. The custodian reviews and edits before deployment.
 #
 # WHERE THIS LIVES
 #   Specification (authoritative):  mars-standard/mcp/server_metadata_spec.yaml  ← this file
-#   Implementation (generator):     upcoming MARS CLI release
 #   Generated output (editable):    harmonised/mars_manifest.yaml
 #
 # Created by Aikya / microdao.bio
@@ -27,11 +24,6 @@ server:
   mars_standard_version: string     # REQUIRED. e.g. '0.1'
                                     # Must match pinned_mars_version in mars.yaml.
                                     # AUTO-GENERATED from mars.yaml.
-
-  mars_certification_tier: string   # REQUIRED.
-                                    # One of: Compliant | Recommended | Agent-Ready | Uncertified
-                                    # Set to Uncertified until mars arena submit is run.
-                                    # AUTO-GENERATED as 'Uncertified'; updated by mars arena submit.
 
 # ── DOMAIN BLOCK ─────────────────────────────────────────────────────────────
 domain:

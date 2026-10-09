@@ -6,12 +6,7 @@ This document describes how the MARS standard is maintained, how contributions a
 
 ## 1. Overview
 
-MARS uses a **BDFL-style governance model** during its incubation and initial release phases, transitioning to a **community governance model** once critical adoption milestones are met.
-
-| Phase | Decision Authority | Contribution Channel |
-|---|---|---|
-| `Incubation` (v0.x - v1.x) | Aikya (BDFL-style) | GitHub Issues — reviewed by Aikya maintainers |
-| `Community` (Post-trigger) | Elected steering committee + Aikya seat | GitHub Issues → 30-day community comment period |
+MARS is an open specification maintained by Aikya / microdao.bio. Anyone may propose changes through GitHub Issues and pull requests. Aikya maintainers review proposals and make final decisions, and give written rationale for each decision.
 
 ---
 
@@ -30,9 +25,9 @@ All changes to the MARS standard — whether schema modifications, new vocabular
 2. **Community comment period:**
    - `PATCH` changes (documentation fixes, clarifications): No minimum comment period. Maintainer can merge after review.
    - `MINOR` changes (new optional fields, vocabulary additions): **30-day** community comment period before decision.
-   - `MAJOR` changes (breaking schema changes, new mandatory fields): **60-day** community comment period, requires explicit steering committee vote from v1.0.
+   - `MAJOR` changes (breaking schema changes, new mandatory fields): **60-day** community comment period, requires explicit maintainer sign-off with written rationale.
 
-3. **Decision:** Maintainer (or steering committee from v1.0) posts a decision comment on the issue: `ACCEPTED`, `REJECTED`, or `DEFERRED` with rationale.
+3. **Decision:** A maintainer posts a decision comment on the issue: `ACCEPTED`, `REJECTED`, or `DEFERRED` with rationale.
 
 4. **Implementation:** Accepted changes are implemented via a Pull Request that references the issue. The PR must update: the relevant schema/vocabulary file, the data dictionary, and the CHANGELOG.
 
@@ -40,25 +35,7 @@ All changes to the MARS standard — whether schema modifications, new vocabular
 
 ## 3. Decision Authority
 
-### Incubation Phase (Current)
-
-**BDFL:** Aikya / microdao.bio  
-To ensure rapid iteration and agility during early adoption, all final decisions on acceptance or rejection of proposed changes rest with Aikya maintainers.  
-Rationale is always provided in writing on the relevant GitHub Issue.
-
-### Community Phase (Planned Transition)
-
-To guarantee that MARS remains an open, community-owned standard, Aikya will cede BDFL control and form a formal **MARS Steering Committee**. 
-
-**The Transition Trigger:**
-This governance transition will occur automatically when MARS reaches **10 independent institutional adopters**.
-
-The committee will comprise:
-- 2 seats: Aikya (permanent, as founding organisation)
-- 3 seats: Elected community representatives (researchers, implementers, public health institutions)
-- Quorum: 4 of 5 members required for MAJOR version decisions
-
-Details of the governance transition and election mechanics will be published as a separate RFC when the adoption trigger is reached.
+Aikya / microdao.bio maintains MARS. Final decisions on acceptance or rejection of proposed changes rest with Aikya maintainers, which keeps the specification coherent and versioned. Rationale is always provided in writing on the relevant GitHub Issue.
 
 ---
 
@@ -69,7 +46,7 @@ Details of the governance transition and election mechanics will be published as
 | Spec bug report | 5 working days |
 | New vocabulary term request | 15 working days |
 | New field (MINOR) | 30 working days + community comment period |
-| Breaking schema change (MAJOR) | By steering committee vote |
+| Breaking schema change (MAJOR) | 60-day comment period, then maintainer decision |
 
 ---
 

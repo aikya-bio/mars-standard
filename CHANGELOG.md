@@ -39,7 +39,7 @@ _Additive only. No changes to existing schema, vocabularies, or crosswalk tables
 - PostgreSQL and SQLite schema DDL
 - JSON Schema representation
 - Crosswalk templates: drug, organism, gene
-- Governance model (BDFL-style for v0.x)
+- Maintainer-led governance (see GOVERNANCE.md)
 - Semantic versioning policy
 
 ### Migration Notes
@@ -47,13 +47,25 @@ _N/A — founding version._
 
 ---
 
+## [Unreleased]
+
+### Changed
+- README: neutral description of WHONET and OMOP; narrowed the "why MARS exists" statement
+- `chembl_lookup.py`: abbreviation map relabelled as an illustrative subset; AWaRe is now an explicit placeholder rather than a heuristic
+- GLASS compatibility note reworded as indicative
+- GOVERNANCE.md simplified to maintainer-led with open contribution
+
+### Removed
+- `server.mars_certification_tier` from `mcp/server_metadata_spec.yaml` and the example manifest · Affected field(s): `mars_certification_tier`
+- References to unreleased tooling in `mcp/server_metadata_spec.yaml`
+
+---
+
 ## [Upcoming] — v1.0
 
 **Planned:** First stable public release  
 **Planned changes:**
-- Community governance model replaces BDFL-style
 - Zenodo DOI registration
-- Public release of certified dataset registry
 - Full MCP manifest with live endpoint validation
 
 ---

@@ -5,7 +5,7 @@ One row per drug tested per isolate. An isolate tested against 20 drugs produces
 | Field | Type | Status | Description |
 |---|---|---|---|
 | `isolate_id` | TEXT | Mandatory | Foreign key to isolates |
-| `source_dataset` | TEXT | Mandatory | MARS dataset registry ID |
+| `source_dataset` | TEXT | Mandatory | Identifier of the source dataset (free text, e.g. `Demo-Dataset-2026`) |
 | `chembl_id` | TEXT | Mandatory | ChEMBL compound identifier |
 | `drug_name_standard` | TEXT | Mandatory | ChEMBL preferred name |
 | `drug_class` | TEXT | Recommended | Beta-lactam / Fluoroquinolone / Aminoglycoside / etc. |

@@ -2,7 +2,6 @@
 server:
   name: MARS Synthetic Demo Dataset 2026
   mars_standard_version: '0.1'
-  mars_certification_tier: Uncertified
 
 domain:
   type: antimicrobial_resistance_surveillance

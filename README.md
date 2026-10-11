@@ -123,7 +123,7 @@ MCP agent-routing and use case vocabulary:
 - ✅ Tool Annotation Standard — per-tool routing signals for agent use case matching (`mcp/tool_annotation_spec.yaml`)
 
 ### v1.0 — First Stable Public Release (planned)
-- WHONET / BacLink crosswalk (organism, antibiotic and test codes; to be developed with input from the WHONET team)
+- WHONET / BacLink crosswalk (planned)
 - Zenodo DOI registration
 - Full MCP manifest with live endpoint validation
 

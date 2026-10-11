@@ -52,6 +52,7 @@
           "aware_category": { "type": "string", "enum": ["Access", "Watch", "Reserve", "Unknown"] },
           "mic_numeric": { "type": "number" },
           "mic_qualifier": { "type": "string", "enum": ["=", ">", "<", ">=", "<="] },
+          "mic_raw": { "type": "string" },
           "interpretation_raw": { "type": "string" },
           "interpretation_standard": { "type": "string", "enum": ["S", "I", "R", "Unknown"] },
           "breakpoint_system": { "type": "string", "enum": ["CLSI", "EUCAST", "Unknown"] },

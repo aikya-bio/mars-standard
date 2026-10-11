@@ -35,6 +35,7 @@ CREATE TABLE harmonised.mic_observations (
     aware_category TEXT CHECK (aware_category IN ('Access', 'Watch', 'Reserve', 'Unknown')),
     mic_numeric DECIMAL NOT NULL,
     mic_qualifier TEXT NOT NULL CHECK (mic_qualifier IN ('=', '>', '<', '>=', '<=')),
+    mic_raw TEXT,
     interpretation_raw TEXT,
     interpretation_standard TEXT CHECK (interpretation_standard IN ('S', 'I', 'R', 'Unknown')),
     breakpoint_system TEXT CHECK (breakpoint_system IN ('CLSI', 'EUCAST', 'Unknown')),

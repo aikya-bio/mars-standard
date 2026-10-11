@@ -12,6 +12,7 @@ One row per drug tested per isolate. An isolate tested against 20 drugs produces
 | `aware_category` | TEXT | Recommended | Access / Watch / Reserve / Unknown |
 | `mic_numeric` | DECIMAL | Mandatory | Normalised MIC value |
 | `mic_qualifier` | TEXT | Mandatory | = / > / < / >= / <= |
+| `mic_raw` | TEXT | Optional | Original MIC string as in source data |
 | `interpretation_raw` | TEXT | Optional | Original S/I/R as in source data |
 | `interpretation_standard` | TEXT | Recommended | S / I / R / Unknown |
 | `breakpoint_system` | TEXT | Recommended | CLSI / EUCAST / Unknown |

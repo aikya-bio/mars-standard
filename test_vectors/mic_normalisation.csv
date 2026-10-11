@@ -1,0 +1,39 @@
+input,expected_numeric,expected_qualifier,expected_mic_raw,reason_code,status,note
+64.0001,64.0,>,64.0001,float_artifact_overflow,approved,Off-scale high float artifact within 1e-4 above grid 64
+128.0001,128.0,>,128.0001,float_artifact_overflow,approved,Off-scale high float artifact within 1e-4 above grid 128
+1.0001,1.0,>,1.0001,float_artifact_overflow,approved,Off-scale high float artifact within 1e-4 above grid 1
+2.0001,2.0,>,2.0001,float_artifact_overflow,approved,Off-scale high float artifact within 1e-4 above grid 2
+0.0599,0.06,<=,0.0599,float_artifact_underflow,provisional,"Off-scale low float artifact within 1e-4 below grid 0.06; provisional <= per GitHub issue #4"
+0.1199,0.12,<=,0.1199,float_artifact_underflow,provisional,"Off-scale low float artifact within 1e-4 below grid 0.12; provisional <= per GitHub issue #4"
+0.2499,0.25,<=,0.2499,float_artifact_underflow,provisional,"Off-scale low float artifact within 1e-4 below grid 0.25; provisional <= per GitHub issue #4"
+0.5,0.5,=,0.5,ok,approved,Standard grid concentration decimal
+1.5,1.5,=,1.5,ok,approved,Intermediate decimal not within artifact tolerance
+2,2.0,=,2,ok,approved,Integer concentration
+0.06,0.06,=,0.06,ok,approved,Standard grid concentration decimal
+64,64.0,=,64,ok,approved,Integer concentration
+<=0.25,0.25,<=,<=0.25,ok,approved,Censored value preserved as reported without imputation
+>64,64.0,>,>64,ok,approved,Upper-censored value
+<0.06,0.06,<,<0.06,ok,approved,Lower-censored value
+>=32,32.0,>=,>=32,ok,approved,Lower-bound censored value
+=4,4.0,=,=4,ok,approved,Explicit equality qualifier
+≤0.5,0.5,<=,≤0.5,ok,approved,Unicode less-than-or-equal symbol normalised
+≥16,16.0,>=,≥16,ok,approved,Unicode greater-than-or-equal symbol normalised
+"1,5",1.5,=,"1,5",ok,approved,European comma decimal separator normalised
+"<=0,25",0.25,<=,"<=0,25",ok,approved,European comma decimal separator with qualifier
+8 (R),8.0,=,8 (R),ok,approved,Trailing interpretation annotation stripped from numeric
+<=2 (S),2.0,<=,<=2 (S),ok,approved,Trailing interpretation annotation stripped from numeric
+>16 [R],16.0,>,>16 [R],ok,approved,Trailing bracketed interpretation annotation stripped
+4/2,4.0,=,4/2,ratio,approved,Fixed ratio antimicrobial; primary agent stored in numeric; full string in mic_raw
+0.25/4.75,0.25,=,0.25/4.75,ratio,approved,Fixed ratio antimicrobial; primary agent stored in numeric; full string in mic_raw
+2/38,2.0,=,2/38,ratio,approved,Fixed ratio antimicrobial; primary agent stored in numeric; full string in mic_raw
+<=4/2,4.0,<=,<=4/2,ratio,approved,Censored fixed ratio
+,,,,empty,approved,Empty string input
+   ,,,,empty,approved,Whitespace only input
+NA,,,NA,non_numeric,approved,Not available text token
+ND,,,ND,non_numeric,approved,Not determined text token
+R,,,R,non_numeric,approved,Single letter interpretation token
+S,,,S,non_numeric,approved,Single letter interpretation token
+I,,,I,non_numeric,approved,Single letter interpretation token
+>,,,>,non_numeric,approved,Lone qualifier symbol
+<=,,,<=,non_numeric,approved,Lone qualifier symbol
+invalid_text,,,invalid_text,non_numeric,approved,Unparseable free text

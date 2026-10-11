@@ -4,6 +4,22 @@ All notable changes to the MARS standard are documented here.
 
 Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [Migration Notes]
 
+## [v0.3.0] — 2026-10-12
+
+**Status:** Pre-release · Specification
+**Change type:** MINOR — additive schema field, normative test vectors, repository scope clarification
+
+### Added
+- Optional nullable `mic_raw TEXT` added to `harmonised.mic_observations` across PostgreSQL, SQLite, and JSON schemas to preserve original un-normalised source strings verbatim (e.g. fixed ratios, trailing annotations, float artifacts) · Affected field: `mic_raw`
+- Normative MIC normalisation test vectors in `test_vectors/mic_normalisation.csv` and documentation in `test_vectors/README.md`
+- Explicit MIC normalisation rules documented in `data_dictionary/mic_observations.md`
+
+### Removed
+- Reference implementation code removed from the specification repository (`reference_implementation/`), separating specification from tooling. Reference code remains in Git history up to commit 41044562c7c046b46ec13cda3fe894aa184715a2. Reference tooling will be released separately.
+
+### Migration Notes
+- Additive schema change: existing databases remain compatible by adding nullable `mic_raw TEXT` to `harmonised.mic_observations`.
+
 ---
 
 ## [v0.2] — 2026-07-19

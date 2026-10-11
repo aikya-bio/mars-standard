@@ -53,7 +53,7 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 | 3 | **PHA4GE-compatible** | A PHA4GE-aligned dataset can be made MARS-compliant with minimal additional work. |
 | 4 | **Mandatory minimum, optional enrichment** | Small mandatory core; optional fields unlock additional use cases. |
 | 5 | **Designed for Agentic Access** | Schemas and identifiers are explicitly optimized for LLM Text-to-SQL and tool use. |
-| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts. Apache 2.0 for reference code. DOI from v1.0. |
+| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts. Apache 2.0 for historical reference code (up to v0.2.0). DOI from v1.0. |
 
 ---
 
@@ -61,8 +61,8 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 
 To implement MARS in a custom ETL pipeline, follow these steps:
 1. **Download schema SQL** from [`schema/`](schema/) and create the four core tables in your database
-2. **Download crosswalk templates** from [`crosswalk_tables/`](crosswalk_tables/) and populate using the [reference lookup scripts](reference_implementation/)
-3. **Normalise MIC values** using [`reference_implementation/mic_normaliser.py`](reference_implementation/mic_normaliser.py) before loading
+2. **Download crosswalk templates** from [`crosswalk_tables/`](crosswalk_tables/) and populate with your identifier lookups (reference tooling will be released separately)
+3. **Normalise MIC values** according to the specification in [`data_dictionary/mic_observations.md`](data_dictionary/mic_observations.md) and validate against [`test_vectors/`](test_vectors/) before loading (reference tooling will be released separately)
 4. **Load harmonised data** into the four MARS tables
 
 ---
@@ -72,7 +72,7 @@ To implement MARS in a custom ETL pipeline, follow these steps:
 ```
 mars-standard/
 ├── LICENSE                            # CC-BY 4.0 (standard artefacts)
-├── LICENSE_CODE                       # Apache 2.0 (reference_implementation/)
+├── LICENSE_CODE                       # Apache 2.0 (historical code up to v0.2.0)
 ├── README.md
 ├── CHANGELOG.md
 ├── GOVERNANCE.md
@@ -93,8 +93,9 @@ mars-standard/
 │   ├── pha4ge_crosswalk.md
 │   ├── hamronization_crosswalk.md
 │   └── glass_crosswalk.md
-├── reference_implementation/          # Apache 2.0 — Python normalisation scripts
-│   └── example_data/harmonised/       # Gold-standard demo dataset & manifest
+├── test_vectors/                      # Normative MIC normalisation test vectors
+│   ├── mic_normalisation.csv
+│   └── README.md
 ├── use_case_library/                  # MARS Use Case Library (MUL)
 │   └── mars_ucl_v0.1.yaml             # 16 seed AMR investigation use cases
 └── mcp/                               # MCP discovery infrastructure specs
@@ -113,14 +114,19 @@ The core standard artefacts:
 - ✅ Controlled vocabularies (15 CSV files)
 - ✅ Crosswalk templates — drug, organism, gene
 - ✅ Compatibility notes — PHA4GE, hAMRonization, WHO GLASS (indicative)
-- ✅ Reference Python scripts (`reference_implementation/`)
+- ✅ Reference Python scripts (historical in repo up to v0.2.0; reference tooling will be released separately)
 - ✅ Governance, contribution, and versioning policy
 
-### v0.2 — Discovery Infrastructure (current)
+### v0.2 — Discovery Infrastructure
 MCP agent-routing and use case vocabulary:
 - ✅ MARS Use Case Library (MUL) — 16 seed AMR investigation types (`use_case_library/mars_ucl_v0.1.yaml`)
 - ✅ Server Metadata Standard — minimum declaration template for every MARS MCP server (`mcp/server_metadata_spec.yaml`)
 - ✅ Tool Annotation Standard — per-tool routing signals for agent use case matching (`mcp/tool_annotation_spec.yaml`)
+
+### v0.3 — Specification Harmonisation (current)
+- ✅ Add optional nullable `mic_raw` field across schemas
+- ✅ Normative MIC normalisation rules and test vectors (`test_vectors/`)
+- ✅ Complete separation of specification artefacts from implementation tooling
 
 ### v1.0 — First Stable Public Release (planned)
 - WHONET / BacLink crosswalk (planned)
@@ -150,7 +156,7 @@ Implementers must construct their own `manifest.yaml` manually by adhering to th
 | Artefact | Licence |
 |---|---|
 | Schema SQL, data dictionary, vocabularies, crosswalk templates, compatibility docs | [CC-BY 4.0](LICENSE) |
-| Reference Python scripts (`reference_implementation/`) | [Apache 2.0](LICENSE_CODE) |
+| Historical reference Python scripts (up to v0.2.0) | [Apache 2.0](LICENSE_CODE) |
 
 **Attribution required:** Any implementation of MARS must credit:  
 `MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`  

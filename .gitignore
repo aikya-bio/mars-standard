@@ -8,7 +8,7 @@ Thumbs.db
 .vscode/
 *.code-workspace
 
-# Python (reference_implementation/ — Apache 2.0, added in v0.2)
+# Python (historical reference code up to v0.2.0)
 __pycache__/
 *.py[cod]
 *.pyo

@@ -118,10 +118,13 @@ Use the [Spec Bug Report issue template](../../issues/new?template=bug_report.ym
 - All mandatory fields must have `NOT NULL` constraints
 - Add inline comments for non-obvious fields
 
-### Python scripts (reference_implementation/)
-- PEP 8 compliant
-- Every public function must have a Google-style docstring
-- No external dependencies beyond the Python standard library (unless absolutely necessary and documented)
+### Reference tooling
+- Implementation code is no longer hosted in this specification repository (historical code up to v0.2.0 was licensed under Apache 2.0; see [LICENSE_CODE](LICENSE_CODE))
+- Reference tooling will be released separately
+
+### Test vector files (test_vectors/)
+- UTF-8 encoding, standard CSV header row
+- Normative columns matching specification (`input`, `expected_numeric`, `expected_qualifier`, `expected_mic_raw`, `reason_code`, `status`, `note`)
 
 ### CSV files (vocabularies/, crosswalk_tables/)
 - UTF-8 encoding

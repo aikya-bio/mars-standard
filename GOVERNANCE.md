@@ -17,10 +17,10 @@ All changes to the MARS standard — whether schema modifications, new vocabular
 ### Step-by-step process
 
 1. **Open an Issue** using the appropriate template:
-   - [New Term Request](../../issues/new?template=feature_request.yml) — to add a new field or table
-   - [Vocabulary Change](../../issues/new?template=feature_request.yml) — to add, modify, or deprecate a controlled vocabulary value
-   - [Spec Bug Report](../../issues/new?template=bug_report.yml) — to report an inconsistency or error in the specification
-   - [General Question](../../discussions) — for questions and usage discussions
+   - [New Term Request](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml) — to add a new field or table
+   - [Vocabulary Change](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml) — to add, modify, or deprecate a controlled vocabulary value
+   - [Spec Bug Report](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml) — to report an inconsistency or error in the specification
+   - [General Question](https://github.com/aikya-bio/mars-standard/discussions) — for questions and usage discussions
 
 2. **Community comment period:**
    - `PATCH` changes (documentation fixes, clarifications): No minimum comment period. Maintainer can merge after review.

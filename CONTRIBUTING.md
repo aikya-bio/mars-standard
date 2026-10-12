@@ -29,11 +29,11 @@ By participating in this project, you agree to abide by the [MARS Code of Conduc
 
 | Type | How |
 |---|---|
-| 🐛 Report a spec inconsistency | [Open a Spec Bug Report issue](../../issues/new?template=bug_report.yml) |
-| ➕ Request a new field | [Open a New Term Request issue](../../issues/new?template=feature_request.yml) |
-| 📋 Propose a vocabulary change | [Open a Vocabulary Change issue](../../issues/new?template=feature_request.yml) |
-| 💬 Ask a question | [Start a Discussion](../../discussions) |
-| 🔧 Improve reference implementation code | Fork → PR (see below) |
+| 🐛 Report a spec inconsistency | [Open a Spec Bug Report issue](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml) |
+| ➕ Request a new field | [Open a New Term Request issue](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml) |
+| 📋 Propose a vocabulary change | [Open a Vocabulary Change issue](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml) |
+| 💬 Ask a question | [Start a Discussion](https://github.com/aikya-bio/mars-standard/discussions) |
+| 🔧 Improve specification or test vectors | Fork → PR (see below) |
 | 📖 Improve documentation | Fork → PR (see below) |
 
 ---
@@ -49,7 +49,7 @@ By participating in this project, you agree to abide by the [MARS Code of Conduc
 
 ## Requesting a New Term or Field
 
-Use the [New Term Request issue template](../../issues/new?template=feature_request.yml). Please provide:
+Use the [New Term Request issue template](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml). Please provide:
 
 - **Which table** the field belongs in (`isolates`, `mic_observations`, `genotype_observations`, `crosswalk_log`)
 - **Proposed field name** (snake_case, consistent with existing fields)
@@ -66,7 +66,7 @@ New mandatory fields require a MAJOR version bump and 60-day comment period. New
 
 ## Proposing a Vocabulary Change
 
-Use the [Vocabulary Change issue template](../../issues/new?template=feature_request.yml). Specify:
+Use the [Vocabulary Change issue template](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml). Specify:
 
 - **Which vocabulary** (e.g., `specimen_type`, `aware_category`)
 - **Change type:** Add / Modify / Deprecate
@@ -80,7 +80,7 @@ All vocabulary CSVs live in [`vocabularies/`](vocabularies/).
 
 ## Reporting a Spec Bug
 
-Use the [Spec Bug Report issue template](../../issues/new?template=bug_report.yml). Include:
+Use the [Spec Bug Report issue template](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml). Include:
 
 - **Section** of the spec where the error appears
 - **Field name(s)** involved
@@ -136,7 +136,7 @@ Use the [Spec Bug Report issue template](../../issues/new?template=bug_report.ym
 
 ## Questions?
 
-For general questions about implementing MARS, start a [Discussion](../../discussions) rather than opening an issue. Discussions are a great place for community Q&A.
+For general questions about implementing MARS, start a [Discussion](https://github.com/aikya-bio/mars-standard/discussions) rather than opening an issue. Discussions are a great place for community Q&A.
 
 ---
 

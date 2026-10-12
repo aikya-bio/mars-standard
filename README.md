@@ -1,6 +1,6 @@
 # MARS — Minimum AMR Surveillance Standard
 
-[![Version](https://img.shields.io/badge/version-v0.1-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.3.0-blue)](CHANGELOG.md)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
 [![License: Apache 2.0](https://img.shields.io/badge/Code%20License-Apache%202.0-green.svg)](LICENSE_CODE)
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](CHANGELOG.md)
@@ -10,7 +10,7 @@
 > **MARS is an open community standard for isolate-level antimicrobial resistance surveillance data.**  
 > It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and a machine-readable agent access interface - all in one versioned, citable artefact.
 
-**Created by [Aikya](https://aikya.bio) · Founding Specification v0.1**
+**Created by [Aikya](https://aikya.bio) · Specification v0.3.0**
 
 ---
 
@@ -192,4 +192,4 @@ MARS follows [Semantic Versioning](https://semver.org): `MAJOR.MINOR.PATCH`
 
 ---
 
-*MARS Founding Specification v0.1 · Created by [Aikya](https://aikya.bio) / [microdao.bio](https://microdao.bio)*
+*MARS Specification v0.3.0 · Created by [Aikya](https://aikya.bio) / [microdao.bio](https://microdao.bio)*

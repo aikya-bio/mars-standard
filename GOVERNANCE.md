@@ -76,4 +76,4 @@ with a link to `https://github.com/aikya-bio/mars-standard`
 
 ---
 
-*Last updated: v0.1 · 2026-07-08 · Aikya*
+*Last updated: v0.3.0 · 2026-10-12 · Aikya*

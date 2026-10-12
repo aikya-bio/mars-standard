@@ -1,4 +1,4 @@
--- MARS Schema v0.1
+-- MARS Schema v0.3.0
 -- Database: PostgreSQL
 
 CREATE SCHEMA IF NOT EXISTS harmonised;

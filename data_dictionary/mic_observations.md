@@ -40,3 +40,7 @@ One row per drug tested per isolate. An isolate tested against 20 drugs produces
 
 5. **No Breakpoint or S/I/R Interpretation**:
    - The normalisation layer does not apply clinical breakpoints or infer S/I/R interpretations. MARS stores what the source reported.
+
+## Values that are not loaded
+
+If normalisation yields no numeric value or no qualifier (reason `empty` or `non_numeric`: blank, whitespace, NA, ND, bare S/I/R tokens, a lone qualifier symbol, or unparseable text), **no row is written to `mic_observations`**, because `mic_numeric` and `mic_qualifier` are mandatory and MUST NOT be imputed. The source string is preserved by the loader outside this table (for example in its own load report). Implementations MUST NOT substitute a default value.

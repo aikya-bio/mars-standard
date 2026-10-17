@@ -20,6 +20,8 @@ Conforming implementations of MARS tools and pipelines must pass these test vect
 | `status` | TEXT | `approved` or `provisional` (underflow is provisional pending issue #4) |
 | `note` | TEXT | Contextual explanation and rationale |
 
+Rows whose `reason_code` is `empty` or `non_numeric` are not loaded; their empty `expected_numeric` and `expected_qualifier` mean no row.
+
 ## Status Classifications
 
 - **`approved`**: Normative requirement confirmed by MARS specification governance.

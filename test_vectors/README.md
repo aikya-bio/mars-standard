@@ -27,7 +27,7 @@ Conforming implementations of MARS tools and pipelines must pass these test vect
 
 ## Normalisation Principles
 
-1. **Float Artifacts on Dilution Grid**: Values within $10^{-4}$ above a standard doubling dilution grid value are treated as overflow (`>grid`). Values within $10^{-4}$ below a grid value are treated as underflow (`<=grid`, provisional). Ordinary decimals outside this tolerance remain `=`.
+1. **Float Artifacts on Dilution Grid**: Artifact tolerance is **0.0001, inclusive**, evaluated on the decimal value **in exact decimal arithmetic** (for example Python `decimal.Decimal`, not binary floating point). A value v is an overflow artefact if 0 < v − g ≤ 0.0001 and an underflow artefact if 0 < g − v ≤ 0.0001 for a grid value g. Implementations that use binary floats MUST round |v − g| to at least 6 decimal places before comparing. Values within tolerance above a grid value are treated as overflow (`>grid`). Values within tolerance below a grid value are treated as underflow (`<=grid`, provisional, see GitHub issue #4). Ordinary decimals outside this tolerance remain `=`.
 2. **Censored Values Preserved**: `<` and `<=` are never imputed or halved; `>` and `>=` are never bumped.
 3. **Fixed Ratios**: For combinations (e.g. `4/2`), the primary component is recorded in `expected_numeric`, and the complete original string is retained in `expected_mic_raw`.
 4. **No Breakpoints**: Breakpoints and S/I/R interpretations are not applied by this layer.

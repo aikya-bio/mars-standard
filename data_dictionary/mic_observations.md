@@ -22,7 +22,7 @@ One row per drug tested per isolate. An isolate tested against 20 drugs produces
 
 1. **Conventional Concentration Grid & Float Artifacts**:
    - The conventional doubling dilution series forms the reference concentration grid (..., 0.002, 0.004, 0.008, 0.015, 0.03, 0.06, 0.12, 0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024 mg/L).
-   - Artifact tolerance is defined as $10^{-4}$ (`1e-4`).
+   - Artifact tolerance is **0.0001, inclusive**, evaluated on the decimal value **in exact decimal arithmetic** (for example Python `decimal.Decimal`, not binary floating point). A value v is an overflow artefact if 0 < v − g ≤ 0.0001 and an underflow artefact if 0 < g − v ≤ 0.0001 for a grid value g. Implementations that use binary floats MUST round |v − g| to at least 6 decimal places before comparing.
    - **Overflow**: A value within $10^{-4}$ above a grid value is an off-scale high artifact and normalises to `>grid` (e.g., `64.0001` -> `mic_numeric: 64.0`, `mic_qualifier: '>'`).
    - **Underflow**: A value within $10^{-4}$ below a grid value is an off-scale low artifact and normalises to `<=grid` (e.g., `0.0599` -> `mic_numeric: 0.06`, `mic_qualifier: '<='`), interpreted as left-censored at the lowest tested concentration (inferred rule; provisional, see GitHub issue #4).
    - Ordinary plain decimals not within tolerance of a float artifact (e.g., `0.5`, `1.5`) retain qualifier `=`.

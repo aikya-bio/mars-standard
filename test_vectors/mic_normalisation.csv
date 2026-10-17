@@ -37,3 +37,7 @@ I,,,I,non_numeric,approved,Single letter interpretation token
 >,,,>,non_numeric,approved,Lone qualifier symbol
 <=,,,<=,non_numeric,approved,Lone qualifier symbol
 invalid_text,,,invalid_text,non_numeric,approved,Unparseable free text
+64.0002,64.0002,=,64.0002,ok,approved,Value outside 0.0001 tolerance above grid 64 remains plain decimal
+64.00009,64.0,>,64.00009,float_artifact_overflow,approved,Off-scale high float artifact within 0.0001 above grid 64
+0.05991,0.06,<=,0.05991,float_artifact_underflow,provisional,"Off-scale low float artifact within 0.0001 below grid 0.06; provisional <= per GitHub issue #4"
+0.0598,0.0598,=,0.0598,ok,approved,Value outside 0.0001 tolerance below grid 0.06 remains plain decimal

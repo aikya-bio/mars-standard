@@ -44,3 +44,16 @@ One row per drug tested per isolate. An isolate tested against 20 drugs produces
 ## Values that are not loaded
 
 If normalisation yields no numeric value or no qualifier (reason `empty` or `non_numeric`: blank, whitespace, NA, ND, bare S/I/R tokens, a lone qualifier symbol, or unparseable text), **no row is written to `mic_observations`**, because `mic_numeric` and `mic_qualifier` are mandatory and MUST NOT be imputed. The source string is preserved by the loader outside this table (for example in its own load report). Implementations MUST NOT substitute a default value.
+
+## Reason codes (informative, used by the test vectors)
+
+The reason codes below are used exclusively by the normative test vectors to classify normalisation outcomes. They are informative diagnostic codes and are **not** stored as fields in the `harmonised.mic_observations` schema table.
+
+| Reason Code | Meaning |
+|---|---|
+| `ok` | Standard concentration decimal, integer, or reported inequality parsed without artifact adjustment. |
+| `empty` | Input is empty or contains only whitespace; yields no numeric value or qualifier and is not loaded. |
+| `non_numeric` | Input contains unparseable text, missing tokens (`NA`, `ND`), bare S/I/R tokens, or lone qualifiers; not loaded. |
+| `float_artifact_overflow` | Off-scale high artifact within 0.0001 above a grid concentration; normalises to `>grid`. |
+| `float_artifact_underflow` | Off-scale low artifact within 0.0001 below a grid concentration; normalises to `<=grid` (provisional). |
+| `ratio` | Combination antimicrobial reported as a fixed ratio; primary agent stored in `mic_numeric`, full string in `mic_raw`. |

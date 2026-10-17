@@ -114,7 +114,7 @@ The core standard artefacts:
 - ✅ Controlled vocabularies (15 CSV files)
 - ✅ Crosswalk templates — drug, organism, gene
 - ✅ Compatibility notes — PHA4GE, hAMRonization, WHO GLASS (indicative)
-- ✅ Reference Python scripts (Reference code is preserved in Git history up to commit 4104456; reference tooling will be released separately)
+- Reference Python scripts: shipped in earlier versions; removed from this repository in v0.3.0 (reference tooling will be released separately)
 - ✅ Governance, contribution, and versioning policy
 
 ### v0.2 — Discovery Infrastructure

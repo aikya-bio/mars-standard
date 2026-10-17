@@ -21,7 +21,7 @@ server:
                                     # Bad:  'mars-server-1' or 'my_data'
                                     # CUSTODIAN: EDIT THIS — make it descriptive and specific.
 
-  mars_standard_version: string     # REQUIRED. e.g. '0.1'
+  mars_standard_version: string     # REQUIRED. e.g. '0.3.0'
                                     # Must match pinned_mars_version in mars.yaml.
                                     # AUTO-GENERATED from mars.yaml.
 

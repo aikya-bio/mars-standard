@@ -15,7 +15,7 @@ Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [M
 - Explicit MIC normalisation rules documented in `data_dictionary/mic_observations.md`
 
 ### Removed
-- Reference implementation code removed from the specification repository (`reference_implementation/`), separating specification from tooling. Reference code remains in Git history up to commit 41044562c7c046b46ec13cda3fe894aa184715a2. Reference tooling will be released separately.
+- Reference implementation code removed from the specification repository (`reference_implementation/`), separating specification from tooling. Reference code is preserved in Git history up to commit 4104456. Reference tooling will be released separately.
 
 ### Migration Notes
 - Additive schema change: existing databases remain compatible by adding nullable `mic_raw TEXT` to `harmonised.mic_observations`.

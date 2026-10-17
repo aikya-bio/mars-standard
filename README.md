@@ -53,7 +53,7 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 | 3 | **PHA4GE-compatible** | A PHA4GE-aligned dataset can be made MARS-compliant with minimal additional work. |
 | 4 | **Mandatory minimum, optional enrichment** | Small mandatory core; optional fields unlock additional use cases. |
 | 5 | **Designed for Agentic Access** | Schemas and identifiers are explicitly optimized for LLM Text-to-SQL and tool use. |
-| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts. Apache 2.0 for historical reference code (up to v0.2.0). DOI from v1.0. |
+| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts. Reference code is preserved in Git history up to commit 4104456. DOI from v1.0. |
 
 ---
 
@@ -72,7 +72,7 @@ To implement MARS in a custom ETL pipeline, follow these steps:
 ```
 mars-standard/
 ├── LICENSE                            # CC-BY 4.0 (standard artefacts)
-├── LICENSE_CODE                       # Apache 2.0 (historical code up to v0.2.0)
+├── LICENSE_CODE                       # Reference code is preserved in Git history up to commit 4104456.
 ├── README.md
 ├── CHANGELOG.md
 ├── GOVERNANCE.md
@@ -114,7 +114,7 @@ The core standard artefacts:
 - ✅ Controlled vocabularies (15 CSV files)
 - ✅ Crosswalk templates — drug, organism, gene
 - ✅ Compatibility notes — PHA4GE, hAMRonization, WHO GLASS (indicative)
-- ✅ Reference Python scripts (historical in repo up to v0.2.0; reference tooling will be released separately)
+- ✅ Reference Python scripts (Reference code is preserved in Git history up to commit 4104456; reference tooling will be released separately)
 - ✅ Governance, contribution, and versioning policy
 
 ### v0.2 — Discovery Infrastructure
@@ -156,7 +156,7 @@ Implementers must construct their own `manifest.yaml` manually by adhering to th
 | Artefact | Licence |
 |---|---|
 | Schema SQL, data dictionary, vocabularies, crosswalk templates, compatibility docs | [CC-BY 4.0](LICENSE) |
-| Historical reference Python scripts (up to v0.2.0) | [Apache 2.0](LICENSE_CODE) |
+| Reference code is preserved in Git history up to commit 4104456. | [Apache 2.0](LICENSE_CODE) |
 
 **Attribution required:** Any implementation of MARS must credit:  
 `MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`  

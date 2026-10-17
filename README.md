@@ -2,7 +2,6 @@
 
 [![Version](https://img.shields.io/badge/version-v0.3.0-blue)](CHANGELOG.md)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
-[![License: Apache 2.0](https://img.shields.io/badge/Code%20License-Apache%202.0-green.svg)](LICENSE_CODE)
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](CHANGELOG.md)
 [![DOI](https://img.shields.io/badge/DOI-pending%20v1.0-lightgrey)](#)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21880278.svg)](https://doi.org/10.5281/zenodo.21880278)

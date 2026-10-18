@@ -60,7 +60,7 @@ Use the [New Term Request issue template](https://github.com/aikya-bio/mars-stan
 - **Example values**
 - **Use case:** what MARS query or agentic use case this field enables
 
-New mandatory fields require a MAJOR version bump and 60-day comment period. New optional/recommended fields require a MINOR version bump and 30-day comment period.
+New mandatory fields require a MAJOR version bump; new optional or recommended fields require a MINOR version bump. Comments from anyone are welcome on any proposal.
 
 ---
 
@@ -97,7 +97,7 @@ Use the [Spec Bug Report issue template](https://github.com/aikya-bio/mars-stand
 2. Make your changes. Follow the [style guide](#style-guide) below.
 3. **Update CHANGELOG.md** — add an entry under `[Unreleased]`
 4. **Open the PR** against `main`, describe your changes clearly in the PR description, and link the related issue
-5. A maintainer will review within the SLA defined in [GOVERNANCE.md](GOVERNANCE.md)
+5. A maintainer will review and respond as capacity allows
 
 **Branch naming:**
 - `fix/issue-NNN-short-description` — for spec bug fixes

@@ -34,31 +34,25 @@ Aikya / microdao.bio maintains MARS. Final decisions on acceptance or rejection 
 
 ---
 
-## 4. Response
-
-Aikya responds as capacity allows and makes no response-time commitment at this stage. More formal review processes and response targets may be introduced once MARS is adopted by multiple organisations.
-
----
-
-## 5. Code of Conduct
+## 4. Code of Conduct
 
 All contributors and community members are expected to adhere to the [MARS Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
 
-## 6. How to Report Issues with Governance
+## 5. How to Report Issues with Governance
 
 If you believe a governance process has not been followed correctly, email **mars@aikya.bio** with the subject line `MARS Governance Concern — [Issue #]`.
 
 ---
 
-## 7. Reporting Security Vulnerabilities
+## 6. Reporting Security Vulnerabilities
 
 If you discover a security issue in any MARS reference implementation code, **do not open a public issue**. Email **mars@aikya.bio** instead.
 
 ---
 
-## 8. Attribution
+## 7. Attribution
 
 Any implementation of MARS must credit:  
 `MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`  

@@ -22,11 +22,9 @@ All changes to the MARS standard — whether schema modifications, new vocabular
    - [Spec Bug Report](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml) — to report an inconsistency or error in the specification
    - [General Question](https://github.com/aikya-bio/mars-standard/discussions) — for questions and usage discussions
 
-2. **Comments are welcome.** Anyone may comment on any proposal. There is no fixed review period. Maintainers consider the comments and decide. `PATCH`, `MINOR` and `MAJOR` describe the version impact of a change (see the versioning policy); a `MAJOR` change also needs a written rationale and migration notes.
+2. **Decision:** A maintainer posts a decision comment on the issue: `ACCEPTED`, `REJECTED`, or `DEFERRED` with rationale.
 
-3. **Decision:** A maintainer posts a decision comment on the issue: `ACCEPTED`, `REJECTED`, or `DEFERRED` with rationale.
-
-4. **Implementation:** Accepted changes are implemented via a Pull Request that references the issue. The PR must update: the relevant schema/vocabulary file, the data dictionary, and the CHANGELOG.
+3. **Implementation:** Accepted changes are implemented via a Pull Request that references the issue. The PR must update: the relevant schema/vocabulary file, the data dictionary, and the CHANGELOG.
 
 ---
 

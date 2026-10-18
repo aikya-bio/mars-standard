@@ -22,10 +22,7 @@ All changes to the MARS standard — whether schema modifications, new vocabular
    - [Spec Bug Report](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml) — to report an inconsistency or error in the specification
    - [General Question](https://github.com/aikya-bio/mars-standard/discussions) — for questions and usage discussions
 
-2. **Community comment period:**
-   - `PATCH` changes (documentation fixes, clarifications): No minimum comment period. Maintainer can merge after review.
-   - `MINOR` changes (new optional fields, vocabulary additions): **30-day** community comment period before decision.
-   - `MAJOR` changes (breaking schema changes, new mandatory fields): **60-day** community comment period, requires explicit maintainer sign-off with written rationale.
+2. **Comments are welcome.** Anyone may comment on any proposal. There is no fixed review period. Maintainers consider the comments and decide. `PATCH`, `MINOR` and `MAJOR` describe the version impact of a change (see the versioning policy); a `MAJOR` change also needs a written rationale and migration notes.
 
 3. **Decision:** A maintainer posts a decision comment on the issue: `ACCEPTED`, `REJECTED`, or `DEFERRED` with rationale.
 
@@ -39,14 +36,9 @@ Aikya / microdao.bio maintains MARS. Final decisions on acceptance or rejection 
 
 ---
 
-## 4. Review SLAs
+## 4. Response
 
-| Change Type | Target Response Time |
-|---|---|
-| Spec bug report | 5 working days |
-| New vocabulary term request | 15 working days |
-| New field (MINOR) | 30 working days + community comment period |
-| Breaking schema change (MAJOR) | 60-day comment period, then maintainer decision |
+Aikya responds as capacity allows and makes no response-time commitment at this stage. More formal review processes and response targets may be introduced once MARS is adopted by multiple organisations.
 
 ---
 

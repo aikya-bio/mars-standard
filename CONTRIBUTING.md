@@ -60,7 +60,7 @@ Use the [New Term Request issue template](https://github.com/aikya-bio/mars-stan
 - **Example values**
 - **Use case:** what MARS query or agentic use case this field enables
 
-New mandatory fields require a MAJOR version bump; new optional or recommended fields require a MINOR version bump. Comments from anyone are welcome on any proposal.
+New mandatory fields require a MAJOR version bump; new optional or recommended fields require a MINOR version bump.
 
 ---
 

@@ -21,6 +21,7 @@ Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [M
 - Standardized historical reference code extent statements across documentation (`README.md`, `CONTRIBUTING.md`, `.gitignore`, `CHANGELOG.md`) to: "Reference code is preserved in Git history up to commit 4104456."
 - Removed Apache 2.0 license badge from `README.md` and removed commit hash line from `CITATION.cff` pending formal release tagging
 - Updated MCP server metadata example specification version to `0.3.0`
+- Governance simplified for the pre-1.0 period: comments welcome, no fixed comment periods or response-time targets.
 
 ### Removed
 - Reference implementation code removed from the specification repository (`reference_implementation/`), separating specification from tooling. Reference code is preserved in Git history up to commit 4104456. Reference tooling will be released separately.

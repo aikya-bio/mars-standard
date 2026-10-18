@@ -97,7 +97,6 @@ Use the [Spec Bug Report issue template](https://github.com/aikya-bio/mars-stand
 2. Make your changes. Follow the [style guide](#style-guide) below.
 3. **Update CHANGELOG.md** — add an entry under `[Unreleased]`
 4. **Open the PR** against `main`, describe your changes clearly in the PR description, and link the related issue
-5. A maintainer will review and respond as capacity allows
 
 **Branch naming:**
 - `fix/issue-NNN-short-description` — for spec bug fixes

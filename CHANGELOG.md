@@ -4,6 +4,30 @@ All notable changes to the MARS standard are documented here.
 
 Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [Migration Notes]
 
+## [v0.3.0] — 2026-10-12
+
+**Status:** Pre-release · Specification
+**Change type:** MINOR — additive schema field, normative test vectors, repository scope clarification
+
+### Added
+- Optional nullable `mic_raw TEXT` added to `harmonised.mic_observations` across PostgreSQL, SQLite, and JSON schemas (`["string", "null"]`) to preserve original un-normalised source strings verbatim (e.g. fixed ratios, trailing annotations, float artifacts) · Affected field: `mic_raw`
+- Normative MIC normalisation test vectors in `test_vectors/mic_normalisation.csv` and documentation in `test_vectors/README.md`
+- Exact decimal arithmetic tolerance rule (0.0001, inclusive) for float artifacts on dilution grid, with boundary test vectors
+- Explicit "Values that are not loaded" rule: inputs with reason `empty` or `non_numeric` write no row to `mic_observations`
+- Informative reason codes table in `data_dictionary/mic_observations.md` documenting test vector classifications
+- Explicit MIC normalisation rules documented in `data_dictionary/mic_observations.md`
+
+### Changed
+- Standardized historical reference code extent statements across documentation (`README.md`, `CONTRIBUTING.md`, `.gitignore`, `CHANGELOG.md`) to: "Reference code is preserved in Git history up to commit 4104456."
+- Removed Apache 2.0 license badge from `README.md` and removed commit hash line from `CITATION.cff` pending formal release tagging
+- Updated MCP server metadata example specification version to `0.3.0`
+
+### Removed
+- Reference implementation code removed from the specification repository (`reference_implementation/`), separating specification from tooling. Reference code is preserved in Git history up to commit 4104456. Reference tooling will be released separately.
+
+### Migration Notes
+- Additive schema change: existing databases remain compatible by adding nullable `mic_raw TEXT` to `harmonised.mic_observations`.
+
 ---
 
 ## [v0.2] — 2026-07-19
@@ -39,7 +63,7 @@ _Additive only. No changes to existing schema, vocabularies, or crosswalk tables
 - PostgreSQL and SQLite schema DDL
 - JSON Schema representation
 - Crosswalk templates: drug, organism, gene
-- Governance model (BDFL-style for v0.x)
+- Maintainer-led governance (see GOVERNANCE.md)
 - Semantic versioning policy
 
 ### Migration Notes
@@ -47,13 +71,26 @@ _N/A — founding version._
 
 ---
 
+## [Unreleased]
+
+### Changed
+- README: neutral description of WHONET and OMOP; narrowed the "why MARS exists" statement
+- `chembl_lookup.py`: abbreviation map relabelled as an illustrative subset; AWaRe now resolved by name against the WHO AWaRe 2023 list (`reference_implementation/third_party/`), replacing a name-pattern heuristic
+- GLASS compatibility note reworded as indicative
+- GOVERNANCE.md simplified to maintainer-led with open contribution
+
+### Removed
+- `server.mars_certification_tier` from `mcp/server_metadata_spec.yaml` and the example manifest, replaced by `server.agentic_readiness_score` (self-assessed, nullable) · Affected field(s): `mars_certification_tier`, `agentic_readiness_score`
+- References to unreleased tooling in `mcp/server_metadata_spec.yaml`
+
+---
+
 ## [Upcoming] — v1.0
 
 **Planned:** First stable public release  
 **Planned changes:**
-- Community governance model replaces BDFL-style
+- WHONET / BacLink crosswalk
 - Zenodo DOI registration
-- Public release of certified dataset registry
 - Full MCP manifest with live endpoint validation
 
 ---

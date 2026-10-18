@@ -5,7 +5,7 @@ One row per resistance gene per isolate. Only populated where gene-level data ex
 | Field | Type | Status | Description |
 |---|---|---|---|
 | `isolate_id` | TEXT | Mandatory | Foreign key to isolates |
-| `source_dataset` | TEXT | Mandatory | MARS dataset registry ID |
+| `source_dataset` | TEXT | Mandatory | Identifier of the source dataset (free text, e.g. `Demo-Dataset-2026`) |
 | `gene_aro_id` | TEXT | Recommended | ARO identifier |
 | `gene_name_standard` | TEXT | Recommended | Standard gene name from ARO |
 | `phenotypic_class` | TEXT | Recommended | ESBL / MBL / Carbapenemase / Cephalosporinase |

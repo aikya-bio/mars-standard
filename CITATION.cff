@@ -36,6 +36,5 @@ keywords:
   - global health
   - genomic surveillance
   - antibiotic susceptibility testing
-commit: 2ae74c079a22b586e4626ba3dde1b9eba2e3abe1
-version: v0.2.0
-date-released: '2026-08-11'
+version: v0.3.0
+date-released: '2026-10-12'

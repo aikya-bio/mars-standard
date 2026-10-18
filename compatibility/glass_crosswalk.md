@@ -1,6 +1,6 @@
 # WHO GLASS Compatibility
 
-MARS feeds into WHO GLASS. GLASS is an aggregate reporting system, while MARS operates at the isolate level. Data in MARS format can easily be aggregated to meet GLASS requirements.
+GLASS is an aggregate reporting system, while MARS operates at the isolate level. Data in MARS format can be aggregated to the counts GLASS requests; this table indicates how MARS fields relate to GLASS concepts. It is indicative, not a validated submission mapping.
 
 | MARS Field | GLASS Concept | Notes |
 |---|---|---|

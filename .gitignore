@@ -8,7 +8,7 @@ Thumbs.db
 .vscode/
 *.code-workspace
 
-# Python (reference_implementation/ — Apache 2.0, added in v0.2)
+# Reference code is preserved in Git history up to commit 4104456.
 __pycache__/
 *.py[cod]
 *.pyo

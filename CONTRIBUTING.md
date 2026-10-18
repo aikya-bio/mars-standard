@@ -29,11 +29,11 @@ By participating in this project, you agree to abide by the [MARS Code of Conduc
 
 | Type | How |
 |---|---|
-| 🐛 Report a spec inconsistency | [Open a Spec Bug Report issue](../../issues/new?template=bug_report.yml) |
-| ➕ Request a new field | [Open a New Term Request issue](../../issues/new?template=feature_request.yml) |
-| 📋 Propose a vocabulary change | [Open a Vocabulary Change issue](../../issues/new?template=feature_request.yml) |
-| 💬 Ask a question | [Start a Discussion](../../discussions) |
-| 🔧 Improve reference implementation code | Fork → PR (see below) |
+| 🐛 Report a spec inconsistency | [Open a Spec Bug Report issue](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml) |
+| ➕ Request a new field | [Open a New Term Request issue](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml) |
+| 📋 Propose a vocabulary change | [Open a Vocabulary Change issue](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml) |
+| 💬 Ask a question | [Start a Discussion](https://github.com/aikya-bio/mars-standard/discussions) |
+| 🔧 Improve specification or test vectors | Fork → PR (see below) |
 | 📖 Improve documentation | Fork → PR (see below) |
 
 ---
@@ -49,7 +49,7 @@ By participating in this project, you agree to abide by the [MARS Code of Conduc
 
 ## Requesting a New Term or Field
 
-Use the [New Term Request issue template](../../issues/new?template=feature_request.yml). Please provide:
+Use the [New Term Request issue template](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml). Please provide:
 
 - **Which table** the field belongs in (`isolates`, `mic_observations`, `genotype_observations`, `crosswalk_log`)
 - **Proposed field name** (snake_case, consistent with existing fields)
@@ -60,13 +60,13 @@ Use the [New Term Request issue template](../../issues/new?template=feature_requ
 - **Example values**
 - **Use case:** what MARS query or agentic use case this field enables
 
-New mandatory fields require a MAJOR version bump and 60-day comment period. New optional/recommended fields require a MINOR version bump and 30-day comment period.
+New mandatory fields require a MAJOR version bump; new optional or recommended fields require a MINOR version bump.
 
 ---
 
 ## Proposing a Vocabulary Change
 
-Use the [Vocabulary Change issue template](../../issues/new?template=feature_request.yml). Specify:
+Use the [Vocabulary Change issue template](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml). Specify:
 
 - **Which vocabulary** (e.g., `specimen_type`, `aware_category`)
 - **Change type:** Add / Modify / Deprecate
@@ -80,7 +80,7 @@ All vocabulary CSVs live in [`vocabularies/`](vocabularies/).
 
 ## Reporting a Spec Bug
 
-Use the [Spec Bug Report issue template](../../issues/new?template=bug_report.yml). Include:
+Use the [Spec Bug Report issue template](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml). Include:
 
 - **Section** of the spec where the error appears
 - **Field name(s)** involved
@@ -97,7 +97,6 @@ Use the [Spec Bug Report issue template](../../issues/new?template=bug_report.ym
 2. Make your changes. Follow the [style guide](#style-guide) below.
 3. **Update CHANGELOG.md** — add an entry under `[Unreleased]`
 4. **Open the PR** against `main`, describe your changes clearly in the PR description, and link the related issue
-5. A maintainer will review within the SLA defined in [GOVERNANCE.md](GOVERNANCE.md)
 
 **Branch naming:**
 - `fix/issue-NNN-short-description` — for spec bug fixes
@@ -118,10 +117,13 @@ Use the [Spec Bug Report issue template](../../issues/new?template=bug_report.ym
 - All mandatory fields must have `NOT NULL` constraints
 - Add inline comments for non-obvious fields
 
-### Python scripts (reference_implementation/)
-- PEP 8 compliant
-- Every public function must have a Google-style docstring
-- No external dependencies beyond the Python standard library (unless absolutely necessary and documented)
+### Reference tooling
+- Implementation code is no longer hosted in this specification repository. Reference code is preserved in Git history up to commit 4104456. (See [LICENSE_CODE](LICENSE_CODE))
+- Reference tooling will be released separately
+
+### Test vector files (test_vectors/)
+- UTF-8 encoding, standard CSV header row
+- Normative columns matching specification (`input`, `expected_numeric`, `expected_qualifier`, `expected_mic_raw`, `reason_code`, `status`, `note`)
 
 ### CSV files (vocabularies/, crosswalk_tables/)
 - UTF-8 encoding
@@ -133,7 +135,7 @@ Use the [Spec Bug Report issue template](../../issues/new?template=bug_report.ym
 
 ## Questions?
 
-For general questions about implementing MARS, start a [Discussion](../../discussions) rather than opening an issue. Discussions are a great place for community Q&A.
+For general questions about implementing MARS, start a [Discussion](https://github.com/aikya-bio/mars-standard/discussions) rather than opening an issue. Discussions are a great place for community Q&A.
 
 ---
 

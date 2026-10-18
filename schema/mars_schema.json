@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "MARS Schema v0.1",
+  "title": "MARS Schema v0.3.0",
   "type": "object",
   "properties": {
     "isolates": {
@@ -52,6 +52,7 @@
           "aware_category": { "type": "string", "enum": ["Access", "Watch", "Reserve", "Unknown"] },
           "mic_numeric": { "type": "number" },
           "mic_qualifier": { "type": "string", "enum": ["=", ">", "<", ">=", "<="] },
+          "mic_raw": { "type": ["string", "null"] },
           "interpretation_raw": { "type": "string" },
           "interpretation_standard": { "type": "string", "enum": ["S", "I", "R", "Unknown"] },
           "breakpoint_system": { "type": "string", "enum": ["CLSI", "EUCAST", "Unknown"] },

@@ -5,7 +5,7 @@ One row per clinical isolate.
 | Field | Type | Status | Description |
 |---|---|---|---|
 | `isolate_id` | TEXT | Mandatory | Unique ID within source dataset |
-| `source_dataset` | TEXT | Mandatory | MARS dataset registry ID |
+| `source_dataset` | TEXT | Mandatory | Identifier of the source dataset (free text, e.g. `Demo-Dataset-2026`) |
 | `loaded_at` | TIMESTAMPTZ | Mandatory | UTC timestamp of data load |
 | `ncbi_taxonomy_id` | INTEGER | Mandatory | NCBI Taxonomy ID for organism |
 | `organism_name_standard` | TEXT | Mandatory | Cleaned binomial species name |

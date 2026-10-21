@@ -103,6 +103,12 @@ annotations:
                                    # e.g., 5 means a max of 5% of total records.
                                    # Prevents complete exfiltration on small datasets.
 
+  # ── SENSITIVE FIELDS ────────────────────────────────────────────────────────
+  sensitive_fields: list[string] # OPTIONAL. Fields flagged as sensitive (e.g. ['patient_key']).
+                                 # Excluded from default agent query results and returned only
+                                 # on explicit request to protect patient privacy.
+                                 # Do not add sensitive fields as default filters.
+
   # ── EXAMPLE QUERIES ──────────────────────────────────────────────────────────
   example_queries: list[string] # RECOMMENDED. 2-3 natural language examples.
                                 # Should match examples in the corresponding MUL entries.
@@ -218,6 +224,9 @@ tools:
         summary: 'Isolate records with MIC observations matching query filters'
         count_field: isolate_count
         max_return_percentage: 5
+      sensitive_fields:
+        - patient_key           # Flagged sensitive: excluded from default agent query results;
+                                # returned only on explicit request. Do not add as a default filter.
       inputSchema:
         type: object
         description: "Retrieves isolate records with MIC observations matching filters. You MUST provide at least one filter parameter."
@@ -239,22 +248,26 @@ tools:
             description: "End year of collection."
           specimen_type:
             type: string
-            description: "Specimen source (e.g., 'Blood', 'Urine', 'Respiratory')."
+            description: "Specimen source (e.g., 'Blood', 'Urine', 'Respiratory', 'Stool', 'Genital'). 13 controlled values in v0.4."
           facility_type:
             type: string
-            description: "Healthcare facility type (e.g., 'ICU', 'Community', 'General Ward')."
+            description: "Healthcare facility type (e.g., 'ICU', 'Community', 'General Ward', 'Outpatient', 'Long-term Care')."
           infection_type:
             type: string
             description: "Type of infection (e.g., 'BSI', 'UTI', 'Pneumonia')."
           age_group:
             type: string
-            description: "Age group (e.g., '0–2', '3–17', '18–64', '65+')."
+            description: "Age group (GLASS-aligned bands: '<1', '1–4', '5–14', '15–24', '25–34', '35–44', '45–54', '55–64', '65–74', '75–84', '85+', 'Unknown'; legacy bands '0–2', '3–17', '18–64', '65+' deprecated)."
           gender:
             type: string
-            description: "Gender ('M', 'F', 'Unknown')."
+            description: "Gender ('M', 'F', 'O', 'Unknown'). 'O' added in v0.4."
           nosocomial:
             type: boolean
             description: "True if the infection was hospital-acquired."
+          infection_origin:
+            type: string
+            enum: [Community, Hospital, Unknown]
+            description: "Infection origin ('Community', 'Hospital', 'Unknown'). Must agree with nosocomial when both present."
           gram_type:
             type: string
             description: "Gram stain type ('Gram-negative', 'Gram-positive')."

@@ -119,6 +119,12 @@ coverage:
                                     # AUTO-GENERATED from isolates.
                                     # CUSTODIAN: Verify.
 
+  has_infection_origin: boolean     # OPTIONAL.
+                                    # True if >50% of isolates have infection_origin populated.
+                                    # Captures Community / Hospital / Unknown origin.
+                                    # Complementary to nosocomial.
+                                    # CUSTODIAN: Verify.
+
   regions: list[string]             # RECOMMENDED. UN M49 region names present in dataset.
                                     # e.g. ['Southern Asia', 'Sub-Saharan Africa', 'Europe']
                                     # AUTO-GENERATED from country_iso → UN M49 mapping.
@@ -154,3 +160,12 @@ not_suitable_for: list[string]      # REQUIRED. Minimum 3 entries.
                                     #   - 'Fungal pathogens — dataset contains bacteria only'
                                     #   - 'Community-acquired infections — ICU isolates only'
                                     #   - 'Pre-2010 resistance trends — data starts 2015'
+                                    #   - 'Direct patient identification — patient_key is pseudonymous'
+
+# ── PRIVACY & SENSITIVE FIELDS ───────────────────────────────────────────────
+privacy:
+  sensitive_fields: list[string]    # Flagged sensitive fields (e.g. ['patient_key']).
+                                    # Excluded from default agent query results and returned
+                                    # only on explicit request to preserve patient privacy.
+                                    # MARS does not require patient_key.
+

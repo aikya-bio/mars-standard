@@ -78,4 +78,4 @@ Source: PAHO 2021, Annex C (Detailed data fields), Variable 11 (`WARD_TYPE`), p.
 | `lab` | laboratory | `Unknown` | no_equivalent | Diagnostic facility, not a care setting; mapped to `Unknown`. |
 | `oth` | other | `Unknown` | no_equivalent | Other unclassified location; mapped to `Unknown`. |
 | `mix` | mixed | `Unknown` | no_equivalent | Mixed ward type; mapped to `Unknown`. |
-| `unk` | unknown | `Unknown` | no_equivalent | Unknown location type; mapped to `Unknown`. |
+| `unk` | unknown | `Unknown` | none | Unknown location type. |

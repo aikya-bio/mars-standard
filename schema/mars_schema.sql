@@ -1,4 +1,4 @@
--- MARS Schema v0.3.0
+-- MARS Schema v0.4.0
 -- Database: PostgreSQL
 
 CREATE SCHEMA IF NOT EXISTS harmonised;
@@ -14,15 +14,26 @@ CREATE TABLE harmonised.isolates (
     country_iso CHAR(2) NOT NULL,
     region_un_m49 TEXT,
     year_collected SMALLINT NOT NULL,
-    specimen_type TEXT CHECK (specimen_type IN ('Blood', 'Urine', 'Respiratory', 'Wound', 'CSF', 'Skin/Soft Tissue', 'Intra-abdominal', 'Bone/Joint', 'Eye', 'Other', 'Unknown')),
+    specimen_type TEXT CHECK (specimen_type IN ('Blood', 'Urine', 'Respiratory', 'Wound', 'CSF', 'Skin/Soft Tissue', 'Intra-abdominal', 'Bone/Joint', 'Eye', 'Stool', 'Genital', 'Other', 'Unknown')),
     facility_type TEXT CHECK (facility_type IN ('ICU', 'General Ward', 'Community', 'Outpatient', 'Long-term Care', 'Unknown')),
-    age_group TEXT CHECK (age_group IN ('0–2', '3–17', '18–64', '65+', 'Unknown')),
-    gender TEXT CHECK (gender IN ('M', 'F', 'Unknown')),
+    age_group TEXT CHECK (age_group IN ('<1', '1–4', '5–14', '15–24', '25–34', '35–44', '45–54', '55–64', '65–74', '75–84', '85+', '0–2', '3–17', '18–64', '65+', 'Unknown')),
+    gender TEXT CHECK (gender IN ('M', 'F', 'O', 'Unknown')),
     nosocomial BOOLEAN,
     infection_type TEXT CHECK (infection_type IN ('BSI', 'UTI', 'Pneumonia', 'Wound', 'IAI', 'HAP', 'SSTI', 'Other', 'Unknown')),
     subtype TEXT,
     has_genotype_data BOOLEAN NOT NULL,
     metadata JSONB,
+    patient_key TEXT,
+    specimen_type_raw TEXT,
+    age_group_raw TEXT,
+    infection_origin TEXT CHECK (infection_origin IN ('Community', 'Hospital', 'Unknown')),
+    CHECK (
+        nosocomial IS NULL
+        OR infection_origin IS NULL
+        OR infection_origin = 'Unknown'
+        OR (infection_origin = 'Hospital' AND nosocomial = TRUE)
+        OR (infection_origin = 'Community' AND nosocomial = FALSE)
+    ),
     PRIMARY KEY (isolate_id, source_dataset)
 );
 
@@ -58,7 +69,7 @@ CREATE TABLE harmonised.genotype_observations (
 
 CREATE TABLE harmonised.crosswalk_log (
     source_dataset TEXT NOT NULL,
-    crosswalk_type TEXT NOT NULL CHECK (crosswalk_type IN ('organism', 'drug', 'gene', 'country')),
+    crosswalk_type TEXT NOT NULL CHECK (crosswalk_type IN ('organism', 'drug', 'gene', 'country', 'specimen', 'age_group', 'gender', 'infection_origin')),
     raw_value TEXT NOT NULL,
     mapped_identifier TEXT NOT NULL,
     mapped_name TEXT NOT NULL,

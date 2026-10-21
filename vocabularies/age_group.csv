@@ -1,6 +1,17 @@
 value,description,mars_version_added,deprecated
-0–2,Infants and toddlers,v0.1,FALSE
-3–17,Children and adolescents,v0.1,FALSE
-18–64,Adults,v0.1,FALSE
-65+,Older adults,v0.1,FALSE
+0–2,Infants and toddlers,v0.1,TRUE
+3–17,Children and adolescents,v0.1,TRUE
+18–64,Adults,v0.1,TRUE
+65+,Older adults,v0.1,TRUE
+<1,Under 1 year,v0.4,FALSE
+1–4,1 to 4 years,v0.4,FALSE
+5–14,5 to 14 years,v0.4,FALSE
+15–24,15 to 24 years,v0.4,FALSE
+25–34,25 to 34 years,v0.4,FALSE
+35–44,35 to 44 years,v0.4,FALSE
+45–54,45 to 54 years,v0.4,FALSE
+55–64,55 to 64 years,v0.4,FALSE
+65–74,65 to 74 years,v0.4,FALSE
+75–84,75 to 84 years,v0.4,FALSE
+85+,85 years and older,v0.4,FALSE
 Unknown,Age unknown,v0.1,FALSE

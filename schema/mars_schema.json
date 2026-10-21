@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "MARS Schema v0.3.0",
+  "title": "MARS Schema v0.4.0",
   "type": "object",
   "properties": {
     "isolates": {
@@ -8,31 +8,224 @@
       "items": {
         "type": "object",
         "required": [
-          "isolate_id", "source_dataset", "loaded_at", "ncbi_taxonomy_id",
-          "organism_name_standard", "gram_type", "country_iso", "year_collected",
+          "isolate_id",
+          "source_dataset",
+          "loaded_at",
+          "ncbi_taxonomy_id",
+          "organism_name_standard",
+          "gram_type",
+          "country_iso",
+          "year_collected",
           "has_genotype_data"
         ],
         "properties": {
-          "isolate_id": { "type": "string" },
-          "source_dataset": { "type": "string" },
-          "loaded_at": { "type": "string", "format": "date-time" },
-          "ncbi_taxonomy_id": { "type": "integer" },
-          "organism_name_standard": { "type": "string" },
-          "gram_type": { "type": "string", "enum": ["Gram-negative", "Gram-positive", "Fungal", "Mycobacteria", "Unknown"] },
-          "organism_group": { "type": "string" },
-          "country_iso": { "type": "string", "minLength": 2, "maxLength": 2 },
-          "region_un_m49": { "type": "string" },
-          "year_collected": { "type": "integer" },
-          "specimen_type": { "type": "string" },
-          "facility_type": { "type": "string" },
-          "age_group": { "type": "string" },
-          "gender": { "type": "string", "enum": ["M", "F", "Unknown"] },
-          "nosocomial": { "type": "boolean" },
-          "infection_type": { "type": "string" },
-          "subtype": { "type": "string" },
-          "has_genotype_data": { "type": "boolean" },
-          "metadata": { "type": "object" }
-        }
+          "isolate_id": {
+            "type": "string"
+          },
+          "source_dataset": {
+            "type": "string"
+          },
+          "loaded_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ncbi_taxonomy_id": {
+            "type": "integer"
+          },
+          "organism_name_standard": {
+            "type": "string"
+          },
+          "gram_type": {
+            "type": "string",
+            "enum": [
+              "Gram-negative",
+              "Gram-positive",
+              "Fungal",
+              "Mycobacteria",
+              "Unknown"
+            ]
+          },
+          "organism_group": {
+            "type": "string"
+          },
+          "country_iso": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2
+          },
+          "region_un_m49": {
+            "type": "string"
+          },
+          "year_collected": {
+            "type": "integer"
+          },
+          "specimen_type": {
+            "type": "string",
+            "enum": [
+              "Blood",
+              "Urine",
+              "Respiratory",
+              "Wound",
+              "CSF",
+              "Skin/Soft Tissue",
+              "Intra-abdominal",
+              "Bone/Joint",
+              "Eye",
+              "Stool",
+              "Genital",
+              "Other",
+              "Unknown"
+            ]
+          },
+          "facility_type": {
+            "type": "string",
+            "enum": [
+              "ICU",
+              "General Ward",
+              "Community",
+              "Outpatient",
+              "Long-term Care",
+              "Unknown"
+            ]
+          },
+          "age_group": {
+            "type": "string",
+            "enum": [
+              "<1",
+              "1–4",
+              "5–14",
+              "15–24",
+              "25–34",
+              "35–44",
+              "45–54",
+              "55–64",
+              "65–74",
+              "75–84",
+              "85+",
+              "0–2",
+              "3–17",
+              "18–64",
+              "65+",
+              "Unknown"
+            ]
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "M",
+              "F",
+              "O",
+              "Unknown"
+            ]
+          },
+          "nosocomial": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "infection_type": {
+            "type": "string",
+            "enum": [
+              "BSI",
+              "UTI",
+              "Pneumonia",
+              "Wound",
+              "IAI",
+              "HAP",
+              "SSTI",
+              "Other",
+              "Unknown"
+            ]
+          },
+          "subtype": {
+            "type": "string"
+          },
+          "has_genotype_data": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "patient_key": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "specimen_type_raw": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "age_group_raw": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "infection_origin": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "Community",
+              "Hospital",
+              "Unknown",
+              null
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "infection_origin": {
+                  "const": "Hospital"
+                },
+                "nosocomial": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "infection_origin",
+                "nosocomial"
+              ]
+            },
+            "then": {
+              "properties": {
+                "nosocomial": {
+                  "const": true
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "infection_origin": {
+                  "const": "Community"
+                },
+                "nosocomial": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "infection_origin",
+                "nosocomial"
+              ]
+            },
+            "then": {
+              "properties": {
+                "nosocomial": {
+                  "const": false
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "mic_observations": {
@@ -40,23 +233,80 @@
       "items": {
         "type": "object",
         "required": [
-          "isolate_id", "source_dataset", "chembl_id", "drug_name_standard",
-          "mic_numeric", "mic_qualifier"
+          "isolate_id",
+          "source_dataset",
+          "chembl_id",
+          "drug_name_standard",
+          "mic_numeric",
+          "mic_qualifier"
         ],
         "properties": {
-          "isolate_id": { "type": "string" },
-          "source_dataset": { "type": "string" },
-          "chembl_id": { "type": "string" },
-          "drug_name_standard": { "type": "string" },
-          "drug_class": { "type": "string" },
-          "aware_category": { "type": "string", "enum": ["Access", "Watch", "Reserve", "Unknown"] },
-          "mic_numeric": { "type": "number" },
-          "mic_qualifier": { "type": "string", "enum": ["=", ">", "<", ">=", "<="] },
-          "mic_raw": { "type": ["string", "null"] },
-          "interpretation_raw": { "type": "string" },
-          "interpretation_standard": { "type": "string", "enum": ["S", "I", "R", "Unknown"] },
-          "breakpoint_system": { "type": "string", "enum": ["CLSI", "EUCAST", "Unknown"] },
-          "breakpoint_version": { "type": "string" }
+          "isolate_id": {
+            "type": "string"
+          },
+          "source_dataset": {
+            "type": "string"
+          },
+          "chembl_id": {
+            "type": "string"
+          },
+          "drug_name_standard": {
+            "type": "string"
+          },
+          "drug_class": {
+            "type": "string"
+          },
+          "aware_category": {
+            "type": "string",
+            "enum": [
+              "Access",
+              "Watch",
+              "Reserve",
+              "Unknown"
+            ]
+          },
+          "mic_numeric": {
+            "type": "number"
+          },
+          "mic_qualifier": {
+            "type": "string",
+            "enum": [
+              "=",
+              ">",
+              "<",
+              ">=",
+              "<="
+            ]
+          },
+          "mic_raw": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "interpretation_raw": {
+            "type": "string"
+          },
+          "interpretation_standard": {
+            "type": "string",
+            "enum": [
+              "S",
+              "I",
+              "R",
+              "Unknown"
+            ]
+          },
+          "breakpoint_system": {
+            "type": "string",
+            "enum": [
+              "CLSI",
+              "EUCAST",
+              "Unknown"
+            ]
+          },
+          "breakpoint_version": {
+            "type": "string"
+          }
         }
       }
     },
@@ -65,18 +315,47 @@
       "items": {
         "type": "object",
         "required": [
-          "isolate_id", "source_dataset"
+          "isolate_id",
+          "source_dataset"
         ],
         "properties": {
-          "isolate_id": { "type": "string" },
-          "source_dataset": { "type": "string" },
-          "gene_aro_id": { "type": "string" },
-          "gene_name_standard": { "type": "string" },
-          "phenotypic_class": { "type": "string" },
-          "betalactamase_status": { "type": "string", "enum": ["POS", "NEG", "Unknown"] },
-          "hgvs_notation": { "type": "string" },
-          "variant_type": { "type": "string", "enum": ["nucleotide", "amino_acid", "Unknown"] },
-          "raw_notation": { "type": "string" }
+          "isolate_id": {
+            "type": "string"
+          },
+          "source_dataset": {
+            "type": "string"
+          },
+          "gene_aro_id": {
+            "type": "string"
+          },
+          "gene_name_standard": {
+            "type": "string"
+          },
+          "phenotypic_class": {
+            "type": "string"
+          },
+          "betalactamase_status": {
+            "type": "string",
+            "enum": [
+              "POS",
+              "NEG",
+              "Unknown"
+            ]
+          },
+          "hgvs_notation": {
+            "type": "string"
+          },
+          "variant_type": {
+            "type": "string",
+            "enum": [
+              "nucleotide",
+              "amino_acid",
+              "Unknown"
+            ]
+          },
+          "raw_notation": {
+            "type": "string"
+          }
         }
       }
     },
@@ -85,18 +364,56 @@
       "items": {
         "type": "object",
         "required": [
-          "source_dataset", "crosswalk_type", "raw_value", "mapped_identifier",
-          "mapped_name", "confidence", "mapped_at"
+          "source_dataset",
+          "crosswalk_type",
+          "raw_value",
+          "mapped_identifier",
+          "mapped_name",
+          "confidence",
+          "mapped_at"
         ],
         "properties": {
-          "source_dataset": { "type": "string" },
-          "crosswalk_type": { "type": "string", "enum": ["organism", "drug", "gene", "country"] },
-          "raw_value": { "type": "string" },
-          "mapped_identifier": { "type": "string" },
-          "mapped_name": { "type": "string" },
-          "confidence": { "type": "string", "enum": ["exact", "fuzzy", "manual", "unknown"] },
-          "mapped_at": { "type": "string", "format": "date-time" },
-          "mapped_by": { "type": "string" }
+          "source_dataset": {
+            "type": "string"
+          },
+          "crosswalk_type": {
+            "type": "string",
+            "enum": [
+              "organism",
+              "drug",
+              "gene",
+              "country",
+              "specimen",
+              "age_group",
+              "gender",
+              "infection_origin"
+            ]
+          },
+          "raw_value": {
+            "type": "string"
+          },
+          "mapped_identifier": {
+            "type": "string"
+          },
+          "mapped_name": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "exact",
+              "fuzzy",
+              "manual",
+              "unknown"
+            ]
+          },
+          "mapped_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mapped_by": {
+            "type": "string"
+          }
         }
       }
     }

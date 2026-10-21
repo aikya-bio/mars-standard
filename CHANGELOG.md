@@ -24,6 +24,7 @@ Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [M
 ### Changed
 - Four legacy age bands (`0–2`, `3–17`, `18–64`, `65+`) in `vocabularies/age_group.csv` marked as deprecated (`deprecated = TRUE`) while remaining valid
 - JSON schema enums aligned with SQL CHECK constraints: closed existing drift where `specimen_type`, `age_group`, `facility_type`, and `infection_type` were free strings in `schema/mars_schema.json`
+- JSON schema: `nosocomial` now accepts null (`["boolean", "null"]`), matching the nullable SQL columns
 - Data dictionary lists corrected in `data_dictionary/isolates.md` to reflect complete vocabulary lists for `specimen_type`, `facility_type`, `infection_type`, `gender`, and `age_group`
 - hAMRonization crosswalk (`compatibility/hamronization_crosswalk.md`) rewritten against PHA4GE hAMRonization specification v1.3.1, correcting field mappings and clarifying that `type` is an input parser column rather than an output field
 

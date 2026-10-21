@@ -89,7 +89,8 @@ mars-standard/
 ├── compatibility/
 │   ├── pha4ge_crosswalk.md
 │   ├── hamronization_crosswalk.md
-│   └── glass_crosswalk.md
+│   ├── glass_crosswalk.md
+│   └── paho_crosswalk.md
 ├── test_vectors/                      # Normative MIC normalisation test vectors
 │   ├── mic_normalisation.csv
 │   └── README.md
@@ -120,10 +121,18 @@ MCP agent-routing and use case vocabulary:
 - ✅ Server Metadata Standard — minimum declaration template for every MARS MCP server (`mcp/server_metadata_spec.yaml`)
 - ✅ Tool Annotation Standard — per-tool routing signals for agent use case matching (`mcp/tool_annotation_spec.yaml`)
 
-### v0.3 — Specification Harmonisation (current)
+### v0.3 — Specification Harmonisation
 - ✅ Add optional nullable `mic_raw` field across schemas
 - ✅ Normative MIC normalisation rules and test vectors (`test_vectors/`)
 - ✅ Complete separation of specification artefacts from implementation tooling
+
+### v0.4 — Surveillance Alignment & Demographic Extensions (current)
+- ✅ Add optional isolate fields: `infection_origin`, `patient_key`, `specimen_type_raw`, `age_group_raw`
+- ✅ Consistency enforcement between `nosocomial` and `infection_origin`
+- ✅ WHO GLASS-aligned age bands (11 values), gender `O`, specimen types `Stool` and `Genital`
+- ✅ Categorical crosswalks and loss tracking template
+- ✅ Full WHO GLASS and PAHO Enhanced Surveillance compatibility crosswalks
+- ✅ Sensitive-field handling and privacy metadata for `patient_key` in MCP specifications
 
 ### v1.0 — First Stable Public Release (planned)
 - WHONET / BacLink crosswalk (planned)

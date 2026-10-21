@@ -90,7 +90,6 @@ _N/A — founding version._
 **Planned:** First stable public release  
 **Planned changes:**
 - WHONET / BacLink crosswalk
-- Zenodo DOI registration
 - Full MCP manifest with live endpoint validation
 
 ---

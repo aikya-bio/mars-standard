@@ -3,8 +3,6 @@
 [![Version](https://img.shields.io/badge/version-v0.4.0-blue)](CHANGELOG.md)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](CHANGELOG.md)
-[![DOI](https://img.shields.io/badge/DOI-pending%20v1.0-lightgrey)](#)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21880278.svg)](https://doi.org/10.5281/zenodo.21880278)
 
 > **MARS is an open community standard for isolate-level antimicrobial resistance surveillance data.**  
 > It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and a machine-readable agent access interface - all in one versioned, citable artefact.
@@ -52,7 +50,7 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 | 3 | **PHA4GE-compatible** | A PHA4GE-aligned dataset can be made MARS-compliant with minimal additional work. |
 | 4 | **Mandatory minimum, optional enrichment** | Small mandatory core; optional fields unlock additional use cases. |
 | 5 | **Designed for Agentic Access** | Schemas and identifiers are explicitly optimized for LLM Text-to-SQL and tool use. |
-| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts. Reference code is preserved in Git history up to commit 4104456. DOI from v1.0. |
+| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts. Reference code is preserved in Git history up to commit 4104456. |
 
 ---
 
@@ -129,7 +127,6 @@ MCP agent-routing and use case vocabulary:
 
 ### v1.0 — First Stable Public Release (planned)
 - WHONET / BacLink crosswalk (planned)
-- Zenodo DOI registration
 - Full MCP manifest with live endpoint validation
 
 ---
@@ -185,7 +182,7 @@ MARS follows [Semantic Versioning](https://semver.org): `MAJOR.MINOR.PATCH`
 
 **Version lifecycle:**
 - `v0.x` — Pre-release, Aikya internal
-- `v1.0` — First stable public release, CC-BY 4.0, DOI via Zenodo
+- `v1.0` — First stable public release, CC-BY 4.0
 - `v1.x` — Community contributions, minor additions
 - `v2.0` — Breaking changes, published migration guide required
 

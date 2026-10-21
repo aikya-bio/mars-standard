@@ -4,6 +4,35 @@ All notable changes to the MARS standard are documented here.
 
 Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [Migration Notes]
 
+## [v0.4.0] — 2026-10-22
+
+**Status:** Pre-release · Specification
+**Change type:** MINOR — additive schema fields, vocabulary expansions, alignment, and compatibility crosswalks
+
+### Added
+- Four optional nullable fields on `harmonised.isolates`: `infection_origin` (`Community`, `Hospital`, `Unknown`), `patient_key` (pseudonymous, non-unique), `specimen_type_raw`, and `age_group_raw` (source strings verbatim, typed as `["string", "null"]` in JSON schema)
+- Consistency rule between `nosocomial` and `infection_origin`: when both are present and `infection_origin` is not `Unknown`, they must agree (`true` <-> `Hospital`, `false` <-> `Community`), enforced via SQL CHECK constraints (PostgreSQL and SQLite) and JSON schema conditional rules (`if`/`then`)
+- 11 WHO GLASS-aligned age bands added to `vocabularies/age_group.csv` with typographic en-dashes (`<1`, `1–4`, `5–14`, `15–24`, `25–34`, `35–44`, `45–54`, `55–64`, `65–74`, `75–84`, `85+`)
+- Gender code `O` ("Other / not captured by M or F") added to `vocabularies/gender.csv`
+- Specimen types `Stool` ("Stool / faeces") and `Genital` ("Genital / urogenital swab") added to `vocabularies/specimen_type.csv` (13 controlled values total)
+- Categorical crosswalk types (`specimen`, `age_group`, `gender`, `infection_origin`) added to `vocabularies/crosswalk_type.csv` and crosswalk schemas
+- Template `crosswalk_tables/categorical_crosswalk_template.csv` with `loss` tracking (`none`, `many_to_one`, `no_equivalent`)
+- Full WHO GLASS compatibility tables for specimen, gender, infection origin, and age groups in `compatibility/glass_crosswalk.md`
+- PAHO Enhanced Surveillance crosswalk for Primary Phase bloodstream infections in `compatibility/paho_crosswalk.md`
+- Sensitive field annotation and privacy mechanisms for `patient_key` in MCP tool and server specifications (`mcp/tool_annotation_spec.yaml`, `mcp/server_metadata_spec.yaml`)
+
+### Changed
+- Four legacy age bands (`0–2`, `3–17`, `18–64`, `65+`) in `vocabularies/age_group.csv` marked as deprecated (`deprecated = TRUE`) while remaining valid
+- JSON schema enums aligned with SQL CHECK constraints: closed existing drift where `specimen_type`, `age_group`, `facility_type`, and `infection_type` were free strings in `schema/mars_schema.json`
+- Data dictionary lists corrected in `data_dictionary/isolates.md` to reflect complete vocabulary lists for `specimen_type`, `facility_type`, `infection_type`, `gender`, and `age_group`
+- hAMRonization crosswalk (`compatibility/hamronization_crosswalk.md`) rewritten against PHA4GE hAMRonization specification v1.3.1, correcting field mappings and clarifying that `type` is an input parser column rather than an output field
+
+### Migration Notes
+- Fully backwards compatible with MARS v0.3 datasets: all new fields are optional and nullable; existing v0.3 data loads into v0.4 schemas without modification.
+- Datasets should use a single age scheme (either the current GLASS-aligned bands or the deprecated legacy bands); old and new age bands overlap (e.g. `65+` vs `65–74`, `75–84`, `85+`), so mixed age schemes cannot be summarised by band and no automatic old-to-new mapping is performed.
+
+---
+
 ## [v0.3.0] — 2026-10-12
 
 **Status:** Pre-release · Specification

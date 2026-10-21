@@ -4,6 +4,7 @@
 CREATE TABLE isolates (
     isolate_id TEXT NOT NULL,
     source_dataset TEXT NOT NULL,
+    patient_key TEXT,
     loaded_at TEXT NOT NULL,
     ncbi_taxonomy_id INTEGER NOT NULL,
     organism_name_standard TEXT NOT NULL,
@@ -12,15 +13,25 @@ CREATE TABLE isolates (
     country_iso TEXT NOT NULL,
     region_un_m49 TEXT,
     year_collected INTEGER NOT NULL,
-    specimen_type TEXT CHECK (specimen_type IN ('Blood', 'Urine', 'Respiratory', 'Wound', 'CSF', 'Skin/Soft Tissue', 'Intra-abdominal', 'Bone/Joint', 'Eye', 'Other', 'Unknown')),
+    specimen_type TEXT CHECK (specimen_type IN ('Blood', 'Urine', 'Respiratory', 'Wound', 'CSF', 'Skin/Soft Tissue', 'Intra-abdominal', 'Bone/Joint', 'Eye', 'Stool', 'Genital', 'Other', 'Unknown')),
+    specimen_type_raw TEXT,
     facility_type TEXT CHECK (facility_type IN ('ICU', 'General Ward', 'Community', 'Outpatient', 'Long-term Care', 'Unknown')),
-    age_group TEXT CHECK (age_group IN ('0–2', '3–17', '18–64', '65+', 'Unknown')),
-    gender TEXT CHECK (gender IN ('M', 'F', 'Unknown')),
+    age_group TEXT CHECK (age_group IN ('<1', '1–4', '5–14', '15–24', '25–34', '35–44', '45–54', '55–64', '65–74', '75–84', '85+', '0–2', '3–17', '18–64', '65+', 'Unknown')),
+    age_group_raw TEXT,
+    gender TEXT CHECK (gender IN ('M', 'F', 'O', 'Unknown')),
     nosocomial INTEGER,
+    infection_origin TEXT CHECK (infection_origin IN ('Community', 'Hospital', 'Unknown')),
     infection_type TEXT CHECK (infection_type IN ('BSI', 'UTI', 'Pneumonia', 'Wound', 'IAI', 'HAP', 'SSTI', 'Other', 'Unknown')),
     subtype TEXT,
     has_genotype_data INTEGER NOT NULL,
     metadata TEXT,
+    CHECK (
+        nosocomial IS NULL
+        OR infection_origin IS NULL
+        OR infection_origin = 'Unknown'
+        OR (infection_origin = 'Hospital' AND nosocomial = 1)
+        OR (infection_origin = 'Community' AND nosocomial = 0)
+    ),
     PRIMARY KEY (isolate_id, source_dataset)
 );
 
@@ -56,7 +67,7 @@ CREATE TABLE genotype_observations (
 
 CREATE TABLE crosswalk_log (
     source_dataset TEXT NOT NULL,
-    crosswalk_type TEXT NOT NULL CHECK (crosswalk_type IN ('organism', 'drug', 'gene', 'country')),
+    crosswalk_type TEXT NOT NULL CHECK (crosswalk_type IN ('organism', 'drug', 'gene', 'country', 'specimen', 'age_group', 'gender', 'infection_origin')),
     raw_value TEXT NOT NULL,
     mapped_identifier TEXT NOT NULL,
     mapped_name TEXT NOT NULL,

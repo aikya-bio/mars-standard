@@ -1,4 +1,4 @@
--- MARS Schema v0.3.0
+-- MARS Schema v0.4.0
 -- Database: SQLite
 
 CREATE TABLE isolates (

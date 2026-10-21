@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "MARS Schema v0.3.0",
+  "title": "MARS Schema v0.4.0",
   "type": "object",
   "properties": {
     "isolates": {

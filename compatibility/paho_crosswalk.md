@@ -12,14 +12,14 @@ This document provides a crosswalk between MARS and the Pan American Health Orga
 This crosswalk applies specifically to the **Primary Phase: Bloodstream Infections** of the PAHO protocol. In this initial surveillance phase, only bloodstream infection isolates (specimen code `bl`) are collected regionally.
 
 ## Specimen Crosswalk
-Source: PAHO 2021, Section 5, Table: Primary Phase variables, Variable 16 (`SPEC_TYPE`), p. 41.
+Source: PAHO 2021, Annex C (Detailed data fields), Variable 16 (`SPEC_TYPE`), p. 41.
 
 | PAHO Code | PAHO Label | MARS Value | Loss | Notes |
 |---|---|---|---|---|
 | `bl` | Blood | `Blood` | none | Primary Phase collects bloodstream specimens only. |
 
 ## Sex / Gender Crosswalk
-Source: PAHO 2021, Section 5, Table: Primary Phase variables, Variable 4 (`SEX`), p. 38.
+Source: PAHO 2021, Annex C (Detailed data fields), Variable 4 (`SEX`), p. 38.
 
 | PAHO Code | PAHO Label | MARS Value | Loss | Notes |
 |---|---|---|---|---|
@@ -29,7 +29,7 @@ Source: PAHO 2021, Section 5, Table: Primary Phase variables, Variable 4 (`SEX`)
 | `u` | unknown | `Unknown` | none | Direct match for unrecorded or unknown sex. |
 
 ## Infection Origin Crosswalk
-Source: PAHO 2021, Section 5, Table: Primary Phase variables, Variable 12 (`INFECT_TYP`), p. 40.
+Source: PAHO 2021, Annex C (Detailed data fields), Variable 12 (`INFECT_TYP`), p. 40.
 
 | PAHO Code | PAHO Label | MARS Value | Loss | Notes |
 |---|---|---|---|---|
@@ -38,7 +38,7 @@ Source: PAHO 2021, Section 5, Table: Primary Phase variables, Variable 12 (`INFE
 | `unk` | unknown | `Unknown` | none | Origin unknown. |
 
 ## Age Crosswalk
-Source: PAHO 2021, Section 5, Table: Primary Phase variables, Variable 6 (`AGE` and `PAT_TYPE`), pp. 38–39.
+Source: PAHO 2021, Annex C (Detailed data fields), Variable 6 (`AGE` and `PAT_TYPE`), pp. 38–39.
 
 PAHO captures patient age through two distinct variables:
 
@@ -55,7 +55,7 @@ PAHO captures patient age through two distinct variables:
 | `oth` | other | `Unknown` | no_equivalent | Other category; preserve in `age_group_raw`. |
 
 ## Patient Identifier (`PATIENT_ID`)
-Source: PAHO 2021, Section 5, Table: Primary Phase variables, Variable 3 (`PATIENT_ID`), p. 37.
+Source: PAHO 2021, Annex C (Detailed data fields), Variable 3 (`PATIENT_ID`), p. 37.
 
 PAHO requires anonymisation of patient identifiers before regional transmission. Similarly, MARS `harmonised.isolates.patient_key` is an optional pseudonymous key:
 - Direct patient identifiers (hospital MRNs, national identity numbers, names) must **never** be stored in `patient_key`.
@@ -63,7 +63,7 @@ PAHO requires anonymisation of patient identifiers before regional transmission.
 - `patient_key` is unique only within `source_dataset` to identify deduplicated repeat isolates from the same patient.
 
 ## Location / Ward Type Crosswalk
-Source: PAHO 2021, Section 5, Table: Primary Phase variables, Variable 11 (`WARD_TYPE`), p. 40.
+Source: PAHO 2021, Annex C (Detailed data fields), Variable 11 (`WARD_TYPE`), p. 40.
 
 | PAHO Code | PAHO Label | MARS `facility_type` | Loss | Notes |
 |---|---|---|---|---|

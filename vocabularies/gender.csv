@@ -1,4 +1,5 @@
 value,description,mars_version_added,deprecated
 M,Male,v0.1,FALSE
 F,Female,v0.1,FALSE
+O,Other / not captured by M or F,v0.4,FALSE
 Unknown,Gender unknown or unrecorded,v0.1,FALSE

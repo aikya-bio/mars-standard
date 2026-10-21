@@ -3,3 +3,7 @@ organism,Organism identifier mapping,v0.1,FALSE
 drug,Drug identifier mapping,v0.1,FALSE
 gene,Gene identifier mapping,v0.1,FALSE
 country,Country identifier mapping,v0.1,FALSE
+specimen,Specimen type mapping,v0.4,FALSE
+age_group,Age group mapping,v0.4,FALSE
+gender,Gender mapping,v0.4,FALSE
+infection_origin,Infection origin mapping,v0.4,FALSE

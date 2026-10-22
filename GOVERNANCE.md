@@ -60,4 +60,4 @@ with a link to `https://github.com/aikya-bio/mars-standard`
 
 ---
 
-*Last updated: v0.4.0 · 2026-10-22 · Aikya*
+*Last updated: v0.4.1 · 2026-10-22 · Aikya*

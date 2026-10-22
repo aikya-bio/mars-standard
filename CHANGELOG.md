@@ -4,6 +4,16 @@ All notable changes to the MARS standard are documented here.
 
 Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [Migration Notes]
 
+## [v0.4.1] — 2026-10-22
+
+**Status:** Pre-release · Specification
+**Change type:** PATCH — documentation only
+
+### Changed
+- PHA4GE compatibility crosswalk corrected against the PHA4GE Minimal Pathogen Agnostic Contextual Data Specification (commit 0390611): field names aligned to the source, unsupported mappings removed, specimen row sourced to GRDI-AMR One Health (commit 001f7fc); README PHA4GE row reworded
+
+---
+
 ## [v0.4.0] — 2026-10-22
 
 **Status:** Pre-release · Specification

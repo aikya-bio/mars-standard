@@ -1,13 +1,13 @@
 # MARS — Minimum AMR Surveillance Standard
 
-[![Version](https://img.shields.io/badge/version-v0.4.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.4.1-blue)](CHANGELOG.md)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](CHANGELOG.md)
 
 > **MARS is an open community standard for isolate-level antimicrobial resistance surveillance data.**  
 > It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and a machine-readable agent access interface - all in one versioned, citable artefact.
 
-**Created by [Aikya](https://aikya.bio) · Specification v0.4.0**
+**Created by [Aikya](https://aikya.bio) · Specification v0.4.1**
 
 ---
 
@@ -33,7 +33,7 @@ No open, versioned, isolate-level specification that any data holder can adopt, 
 | Standard | What It Does | Relationship to MARS |
 |---|---|---|
 | WHO GLASS | Aggregate surveillance (countries submit resistance *rates*) | Downstream consumer of MARS-level analysis |
-| PHA4GE | Minimal pathogen-agnostic contextual metadata for genomics | Compatible - MARS is explicitly PHA4GE-aligned |
+| PHA4GE | Minimal pathogen-agnostic contextual metadata for genomics | Field-level mapping for overlapping fields (see `compatibility/pha4ge_crosswalk.md`) |
 | WHONET | Free laboratory software and BacLink conversion tool, with widely used organism, antibiotic and test code dictionaries | Upstream source for routine laboratory data; WHONET and BacLink files can be mapped into MARS |
 | OMOP CDM | Common data model for EHR observational data | Designed for clinical records; a different unit of analysis from surveillance isolates |
 
@@ -197,4 +197,4 @@ MARS follows [Semantic Versioning](https://semver.org): `MAJOR.MINOR.PATCH`
 
 ---
 
-*MARS Specification v0.4.0 · Created by [Aikya](https://aikya.bio) / [microdao.bio](https://microdao.bio)*
+*MARS Specification v0.4.1 · Created by [Aikya](https://aikya.bio) / [microdao.bio](https://microdao.bio)*

@@ -33,7 +33,7 @@ No open, versioned, isolate-level specification that any data holder can adopt, 
 | Standard | What It Does | Relationship to MARS |
 |---|---|---|
 | WHO GLASS | Aggregate surveillance (countries submit resistance *rates*) | Downstream consumer of MARS-level analysis |
-| PHA4GE | Minimal pathogen-agnostic contextual metadata for genomics | Compatible - MARS is explicitly PHA4GE-aligned |
+| PHA4GE | Minimal pathogen-agnostic contextual metadata for genomics | Field-level mapping for overlapping fields (see `compatibility/pha4ge_crosswalk.md`) |
 | WHONET | Free laboratory software and BacLink conversion tool, with widely used organism, antibiotic and test code dictionaries | Upstream source for routine laboratory data; WHONET and BacLink files can be mapped into MARS |
 | OMOP CDM | Common data model for EHR observational data | Designed for clinical records; a different unit of analysis from surveillance isolates |
 

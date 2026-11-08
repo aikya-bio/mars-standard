@@ -54,7 +54,7 @@ MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access*
 | 3 | **Mappable from PHA4GE-aligned data** | Designed to be mappable from the overlapping fields of PHA4GE-aligned datasets. |
 | 4 | **Mandatory minimum, optional enrichment** | Small mandatory core; optional fields unlock additional use cases. |
 | 5 | **Designed for agent access** | The schema, identifiers and MCP server-metadata and tool-annotation standards are designed for LLM and agent use. This is a design intent that independent adopters have not yet validated. |
-| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts (schema, data dictionary, vocabularies, crosswalks, test vectors). Reference code is preserved in Git history up to commit 4104456. |
+| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts (schema, data dictionary, vocabularies, crosswalks, test vectors). |
 
 ---
 

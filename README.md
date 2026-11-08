@@ -73,7 +73,7 @@ To implement MARS in a custom ETL pipeline, follow these steps:
 ```
 mars-standard/
 ├── LICENSE                            # CC-BY 4.0 (standard artefacts)
-├── LICENSE_CODE                       # licence file for the code preserved in Git history (up to commit 4104456)
+├── LICENSE_CODE
 ├── README.md
 ├── CHANGELOG.md
 ├── GOVERNANCE.md

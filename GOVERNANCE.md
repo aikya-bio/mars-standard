@@ -48,7 +48,7 @@ If you believe a governance process has not been followed correctly, email **mar
 
 ## 6. Reporting Security Vulnerabilities
 
-If you discover a security issue in any MARS reference implementation code, **do not open a public issue**. Email **mars@aikya.bio** instead.
+If you discover a security issue related to MARS or its published artefacts, **do not open a public issue**. Email **mars@aikya.bio** instead.
 
 ---
 

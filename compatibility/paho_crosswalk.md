@@ -8,6 +8,8 @@ This document provides a crosswalk between MARS and the Pan American Health Orga
 
 *(In compliance with CC BY-NC-SA 3.0 IGO licensing, tables contain codes, labels, and MARS mappings only; descriptive prose from the manual is not reproduced.)*
 
+**Source licence and attribution:** The PAHO codes and labels listed here are taken from the protocol above, © Pan American Health Organization 2021, which is available under the [CC BY-NC-SA 3.0 IGO](https://creativecommons.org/licenses/by-nc-sa/3.0/igo/) licence. This is an adaptation of an original work by the Pan American Health Organization (PAHO). Views and opinions expressed in the adaptation are the sole responsibility of the author(s) of the adaptation and are not endorsed by PAHO. The PAHO logo is not used.
+
 ## Scope
 This crosswalk applies specifically to the **Primary Phase: Bloodstream Infections** of the PAHO protocol. In this initial surveillance phase, only bloodstream infection isolates (specimen code `bl`) are collected regionally.
 

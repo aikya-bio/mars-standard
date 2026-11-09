@@ -8,6 +8,8 @@ MARS operates at the individual clinical isolate level, whereas the WHO Global A
 
 *(In compliance with CC BY-NC-SA 3.0 IGO licensing, tables contain codes, labels, and MARS mappings only; descriptive prose from the manual is not reproduced.)*
 
+**Source licence and attribution:** The GLASS code names and labels listed here are taken from the manual above, © World Health Organization 2023, which is available under the [CC BY-NC-SA 3.0 IGO](https://creativecommons.org/licenses/by-nc-sa/3.0/igo/) licence. The mapping to MARS values was made by the MARS authors. No suggestion is made that WHO endorses any specific organization, product or service, and the WHO logo is not used.
+
 ## Conceptual Mapping
 
 | MARS Field | GLASS Concept | Notes |

@@ -38,3 +38,19 @@ keywords:
   - antibiotic susceptibility testing
 version: v0.4.1
 date-released: '2026-10-22'
+preferred-citation:
+  type: article
+  status: preprint
+  title: >-
+    MARS: An Open Minimum Standard for Isolate-Level
+    Antimicrobial Resistance Surveillance Data
+  authors:
+    - given-names: Varun
+      family-names: Kothamachu
+      orcid: 'https://orcid.org/0000-0002-2888-4317'
+  journal: Preprints
+  year: 2026
+  month: 11
+  doi: 10.20944/preprints202611.2139.v1
+  url: 'https://www.preprints.org/manuscript/202611.2139'
+  notes: Preprint (version 1, posted 20 November 2026); not peer-reviewed.

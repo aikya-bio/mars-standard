@@ -3,6 +3,7 @@
 [![Version](https://img.shields.io/badge/version-v0.4.1-blue)](CHANGELOG.md)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](CHANGELOG.md)
+[![Preprint DOI](https://img.shields.io/badge/preprint%20DOI-10.20944%2Fpreprints202611.2139.v1-blue)](https://doi.org/10.20944/preprints202611.2139.v1)
 
 > **MARS is an open community standard for isolate-level antimicrobial resistance surveillance data.**  
 > It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and MCP server-metadata and tool-annotation standards for agent access - all in one versioned, citable artefact.
@@ -172,7 +173,24 @@ Implementers write their own discovery metadata file by following the template i
 
 ## How to cite
 
-Cite the release you used, for example:
+If you use the MARS standard, please cite the preprint (Preprints.org, version 1, posted 20 November 2026; not peer-reviewed):
+
+```bibtex
+@article{kothamachu2026mars,
+  author  = {Kothamachu, Varun},
+  title   = {{MARS}: An Open Minimum Standard for Isolate-Level Antimicrobial Resistance Surveillance Data},
+  journal = {Preprints},
+  year    = {2026},
+  month   = nov,
+  doi     = {10.20944/preprints202611.2139.v1},
+  url     = {https://www.preprints.org/manuscript/202611.2139},
+  note    = {Preprint, not peer-reviewed}
+}
+```
+
+APA: Kothamachu, V. (2026). *MARS: An Open Minimum Standard for Isolate-Level Antimicrobial Resistance Surveillance Data*. Preprints. https://doi.org/10.20944/preprints202611.2139.v1 (preprint, not peer-reviewed)
+
+To cite a specific release of the specification, for example:
 
 > MARS — Minimum AMR Surveillance Standard, v0.4.1, commit `14bfd823e2da515563003ba73c0e6b40a3595958`, https://github.com/aikya-bio/mars-standard/releases/tag/v0.4.1
 

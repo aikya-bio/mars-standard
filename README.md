@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/badge/version-v0.4.1-blue)](CHANGELOG.md)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](CHANGELOG.md)
-[![Preprint DOI](https://img.shields.io/badge/preprint%20DOI-10.20944%2Fpreprints202611.2139.v1-blue)](https://doi.org/10.20944/preprints202611.2139.v1)
+[![Preprint DOI](https://img.shields.io/badge/preprint%20DOI-10.20944%2Fpreprints202611.2139.v1-blue)](https://www.preprints.org/manuscript/202611.2139)
 
 > **MARS is an open community standard for isolate-level antimicrobial resistance surveillance data.**  
 > It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and MCP server-metadata and tool-annotation standards for agent access - all in one versioned, citable artefact.
@@ -173,7 +173,7 @@ Implementers write their own discovery metadata file by following the template i
 
 ## How to cite
 
-If you use the MARS standard, please cite the preprint (Preprints.org, version 1, posted 20 November 2026; not peer-reviewed):
+If you use the MARS standard, please cite the [preprint](https://www.preprints.org/manuscript/202611.2139) (Preprints.org, version 1, posted 20 November 2026; not peer-reviewed). The DOI below may not resolve until its registration completes; the link above goes directly to the article:
 
 ```bibtex
 @article{kothamachu2026mars,
@@ -188,7 +188,7 @@ If you use the MARS standard, please cite the preprint (Preprints.org, version 1
 }
 ```
 
-APA: Kothamachu, V. (2026). *MARS: An Open Minimum Standard for Isolate-Level Antimicrobial Resistance Surveillance Data*. Preprints. https://doi.org/10.20944/preprints202611.2139.v1 (preprint, not peer-reviewed)
+APA: Kothamachu, V. (2026). *MARS: An Open Minimum Standard for Isolate-Level Antimicrobial Resistance Surveillance Data*. Preprints. https://doi.org/10.20944/preprints202611.2139.v1 (preprint, not peer-reviewed). Available at: https://www.preprints.org/manuscript/202611.2139
 
 To cite a specific release of the specification, for example:
 

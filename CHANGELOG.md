@@ -122,6 +122,7 @@ _N/A — founding version._
 ### Removed
 - `server.mars_certification_tier` from `mcp/server_metadata_spec.yaml` and the example manifest, replaced by `server.agentic_readiness_score` (self-assessed, nullable) · Affected field(s): `mars_certification_tier`, `agentic_readiness_score`
 - References to unreleased tooling in `mcp/server_metadata_spec.yaml`
+- LICENSE_CODE placeholder file removed; the repository contains no code. Reference code in Git history up to commit 4104456 remains Apache 2.0 · Affected file(s): `LICENSE_CODE`, `README.md`, `CONTRIBUTING.md`
 
 ---
 

@@ -74,7 +74,6 @@ To implement MARS in a custom ETL pipeline, follow these steps:
 ```
 mars-standard/
 ├── LICENSE                            # CC-BY 4.0 (standard artefacts)
-├── LICENSE_CODE
 ├── README.md
 ├── CHANGELOG.md
 ├── GOVERNANCE.md
@@ -201,7 +200,7 @@ To cite a specific release of the specification, for example:
 | Artefact | Licence |
 |---|---|
 | Schema SQL, data dictionary, vocabularies, crosswalk templates, compatibility docs, test vectors, MCP specifications, use case library | [CC-BY 4.0](LICENSE) |
-| Reference code preserved in Git history (up to commit 4104456) | [Apache 2.0](LICENSE_CODE) |
+| Reference code preserved in Git history (up to commit 4104456) | Apache 2.0 (see https://www.apache.org/licenses/LICENSE-2.0) |
 
 **Attribution required:** Any implementation of MARS must credit:  
 `MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`  

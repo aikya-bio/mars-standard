@@ -118,7 +118,7 @@ Use the [Spec Bug Report issue template](https://github.com/aikya-bio/mars-stand
 - Add inline comments for non-obvious fields
 
 ### Reference tooling
-- Implementation code is no longer hosted in this specification repository. (See [LICENSE_CODE](LICENSE_CODE))
+- Implementation code is no longer hosted in this specification repository. (Reference code in Git history up to commit 4104456 is Apache 2.0.)
 - Reference tooling will be released separately
 
 ### Test vector files (test_vectors/)

@@ -59,7 +59,7 @@ Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [M
 
 ### Changed
 - Standardized historical reference code extent statements across documentation (`README.md`, `CONTRIBUTING.md`, `.gitignore`, `CHANGELOG.md`) to: "Reference code is preserved in Git history up to commit 4104456."
-- Removed Apache 2.0 license badge from `README.md` and removed commit hash line from `CITATION.cff` pending formal release tagging
+- Removed the code licence badge from `README.md` and removed commit hash line from `CITATION.cff` pending formal release tagging
 - Updated MCP server metadata example specification version to `0.3.0`
 
 ### Removed
@@ -72,7 +72,7 @@ Format: [Date] · [Version] · [Change Type] · [Affected Fields/Sections] · [M
 
 ## [v0.2] — 2026-07-19
 
-**Status:** Pre-release · Aikya internal development
+**Status:** Pre-release · aikya.bio internal development
 **Change type:** MINOR — additive discovery infrastructure artefacts
 
 ### Added
@@ -87,7 +87,7 @@ _Additive only. No changes to existing schema, vocabularies, or crosswalk tables
 
 ## [v0.1] — 2026-07-08
 
-**Status:** Pre-release · Aikya internal development  
+**Status:** Pre-release · aikya.bio internal development  
 **Change type:** Initial founding specification  
 
 ### Added
@@ -114,6 +114,7 @@ _N/A — founding version._
 ## [Unreleased]
 
 ### Changed
+- README rewritten around usage, feedback (one issue per term) and reuse; full CC BY 4.0 legal code added to `LICENSE`; attribution wording now applies to every implementation and credits aikya.bio; maintainer branding standardised to aikya.bio; contact set to mars@aikya.bio (documentation only)
 - README: neutral description of WHONET and OMOP; narrowed the "why MARS exists" statement
 - `chembl_lookup.py`: abbreviation map relabelled as an illustrative subset; AWaRe now resolved by name against the WHO AWaRe 2023 list (`reference_implementation/third_party/`), replacing a name-pattern heuristic
 - GLASS compatibility note reworded as indicative
@@ -122,7 +123,7 @@ _N/A — founding version._
 ### Removed
 - `server.mars_certification_tier` from `mcp/server_metadata_spec.yaml` and the example manifest, replaced by `server.agentic_readiness_score` (self-assessed, nullable) · Affected field(s): `mars_certification_tier`, `agentic_readiness_score`
 - References to unreleased tooling in `mcp/server_metadata_spec.yaml`
-- LICENSE_CODE placeholder file removed; the repository contains no code. Reference code in Git history up to commit 4104456 remains Apache 2.0 · Affected file(s): `LICENSE_CODE`, `README.md`, `CONTRIBUTING.md`
+- LICENSE_CODE placeholder file removed; the repository contains no code. · Affected file(s): `LICENSE_CODE`, `README.md`, `CONTRIBUTING.md`
 
 ---
 

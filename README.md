@@ -5,174 +5,80 @@
 [![Status](https://img.shields.io/badge/status-pre--release-orange)](CHANGELOG.md)
 [![Preprint DOI](https://img.shields.io/badge/preprint%20DOI-10.20944%2Fpreprints202611.2139.v1-blue)](https://www.preprints.org/manuscript/202611.2139)
 
-> **MARS is an open community standard for isolate-level antimicrobial resistance surveillance data.**  
-> It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and MCP server-metadata and tool-annotation standards for agent access - all in one versioned, citable artefact.
+> **MARS is an open community standard for isolate-level antimicrobial resistance (AMR) surveillance data.**
+> It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and MCP server-metadata and tool-annotation standards for agent access, as one versioned, citable artefact.
 
-**Created by [Aikya](https://aikya.bio) · Specification v0.4.1**
+**Created by [aikya.bio](https://aikya.bio) · Specification v0.4.1 · Pre-release (not yet validated by independent adopters)**
+
+For the rationale, design and comparison with GLASS, PHA4GE, hAMRonization, PAHO, WHONET and OMOP, read the [preprint](https://www.preprints.org/manuscript/202611.2139) (not peer-reviewed). This repository holds the specification itself.
 
 ---
 
-## What MARS Is
+## What is in this repository
 
-MARS does not define how data is *collected*. It defines how data is **represented and shared** for computational and agentic use.
+MARS defines how AMR data is **represented and shared**, not how it is collected. A MARS dataset exposes four tables: `harmonised.isolates`, `harmonised.mic_observations`, `harmonised.genotype_observations` and `harmonised.crosswalk_log`.
 
-Every MARS-compliant dataset exposes four normalised tables:
-
-| Table | Grain | Purpose |
+| Folder | Contents | Raise an issue here if... |
 |---|---|---|
-| `harmonised.isolates` | One row per clinical isolate | Core metadata, organism, geography, demography |
-| `harmonised.mic_observations` | One row per drug per isolate | Phenotypic MIC data, AWaRe, breakpoints |
-| `harmonised.genotype_observations` | One row per resistance gene per isolate | AMR gene/variant data, HGVS notation |
-| `harmonised.crosswalk_log` | One row per mapping decision | Full audit trail of identifier harmonisation |
+| [`schema/`](schema/) | PostgreSQL DDL, SQLite DDL, JSON Schema | a table, column, type or constraint is wrong or missing |
+| [`data_dictionary/`](data_dictionary/) | Field-by-field definitions for each table | a definition is unclear, inconsistent or contradicts the schema |
+| [`vocabularies/`](vocabularies/) | Controlled-value CSVs (allowed values for categorical fields) | a value is missing, wrong or should be deprecated |
+| [`crosswalk_tables/`](crosswalk_tables/) | Unpopulated mapping templates (drug, organism, gene) | a template column or identifier scheme is wrong |
+| [`compatibility/`](compatibility/) | Indicative crosswalks to PHA4GE, hAMRonization, WHO GLASS, PAHO | a mapping is wrong, or you maintain the source specification |
+| [`test_vectors/`](test_vectors/) | Normative MIC normalisation test cases | an expected output is wrong or a case is missing |
+| [`use_case_library/`](use_case_library/) | 16 seed AMR investigation use cases (MUL) | a use case is wrong or one is missing |
+| [`mcp/`](mcp/) | MCP server-metadata and tool-annotation templates | the template is unclear or inconsistent with the data model |
+
+Crosswalk documents are indicative. They were checked against the cited specifications but have not been reviewed by those specifications' maintainers.
 
 ---
 
-## Why MARS Exists
+## How to use MARS
 
-No open, versioned, isolate-level specification that any data holder can adopt, and that is designed for agentic AI access, currently exists for routine and industry surveillance data.
+To implement MARS in your own pipeline:
 
-| Standard | What It Does | Relationship to MARS |
-|---|---|---|
-| WHO GLASS | Aggregate surveillance (countries submit resistance *rates*) | Downstream consumer; indicative value mapping for specimen, sex, age group and infection origin (see `compatibility/glass_crosswalk.md`) |
-| PHA4GE | Minimal pathogen-agnostic contextual metadata for genomics | Field-level mapping for overlapping fields (see `compatibility/pha4ge_crosswalk.md`) |
-| hAMRonization | Harmonises the output of AMR gene-detection tools | Upstream source for genotype observations; indicative field mapping (see `compatibility/hamronization_crosswalk.md`) |
-| PAHO enhanced isolate-level protocol | Isolate-level AMR reporting protocol for the Americas (bloodstream infection phase) | Indicative crosswalk for the bloodstream phase (see `compatibility/paho_crosswalk.md`) |
-| WHONET | Free laboratory software and BacLink conversion tool, with widely used organism, antibiotic and test code dictionaries | Upstream source for routine laboratory data; WHONET and BacLink files can be mapped into MARS |
-| OMOP CDM | Common data model for EHR observational data | Designed for clinical records; a different unit of analysis from surveillance isolates |
+1. **Create the tables.** Use the DDL in [`schema/`](schema/) (`mars_schema.sql` for PostgreSQL, `mars_schema_sqlite.sql` for SQLite), or `mars_schema.json` to validate records.
+2. **Read the data dictionary.** [`data_dictionary/`](data_dictionary/) defines every field and marks it `Mandatory`, `Recommended` or `Optional`.
+3. **Map your identifiers.** Populate the templates in [`crosswalk_tables/`](crosswalk_tables/) with your lookups to NCBI Taxonomy, ChEMBL and ARO, and use the values in [`vocabularies/`](vocabularies/) for categorical fields.
+4. **Normalise MIC values** following [`data_dictionary/mic_observations.md`](data_dictionary/mic_observations.md), and check your implementation against [`test_vectors/`](test_vectors/) before loading.
+5. **Load your data** into the four tables, recording each identifier mapping decision in `crosswalk_log`.
+6. **Optional, for agent access:** describe your MCP server using the templates in [`mcp/`](mcp/) and the use cases in [`use_case_library/`](use_case_library/).
 
-The crosswalk documents are indicative. They were checked against the cited specifications and have not been reviewed by the maintainers of those specifications.
-
-MARS fills the gap: **an open, isolate-level CDM designed for agentic AI access**.
+Reference tooling is not hosted in this repository and will be released separately.
 
 ---
 
-## Founding Principles
+## Feedback and issues
 
-| # | Principle | Description |
-|---|---|---|
-| 1 | **Isolate-level, not aggregate** | MARS operates at the individual clinical isolate level. GLASS handles aggregation. |
-| 2 | **Built on community identifiers** | Uses NCBI Taxonomy, ARO, ChEMBL, and ISO 3166 - invents nothing new. |
-| 3 | **Mappable from PHA4GE-aligned data** | Designed to be mappable from the overlapping fields of PHA4GE-aligned datasets. |
-| 4 | **Mandatory minimum, optional enrichment** | Small mandatory core; optional fields unlock additional use cases. |
-| 5 | **Designed for agent access** | The schema, identifiers and MCP server-metadata and tool-annotation standards are designed for LLM and agent use. This is a design intent that independent adopters have not yet validated. |
-| 6 | **Open, versioned, and citable** | CC-BY 4.0 for artefacts (schema, data dictionary, vocabularies, crosswalks, test vectors). |
+**One issue per term.** Please open a separate issue for each field, vocabulary value or mapping you want to add, change or question. Do not bundle several terms into one issue: each issue gets its own accept, reject or defer decision and its own changelog entry.
 
----
+| I want to... | Open |
+|---|---|
+| Propose a **new field or table** (one field per issue) | [New term request](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml) |
+| **Add, change or deprecate a vocabulary value** (one value per issue) | [New term request](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml), naming the vocabulary file |
+| Report an **error or inconsistency** in the schema, data dictionary, vocabularies, crosswalks, test vectors or MCP templates | [Spec bug report](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml) |
+| Ask **how to implement MARS** or discuss use | [GitHub Discussions](https://github.com/aikya-bio/mars-standard/discussions) (not an issue) |
+| Report a **security concern** or a **governance** concern | Email mars@aikya.bio (do not open a public issue); see [GOVERNANCE.md](GOVERNANCE.md) |
 
-## How to Implement MARS
-
-To implement MARS in a custom ETL pipeline, follow these steps:
-1. **Download schema SQL** from [`schema/`](schema/) and create the four core tables in your database
-2. **Download crosswalk templates** from [`crosswalk_tables/`](crosswalk_tables/) and populate with your identifier lookups (reference tooling will be released separately)
-3. **Normalise MIC values** according to the specification in [`data_dictionary/mic_observations.md`](data_dictionary/mic_observations.md) and validate against [`test_vectors/`](test_vectors/) before loading (reference tooling will be released separately)
-4. **Load harmonised data** into the four MARS tables
+Search existing issues first. In every issue, name the file and field affected and give the use case or source specification behind your request. A maintainer will reply `ACCEPTED`, `REJECTED` or `DEFERRED` with written rationale. Accepted changes are made by pull request that links the issue; please do not open a pull request for a schema or vocabulary change before the issue is accepted. Full process: [CONTRIBUTING.md](CONTRIBUTING.md) · [GOVERNANCE.md](GOVERNANCE.md) · [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
 
-## Repository Structure
+## Reuse, licence and citation
 
-```
-mars-standard/
-├── LICENSE                            # CC-BY 4.0 (standard artefacts)
-├── README.md
-├── CHANGELOG.md
-├── GOVERNANCE.md
-├── CONTRIBUTING.md
-├── CODE_OF_CONDUCT.md
-├── schema/
-│   ├── mars_schema.sql                # PostgreSQL DDL
-│   ├── mars_schema_sqlite.sql         # SQLite equivalent
-│   └── mars_schema.json               # JSON Schema
-├── data_dictionary/
-│   ├── isolates.md
-│   ├── mic_observations.md
-│   ├── genotype_observations.md
-│   └── crosswalk_log.md
-├── vocabularies/                      # Controlled vocabulary CSVs
-├── crosswalk_tables/                  # Mapping templates (unpopulated)
-├── compatibility/
-│   ├── pha4ge_crosswalk.md
-│   ├── hamronization_crosswalk.md
-│   ├── glass_crosswalk.md
-│   └── paho_crosswalk.md
-├── test_vectors/                      # Normative MIC normalisation test vectors
-│   ├── mic_normalisation.csv
-│   └── README.md
-├── use_case_library/                  # MARS Use Case Library (MUL)
-│   └── mars_ucl_v0.1.yaml             # 16 seed AMR investigation use cases
-└── mcp/                               # MCP discovery infrastructure specs
-    ├── server_metadata_spec.yaml      # Server metadata minimum standard template
-    └── tool_annotation_spec.yaml      # Tool annotation standard template
-```
+All specification artefacts in this repository (schema, data dictionary, vocabularies, crosswalks, test vectors, MCP specifications, use case library) are licensed under **[CC BY 4.0](LICENSE)** (full legal code in the `LICENSE` file). Anyone, including commercial organisations, may copy, adapt and redistribute them, provided they meet the attribution conditions below.
 
+**Attribution (required for every implementation of MARS).** Any implementation, product, dataset, publication or derivative that uses MARS must:
 
+- **credit aikya.bio** using this statement: `MARS — Minimum AMR Surveillance Standard, created by aikya.bio`, with a link to <https://github.com/aikya-bio/mars-standard>;
+- **link to the licence** (<https://creativecommons.org/licenses/by/4.0/>); and
+- **indicate whether you made changes**, and name the MARS version you used.
 
-## Roadmap
+Source specifications referenced in `compatibility/` keep their own licences; see the notices in those files.
 
-### v0.1 — Founding Specification ✅
-The core standard artefacts:
-- ✅ Four-table data model (schema SQL + JSON Schema)
-- ✅ Data dictionary — field-by-field definitions for all four tables
-- ✅ Controlled vocabularies (15 CSV files)
-- ✅ Crosswalk templates — drug, organism, gene
-- ✅ Compatibility notes — PHA4GE, hAMRonization, WHO GLASS (indicative)
-- Reference Python scripts: shipped in earlier versions; removed from this repository in v0.3.0 (reference tooling will be released separately)
-- ✅ Governance, contribution, and versioning policy
+**Contact:** mars@aikya.bio
 
-### v0.2 — Discovery Infrastructure
-MCP agent-routing and use case vocabulary:
-- ✅ MARS Use Case Library (MUL) — 16 seed AMR investigation types (`use_case_library/mars_ucl_v0.1.yaml`)
-- ✅ Server Metadata Standard — minimum declaration template for every MARS MCP server (`mcp/server_metadata_spec.yaml`)
-- ✅ Tool Annotation Standard — per-tool routing signals for agent use case matching (`mcp/tool_annotation_spec.yaml`)
-
-### v0.3 — Specification Harmonisation
-- ✅ Add optional nullable `mic_raw` field across schemas
-- ✅ Normative MIC normalisation rules and test vectors (`test_vectors/`)
-- ✅ Complete separation of specification artefacts from implementation tooling
-
-### v0.4 — Surveillance Alignment & Demographic Extensions
-- ✅ Add optional isolate fields: `infection_origin`, `patient_key`, `specimen_type_raw`, `age_group_raw`
-- ✅ Consistency enforcement between `nosocomial` and `infection_origin`
-- ✅ WHO GLASS-aligned age bands (11 values), gender `O`, specimen types `Stool` and `Genital`
-- ✅ Categorical crosswalks and loss tracking template
-- ✅ Indicative WHO GLASS crosswalk and an indicative PAHO crosswalk (bloodstream infection phase only)
-- ✅ Sensitive-field handling and privacy metadata for `patient_key` in MCP specifications
-
-### v0.4.1 — Documentation correction (current)
-- ✅ PHA4GE compatibility crosswalk corrected against the PHA4GE minimal specification, with one specimen row sourced to the GRDI-AMR specification (documentation only)
-
-### Planned (no dates)
-- EARS-Net crosswalk
-- Disk-diffusion zone data and an episode key as optional fields
-- Controlled vocabularies and gene fields for fungal and mycobacterial resistance mechanisms
-- Release of reference tooling for normalisation, identifier lookups and harmonisation reporting
-- Validation of the MCP server-metadata and tool-annotation standards against live agent workflows
-
-### v1.0 — First Stable Public Release (planned)
-- WHONET / BacLink crosswalk (planned)
-- MCP conformance validation against live endpoints (planned)
-
----
-
-## Ecosystem & AI Readiness
-
-MARS is designed for use by AI agents. This is a design intent; agent workflows have not yet been validated by independent adopters.
-- **Small, documented schema:** four tables with documented fields and controlled values, so a query can be written against the schema without guessing what a field means.
-- **Canonical IDs over strings:** Agents can use NCBI Taxonomy and ChEMBL IDs, avoiding fuzzy string matching errors.
-- **Controlled vocabularies:** Published CSV files list the allowed values for categorical fields.
-- **Use Case Library:** The [MARS Use Case Library](use_case_library/mars_ucl_v0.1.yaml) defines 16 structured AMR investigation types with intent signals, so agents can route queries to the right tool.
-- **Discovery metadata:** An MCP server over a MARS dataset declares structured metadata (what data it holds, which use cases it supports, what it cannot do, and which fields are sensitive), so an agent can choose a server before calling any tool.
-
-**MCP Discovery Infrastructure**
-The MCP specifications (server metadata standard and tool annotation standard) live in this repo as the authoritative artefacts.
-
-Implementers write their own discovery metadata file by following the template in `mcp/server_metadata_spec.yaml`, populating it with their data scope and supported use cases from the Use Case Library (MUL).
-
----
-
-## How to cite
-
-If you use the MARS standard, please cite the [preprint](https://www.preprints.org/manuscript/202611.2139) (Preprints.org, version 1, posted 20 November 2026; not peer-reviewed). The DOI below may not resolve until its registration completes; the link above goes directly to the article:
+**Citing.** Please cite the [preprint](https://www.preprints.org/manuscript/202611.2139) (Preprints.org, version 1, 20 November 2026; not peer-reviewed). The DOI may not resolve until registration completes; the link goes directly to the article. GitHub's "Cite this repository" button uses [`CITATION.cff`](CITATION.cff).
 
 ```bibtex
 @article{kothamachu2026mars,
@@ -187,53 +93,16 @@ If you use the MARS standard, please cite the [preprint](https://www.preprints.o
 }
 ```
 
-APA: Kothamachu, V. (2026). *MARS: An Open Minimum Standard for Isolate-Level Antimicrobial Resistance Surveillance Data*. Preprints. https://doi.org/10.20944/preprints202611.2139.v1 (preprint, not peer-reviewed). Available at: https://www.preprints.org/manuscript/202611.2139
-
-To cite a specific release of the specification, for example:
-
-> MARS — Minimum AMR Surveillance Standard, v0.4.1, commit `14bfd823e2da515563003ba73c0e6b40a3595958`, https://github.com/aikya-bio/mars-standard/releases/tag/v0.4.1
+To cite a specific release, add the version and release link, for example: *MARS — Minimum AMR Surveillance Standard, v0.4.1, https://github.com/aikya-bio/mars-standard/releases/tag/v0.4.1*
 
 ---
 
-## Licensing
+## Versioning and status
 
-| Artefact | Licence |
-|---|---|
-| Schema SQL, data dictionary, vocabularies, crosswalk templates, compatibility docs, test vectors, MCP specifications, use case library | [CC-BY 4.0](LICENSE) |
-| Reference code preserved in Git history (up to commit 4104456) | Apache 2.0 (see https://www.apache.org/licenses/LICENSE-2.0) |
+MARS follows [Semantic Versioning](https://semver.org): breaking schema changes are MAJOR, new optional fields and vocabulary additions are MINOR, clarifications and documentation fixes are PATCH. All changes are recorded in [CHANGELOG.md](CHANGELOG.md).
 
-**Attribution required:** Any implementation of MARS must credit:  
-`MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`  
-with a link to `https://github.com/aikya-bio/mars-standard`
+`v0.x` is pre-release. Planned work (no dates): EARS-Net and WHONET/BacLink crosswalks, disk-diffusion zone data, fungal and mycobacterial mechanisms, reference tooling, and validation of the MCP standards against live agent workflows. `v1.0` will be the first stable release.
 
 ---
 
-## Community & Contributing
-
-- 💬 **Questions & Discussion** → [GitHub Discussions](https://github.com/aikya-bio/mars-standard/discussions)
-- 🐛 **Spec bug or inconsistency** → [Open an Issue](https://github.com/aikya-bio/mars-standard/issues/new?template=bug_report.yml)
-- ➕ **New term or vocabulary addition** → [New Term Request](https://github.com/aikya-bio/mars-standard/issues/new?template=feature_request.yml)
-- 📖 **How to contribute** → [CONTRIBUTING.md](CONTRIBUTING.md)
-- ⚖️ **How decisions are made** → [GOVERNANCE.md](GOVERNANCE.md)
-
-
-
-## Versioning
-
-MARS follows [Semantic Versioning](https://semver.org): `MAJOR.MINOR.PATCH`
-
-| Change Type | Bump |
-|---|---|
-| Schema changes that break existing implementations | MAJOR |
-| New optional fields or vocabulary additions | MINOR |
-| Clarifications, documentation fixes | PATCH |
-
-**Version lifecycle:**
-- `v0.x` — Pre-release; public, not yet validated by independent adopters
-- `v1.0` — First stable public release, CC-BY 4.0
-- `v1.x` — Community contributions, minor additions
-- `v2.0` — Breaking changes, published migration guide required
-
----
-
-*MARS Specification v0.4.1 · Created by [Aikya](https://aikya.bio) / [microdao.bio](https://microdao.bio)*
+*MARS Specification v0.4.1 · Created by [aikya.bio](https://aikya.bio)*

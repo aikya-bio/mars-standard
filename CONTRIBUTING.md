@@ -118,7 +118,7 @@ Use the [Spec Bug Report issue template](https://github.com/aikya-bio/mars-stand
 - Add inline comments for non-obvious fields
 
 ### Reference tooling
-- Implementation code is no longer hosted in this specification repository. (Reference code in Git history up to commit 4104456 is Apache 2.0.)
+- Implementation code is no longer hosted in this specification repository.
 - Reference tooling will be released separately
 
 ### Test vector files (test_vectors/)
@@ -139,4 +139,4 @@ For general questions about implementing MARS, start a [Discussion](https://gith
 
 ---
 
-*MARS is maintained by [Aikya](https://aikya.bio). Thank you for helping build the standard for AMR surveillance data.*
+*MARS is maintained by [aikya.bio](https://aikya.bio). Thank you for helping build the standard for AMR surveillance data.*

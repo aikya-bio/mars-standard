@@ -8,7 +8,7 @@
 > **MARS is an open community standard for isolate-level antimicrobial resistance (AMR) surveillance data.**
 > It defines a minimal mandatory data model, canonical identifier mappings, controlled vocabularies, and MCP server-metadata and tool-annotation standards for agent access, as one versioned, citable artefact.
 
-**Created by [Aikya](https://aikya.bio) · Specification v0.4.1 · Pre-release (not yet validated by independent adopters)**
+**Created by [aikya.bio](https://aikya.bio) · Specification v0.4.1 · Pre-release (not yet validated by independent adopters)**
 
 For the rationale, design and comparison with GLASS, PHA4GE, hAMRonization, PAHO, WHONET and OMOP, read the [preprint](https://www.preprints.org/manuscript/202611.2139) (not peer-reviewed). This repository holds the specification itself.
 
@@ -66,13 +66,17 @@ Search existing issues first. In every issue, name the file and field affected a
 
 ## Reuse, licence and citation
 
-All specification artefacts in this repository (schema, data dictionary, vocabularies, crosswalks, test vectors, MCP specifications, use case library) are licensed under **[CC BY 4.0](LICENSE)**. You may copy, adapt and redistribute them, including commercially, provided you:
+All specification artefacts in this repository (schema, data dictionary, vocabularies, crosswalks, test vectors, MCP specifications, use case library) are licensed under **[CC BY 4.0](LICENSE)** (full legal code in the `LICENSE` file). Anyone, including commercial organisations, may copy, adapt and redistribute them, provided they meet the attribution conditions below.
 
-- **credit** the standard: `MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`, with a link to <https://github.com/aikya-bio/mars-standard>;
+**Attribution (required for every implementation of MARS).** Any implementation, product, dataset, publication or derivative that uses MARS must:
+
+- **credit aikya.bio** using this statement: `MARS — Minimum AMR Surveillance Standard, created by aikya.bio`, with a link to <https://github.com/aikya-bio/mars-standard>;
 - **link to the licence** (<https://creativecommons.org/licenses/by/4.0/>); and
 - **indicate whether you made changes**, and name the MARS version you used.
 
-Reference code in Git history up to commit `4104456` is licensed under Apache 2.0. Source specifications referenced in `compatibility/` keep their own licences; see the notices in those files.
+Source specifications referenced in `compatibility/` keep their own licences; see the notices in those files.
+
+**Contact:** mars@aikya.bio
 
 **Citing.** Please cite the [preprint](https://www.preprints.org/manuscript/202611.2139) (Preprints.org, version 1, 20 November 2026; not peer-reviewed). The DOI may not resolve until registration completes; the link goes directly to the article. GitHub's "Cite this repository" button uses [`CITATION.cff`](CITATION.cff).
 
@@ -101,4 +105,4 @@ MARS follows [Semantic Versioning](https://semver.org): breaking schema changes 
 
 ---
 
-*MARS Specification v0.4.1 · Created by [Aikya](https://aikya.bio) / [microdao.bio](https://microdao.bio)*
+*MARS Specification v0.4.1 · Created by [aikya.bio](https://aikya.bio)*

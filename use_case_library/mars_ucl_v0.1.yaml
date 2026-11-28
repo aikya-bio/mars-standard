@@ -4,7 +4,7 @@
 # Agents use this to route investigation queries to the correct tool.
 # Enterprise middleware uses use_case_ids in tool annotations to validate access.
 #
-# Created by Aikya / microdao.bio
+# Created by aikya.bio
 # Licence: CC-BY 4.0
 # Changelog: github.com/aikya-bio/mars-standard/CHANGELOG.md
 #
@@ -18,7 +18,7 @@
 # IDs are STABLE and NEVER change after publication.
 
 version: '0.1'
-created_by: 'Aikya / microdao.bio'
+created_by: 'aikya.bio'
 licence: 'CC-BY 4.0'
 changelog_url: 'github.com/aikya-bio/mars-standard/CHANGELOG.md'
 
@@ -957,7 +957,7 @@ use_cases:
       agents to verify where data came from, how organism names were
       mapped to NCBI Taxonomy, and how drug names were mapped to ChEMBL
       identifiers. Required for Evidence Outcome Stub (EOS) generation
-      in Aikya's agent framework.
+      in aikya.bio's agent framework.
 
     intent_signals:
       keywords:

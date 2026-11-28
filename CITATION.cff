@@ -10,7 +10,7 @@ type: software
 authors:
   - given-names: Varun Bhaskar
     family-names: Kothamachu
-    email: varunkothamachu@gmail.com
+    email: mars@aikya.bio
     affiliation: aikya.bio
     orcid: 'https://orcid.org/0000-0002-2888-4317'
 repository-code: 'https://github.com/aikya-bio/mars-standard'

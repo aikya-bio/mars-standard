@@ -6,7 +6,7 @@ This document describes how the MARS standard is maintained, how contributions a
 
 ## 1. Overview
 
-MARS is an open specification maintained by Aikya / microdao.bio. Anyone may propose changes through GitHub Issues and pull requests. Aikya maintainers review proposals and make final decisions, and give written rationale for each decision.
+MARS is an open specification maintained by aikya.bio. Anyone may propose changes through GitHub Issues and pull requests. aikya.bio maintainers review proposals and make final decisions, and give written rationale for each decision.
 
 ---
 
@@ -30,7 +30,7 @@ All changes to the MARS standard — whether schema modifications, new vocabular
 
 ## 3. Decision Authority
 
-Aikya / microdao.bio maintains MARS. Final decisions on acceptance or rejection of proposed changes rest with Aikya maintainers, which keeps the specification coherent and versioned. Rationale is always provided in writing on the relevant GitHub Issue.
+aikya.bio maintains MARS. Final decisions on acceptance or rejection of proposed changes rest with aikya.bio maintainers, which keeps the specification coherent and versioned. Rationale is always provided in writing on the relevant GitHub Issue.
 
 ---
 
@@ -54,10 +54,10 @@ If you discover a security issue related to MARS or its published artefacts, **d
 
 ## 7. Attribution
 
-Any implementation of MARS must credit:  
-`MARS — Minimum AMR Surveillance Standard, created by Aikya / microdao.bio`  
-with a link to `https://github.com/aikya-bio/mars-standard`
+Any implementation of MARS must credit aikya.bio:  
+`MARS — Minimum AMR Surveillance Standard, created by aikya.bio`  
+with a link to `https://github.com/aikya-bio/mars-standard`. Contact: mars@aikya.bio.
 
 ---
 
-*Last updated: v0.4.1 · 2026-10-22 · Aikya*
+*Last updated: v0.4.1 · 2026-10-22 · aikya.bio*

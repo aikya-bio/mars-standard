@@ -11,7 +11,7 @@
 #   Implementation (dict):          mars/server_annotations.py (TOOL_ANNOTATIONS)
 #   Applied in:                     mars/server.py (@server.tool(annotations=...))
 #
-# Created by Aikya / microdao.bio
+# Created by aikya.bio
 # Licence: CC-BY 4.0
 
 # ── ANNOTATION TEMPLATE ───────────────────────────────────────────────────────
